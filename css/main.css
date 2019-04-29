@@ -200,6 +200,14 @@ img {
   border: 0;
 }
 
+@media only screen and (max-width: 35em) {
+ /* Style adjustments for viewports that meet the condition */
+ .copyright {
+   float: left;
+   display: none;
+ }
+}
+
 
 
 
