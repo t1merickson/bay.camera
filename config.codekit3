@@ -71,6 +71,14 @@
 		"oAP": "/favicon.ico",
 		"oF": 0
 		},
+	"/hello/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/hello/index.html",
+		"oF": 0
+		},
 	"/humans.txt": {
 		"cB": 0,
 		"ft": 8192,

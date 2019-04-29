@@ -208,6 +208,41 @@ img {
  }
 }
 
+form {
+  text-align: left;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+form label {
+  margin-bottom: 3px;
+  overflow: auto;
+  display: block;
+  line-height: 2.3em;
+}
+
+form label input, form label textarea {
+  width: 70%;
+  display: inline-block;
+  float: right;
+  border: 1px solid #cacaca;
+  border-radius: 3px;
+  overflow: auto;
+  padding: 5px;
+
+}
+
+form button {
+  background-color: #1b80f5;
+  color: #fff;
+  border-radius: 3px;
+  border: 0;
+  float: right;
+
+  padding: 8px 16px;
+
+}
 
 
 
