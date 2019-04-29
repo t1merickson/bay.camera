@@ -7,13 +7,13 @@
  * Kroc Camen, and the H5BP dev community and team.
  */
 
- 
+
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
 
    html {
-    color: #222;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 1em;
     line-height: 1.4;
 }
@@ -102,15 +102,103 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+/* Theme */
+
+body, body#day {
+  background-color: #f8fafd;
+  color: #262626;
+}
+body#night {
+  background-color: #2d3037;
+  color: #9f9f9f;
+}
+
+a,
+a:visited {
+    color: #0c7dfa;
+}
+
+
+#device-container {
+  max-width: 720px;
+  padding: 0 5px;
+
+  margin: 0 auto;
+}
 
 
 
+img {
+  width: 100%;
+  min-height: 100px;
+
+  height: auto;
+  background-color: #C6CFDA;
+}
+
+.small, .source, .copyright, .location {
+  font-size: 80%;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.source::before {
+  content: "⤷";
+  padding-right: 4px;
+}
+
+.copyright::before {
+  content: "©";
+  padding-right: 4px;
+}
+
+.location::before {
+  margin: 0 7px 0 1px;
+
+  background-image: url('/img/location@2x.png');
+  background-size: 10px 12px;
+
+  display: inline-block;
+  width: 10px;
+  height: 12px;
+  content: "";
+}
+
+.location {
+  float: left;
+}
+
+.copyright {
+  float: right;
+}
+
+.source {
+  clear: both;
+}
 
 
+.right-align {
+  display: inline-block;
+  float: right;
+  text-align: right;
+}
 
+.cam-block {
+  border-bottom: 1px solid #cbcbcb;
+  padding-bottom: 8px;
+  margin-bottom: 38px;
+  overflow: auto;
+}
 
+.cam-block p {
+  margin-block-end: 8px;
+}
 
-
+.cam-block iframe {
+  importance: low;
+  overflow-y: hidden;
+  border: 0;
+}
 
 
 
@@ -197,7 +285,7 @@ textarea {
   clear: both;
 }
 
- 
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.
@@ -215,7 +303,7 @@ textarea {
     /* Style adjustments for high resolution devices */
 }
 
- 
+
 /* ==========================================================================
    Print styles.
    Inlined to avoid the additional HTTP request:
@@ -291,5 +379,3 @@ textarea {
         page-break-after: avoid;
     }
 }
-
-
