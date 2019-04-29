@@ -134,6 +134,7 @@ img {
 
   height: auto;
   background-color: #C6CFDA;
+  display: block;
 }
 
 .small, .source, .copyright, .location {
