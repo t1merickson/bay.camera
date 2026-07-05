@@ -12,6 +12,8 @@ import { initMicroclimates, initConditions, setTempsVisible } from './weather';
 
 const map = createMap();
 (window as any).__map = map; // debug/verification handle
+// Test handle for the fog classifier (used by scripts/calibrate-fogtop.mjs).
+import('./fogtop').then((m) => { (window as any).__fogTest = m; });
 
 map.on('load', () => {
   map.fitBounds(BAY_BOUNDS, { padding: { top: 72, bottom: 40, left: 40, right: 40 }, duration: 0 });

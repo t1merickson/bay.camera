@@ -60,7 +60,7 @@ const allReadings = new Map<string, PeakReading>();
 
 const $ = (id: string) => document.getElementById(id);
 
-function renderEstimate(est: FogTopEstimate, sampled: number) {
+function renderEstimate(est: FogTopEstimate, sampled: number, fogElevs: number[] = []) {
   const main = $('fog-main'), sub = $('fog-sub'), chip = $('fog-chip');
   if (!main || !sub) return;
   const time = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
@@ -84,9 +84,23 @@ function renderEstimate(est: FogTopEstimate, sampled: number) {
     return;
   }
   const fogCount = [...est.readings.values()].filter((r) => r.status === 'fog').length;
-  main.innerHTML = `Top ≈ <strong>${mToFt(est.topM).toLocaleString()} ft</strong> <span class="fog-conf fog-conf-${est.confidence}">${est.confidence}</span>`;
+  const topFt = mToFt(est.topM).toLocaleString();
+  // A couple of isolated socked-in cams = dissipating patches, not a deck;
+  // a tight two-cam "band" would overclaim precision.
+  if (fogCount <= 2 && fogElevs.length) {
+    const lo = mToFt(Math.min(...fogElevs)).toLocaleString();
+    const hi = mToFt(Math.max(...fogElevs)).toLocaleString();
+    main.innerHTML = `<strong>Patchy fog</strong> <span class="fog-conf fog-conf-low">low</span>`;
+    sub.textContent = `${fogCount} of ${est.sampled} peaks in cloud (${lo === hi ? lo : `${lo}–${hi}`} ft) · ${time}`;
+    if (chip) { chip.hidden = false; chip.innerHTML = '<b>Fog</b> <span class="cond-d">patchy</span>'; }
+    return;
+  }
+  const range = est.baseM != null
+    ? `${mToFt(est.baseM).toLocaleString()}–${topFt} ft`
+    : `top ≈ ${topFt} ft`;
+  main.innerHTML = `<strong>${range}</strong> <span class="fog-conf fog-conf-${est.confidence}">${est.confidence}</span>`;
   sub.textContent = `${fogCount} of ${est.sampled} peaks in cloud · ${time}`;
-  if (chip) { chip.hidden = false; chip.innerHTML = `<b>Fog top</b> <span class="cond-t">${mToFt(est.topM).toLocaleString()} ft</span>`; }
+  if (chip) { chip.hidden = false; chip.innerHTML = `<b>Fog top</b> <span class="cond-t">${topFt} ft</span>`; }
 }
 
 export function runFogAnalysis(map: maplibregl.Map, sampleSize: number, force = false): Promise<void> {
@@ -110,7 +124,13 @@ export function runFogAnalysis(map: maplibregl.Map, sampleSize: number, force = 
     const est = estimateFogTop(inputs, readings);
     lastEstimate = est;
     lastRun = Date.now();
-    renderEstimate(est, inputs.length);
+    // Debug/verification handle: per-cam readings joined with elevations.
+    (window as any).__fogDebug = {
+      est: { topM: est.topM, baseM: est.baseM, confidence: est.confidence, sampled: est.sampled },
+      cams: inputs.map((i) => ({ name: i.name, elevM: i.elevM, ...(() => { const r = readings.get(i.camId); return r ? { status: r.status, b: Math.round(r.brightness), c: Math.round(r.contrast), s: +r.saturation.toFixed(2), e: +r.edges.toFixed(1) } : {}; })() })).sort((a, b) => a.elevM - b.elevM),
+    };
+    const fogElevs = inputs.filter((i) => readings.get(i.camId)?.status === 'fog').map((i) => i.elevM);
+    renderEstimate(est, inputs.length, fogElevs);
     updatePeakStatuses(map, allReadings);
   })().catch(() => {
     const main = $('fog-main');

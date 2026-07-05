@@ -33,7 +33,10 @@ export function createMap(): maplibregl.Map {
     center: [-122.3, 37.75], zoom: 8,
     style: {
       version: 8,
-      glyphs: 'https://fonts.openmaptiles.org/{fontstack}/{range}.pbf',
+      // NOT fonts.openmaptiles.org — it 200s an HTML page, MapLibre chokes
+      // parsing it as PBF ("Unimplemented type: 4") and the failure kills
+      // every vector layer, not just labels.
+      glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
       // Label-less base + labels-only overlay, so raster weather layers
       // (GOES) can slide between terrain and place names.
       sources: {

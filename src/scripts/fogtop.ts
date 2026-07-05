@@ -11,10 +11,18 @@
  * ground elevation and find the elevation at which cameras flip from "socked in"
  * to "clear", that boundary elevation IS the fog top.
  *
- * We turn each live image into four cheap statistics (brightness, contrast,
- * saturation, edge energy), classify each camera as fog / clear / dark / error,
- * then find the elevation threshold that best separates fog (below) from clear
- * (above). Fog hugs the ground, so on ties we bias toward the lowest threshold.
+ * Three cases per camera, calibrated against live 2026-07-05 imagery:
+ *   - BELOW the deck (e.g. Pillar Point 0 m under 300 m stratus): gray sky
+ *     overhead, but the horizon band is crisp — houses, hills, boats.
+ *   - INSIDE the deck (San Bruno Mtn 387 m, Grizzly Peak 509 m): everything
+ *     except the immediate foreground is washed out; the mid/horizon band is
+ *     gray soup even while near-field trees keep some texture.
+ *   - ABOVE the deck (Mt Diablo 1,059 m): saturated sky, sharp terrain.
+ * Whole-frame statistics can't tell these apart (foreground texture rescues
+ * an in-cloud frame), so we score washout per grid cell (3 rows × 2 cols,
+ * vendor overlays cropped) and call a camera fog when the upper cells are
+ * washed. The marine layer is then a BAND [base, top]: clear cams below the
+ * base, fog cams inside, clear cams above — a two-threshold search.
  *
  * Night limitation
  * ----------------
@@ -38,20 +46,26 @@ export interface PeakInput {
 
 export type PeakStatus = 'clear' | 'fog' | 'dark' | 'error';
 
-export interface PeakReading {
-  camId: string;
-  status: PeakStatus;
+export interface CellMetrics {
   brightness: number; // mean luminance 0-255
   contrast: number; // stddev of luminance
   saturation: number; // mean HSL-ish saturation 0-1
   edges: number; // mean absolute horizontal+vertical luminance gradient
 }
 
+export interface PeakReading extends CellMetrics {
+  camId: string;
+  status: PeakStatus;
+  /** 3 rows × 2 cols (row-major, top-left first), vendor overlays cropped. */
+  cells: CellMetrics[];
+}
+
 export interface FogTopEstimate {
-  topM: number | null; // estimated fog top in meters, null if indeterminate
+  topM: number | null; // estimated fog-layer top in meters, null if indeterminate
+  baseM: number | null; // estimated fog-layer base; null = deck reaches the ground/sea
   confidence: 'none' | 'low' | 'medium' | 'high';
-  sockedBelow: number; // count of fog-status cams below the boundary
-  clearAbove: number; // count of clear-status cams above the boundary
+  sockedBelow: number; // count of fog-status cams inside the band
+  clearAbove: number; // count of clear-status cams above the band
   sampled: number; // cams successfully analyzed (not error/dark)
   readings: Map<string, PeakReading>;
 }
@@ -66,20 +80,42 @@ const SAMPLE_H = 48;
 const DEFAULT_CONCURRENCY = 8;
 const DEFAULT_TIMEOUT_MS = 8000;
 
+// ALERTCalifornia frames carry vendor chrome that fakes texture: logo strip +
+// sponsor badge across the top ~15%, timestamp bar in the bottom ~5%. Crop
+// both before sampling so a pure-fog frame actually measures flat.
+const CROP_TOP = 0.15;
+const CROP_BOTTOM = 0.06;
+
+// Cell grid over the cropped frame. Row 0 is sky (washes under any gray sky,
+// in cloud or not), row 1 is the upper-mid / horizon field — THE discriminating
+// band: below the deck it stays crisp (distant terrain, c≈20-45), inside the
+// cloud it washes (c≈5-17). Rows 2-3 are near-field foreground that keeps
+// texture even in cloud, so they never vote. Calibrated 2026-07-05 against
+// Pillar Point & Skyline College (below deck), San Bruno Mtn & Vollmer Peak
+// (in cloud), Mt Diablo (above deck, blue sky saves row 0 via saturation).
+const GRID_ROWS = 4;
+const GRID_COLS = 6;
+
 // --- Classification thresholds (hand-tuned) --------------------------------
 
 // Below this mean luminance the frame is treated as night/dark: fog-top is
 // unreliable because the cams go near-IR / near-black after dusk.
 const DARK_BRIGHTNESS = 35;
 
-// "In-cloud" signature: the frame is flat gray soup. All four must hold.
-const FOG_CONTRAST_MAX = 14; // luminance stddev — cloud interiors are very flat
-const FOG_EDGES_MAX = 5; // almost no gradient structure inside cloud
-const FOG_SATURATION_MAX = 0.12; // gray, nearly colorless
-const FOG_BRIGHTNESS_MIN = 90; // bright enough to be daytime cloud, not shadow
+// A cell is "washed" (inside-cloud look) when it is flat, edgeless, colorless
+// and daytime-bright, all at once. Blue sky fails on saturation; below-deck
+// horizons fail on contrast/edges; night fails on brightness.
+const WASH_CONTRAST_MAX = 18;
+const WASH_EDGES_MAX = 6;
+const WASH_SATURATION_MAX = 0.12;
+const WASH_BRIGHTNESS_MIN = 95;
 
-// Extremely washed-out bright frames also read as fog even if contrast is a
-// touch higher than FOG_CONTRAST_MAX (blown-out whiteout, glare through cloud).
+// A row counts as washed when at least this many of its cells wash; the
+// camera is in-cloud when BOTH row 0 (sky) and row 1 (horizon field) wash.
+const WASHED_CELLS_PER_ROW_MIN = 4;
+
+// Extremely washed-out bright frames read as fog regardless of cell votes
+// (blown-out whiteout, glare through cloud).
 const FOG_WHITEOUT_BRIGHTNESS_MIN = 200;
 const FOG_WHITEOUT_CONTRAST_MAX = 22;
 
@@ -94,29 +130,39 @@ const HIGH_N = 10;
 const MED_ACC = 0.7;
 const MED_N = 6;
 
+/** One cell shows the inside-cloud look: flat, edgeless, gray, bright. */
+function isWashed(c: CellMetrics): boolean {
+  return (
+    c.contrast < WASH_CONTRAST_MAX &&
+    c.edges < WASH_EDGES_MAX &&
+    c.saturation < WASH_SATURATION_MAX &&
+    c.brightness >= WASH_BRIGHTNESS_MIN
+  );
+}
+
 /**
- * Classify a single reading from its four metrics. See threshold constants above
- * for the rationale behind each cutoff.
+ * Classify a single reading. Below the deck only the sky row washes (the
+ * horizon row keeps distant detail); inside the deck the sky AND horizon rows
+ * wash, leaving texture only in the near foreground; above the deck the sky
+ * keeps saturation and the terrain keeps edges.
  */
 export function classifyReading(
   r: Omit<PeakReading, 'camId' | 'status'>,
 ): PeakStatus {
-  // Night / too dark to trust — exclude from the fog-top fit.
+  // Night / too dark to trust — exclude from the fog fit.
   if (r.brightness < DARK_BRIGHTNESS) return 'dark';
 
-  // Flat, colorless, edgeless, daytime-bright => camera is inside the cloud.
-  const inCloud =
-    r.contrast < FOG_CONTRAST_MAX &&
-    r.edges < FOG_EDGES_MAX &&
-    r.saturation < FOG_SATURATION_MAX &&
-    r.brightness >= FOG_BRIGHTNESS_MIN;
+  const rowWashed = (row: number): boolean => {
+    const cells = r.cells.slice(row * GRID_COLS, (row + 1) * GRID_COLS);
+    return cells.reduce((a, c) => a + (isWashed(c) ? 1 : 0), 0) >= WASHED_CELLS_PER_ROW_MIN;
+  };
 
-  // Blown-out whiteout: near-white and still fairly flat.
+  // Blown-out whiteout: near-white and still fairly flat overall.
   const whiteout =
     r.brightness > FOG_WHITEOUT_BRIGHTNESS_MIN &&
     r.contrast < FOG_WHITEOUT_CONTRAST_MAX;
 
-  if (inCloud || whiteout) return 'fog';
+  if ((r.cells.length >= 2 * GRID_COLS && rowWashed(0) && rowWashed(1)) || whiteout) return 'fog';
 
   return 'clear';
 }
@@ -125,67 +171,97 @@ export function classifyReading(
  * Compute the four metrics for one already-loaded image by drawing it into a
  * shared downscale canvas and reading back the pixels.
  */
-function measureImage(
-  img: HTMLImageElement,
-  ctx: CanvasRenderingContext2D,
-): Omit<PeakReading, 'camId' | 'status'> {
-  ctx.clearRect(0, 0, SAMPLE_W, SAMPLE_H);
-  ctx.drawImage(img, 0, 0, SAMPLE_W, SAMPLE_H);
-  const { data } = ctx.getImageData(0, 0, SAMPLE_W, SAMPLE_H);
-
-  const n = SAMPLE_W * SAMPLE_H;
-
-  // Per-pixel luminance buffer (reused for the gradient pass).
-  const lum = new Float32Array(n);
+function measureRegion(
+  lum: Float32Array,
+  data: Uint8ClampedArray,
+  x0: number,
+  y0: number,
+  x1: number,
+  y1: number,
+): CellMetrics {
+  let n = 0;
   let sumL = 0;
   let sumSat = 0;
-
-  for (let i = 0; i < n; i++) {
-    const o = i * 4;
-    const rr = data[o];
-    const gg = data[o + 1];
-    const bb = data[o + 2];
-
-    const L = 0.2126 * rr + 0.7152 * gg + 0.0722 * bb;
-    lum[i] = L;
-    sumL += L;
-
-    const max = rr > gg ? (rr > bb ? rr : bb) : gg > bb ? gg : bb;
-    const min = rr < gg ? (rr < bb ? rr : bb) : gg < bb ? gg : bb;
-    sumSat += max === 0 ? 0 : (max - min) / max;
+  for (let y = y0; y < y1; y++) {
+    for (let x = x0; x < x1; x++) {
+      const idx = y * SAMPLE_W + x;
+      const o = idx * 4;
+      sumL += lum[idx];
+      const rr = data[o];
+      const gg = data[o + 1];
+      const bb = data[o + 2];
+      const max = rr > gg ? (rr > bb ? rr : bb) : gg > bb ? gg : bb;
+      const min = rr < gg ? (rr < bb ? rr : bb) : gg < bb ? gg : bb;
+      sumSat += max === 0 ? 0 : (max - min) / max;
+      n++;
+    }
   }
+  const mean = n === 0 ? 0 : sumL / n;
 
-  const mean = sumL / n;
-
-  // Stddev of luminance = contrast.
   let sumSq = 0;
-  for (let i = 0; i < n; i++) {
-    const d = lum[i] - mean;
-    sumSq += d * d;
-  }
-  const contrast = Math.sqrt(sumSq / n);
-
-  // Mean gradient magnitude (horizontal + vertical) over the interior cells.
   let sumGrad = 0;
   let gradCount = 0;
-  for (let y = 0; y < SAMPLE_H; y++) {
-    for (let x = 0; x < SAMPLE_W; x++) {
+  for (let y = y0; y < y1; y++) {
+    for (let x = x0; x < x1; x++) {
       const idx = y * SAMPLE_W + x;
+      const d = lum[idx] - mean;
+      sumSq += d * d;
       let g = 0;
-      if (x + 1 < SAMPLE_W) g += Math.abs(lum[idx + 1] - lum[idx]);
-      if (y + 1 < SAMPLE_H) g += Math.abs(lum[idx + SAMPLE_W] - lum[idx]);
+      if (x + 1 < x1) g += Math.abs(lum[idx + 1] - lum[idx]);
+      if (y + 1 < y1) g += Math.abs(lum[idx + SAMPLE_W] - lum[idx]);
       sumGrad += g;
       gradCount++;
     }
   }
-  const edges = gradCount === 0 ? 0 : sumGrad / gradCount;
 
   return {
     brightness: mean,
-    contrast,
-    saturation: sumSat / n,
-    edges,
+    contrast: n === 0 ? 0 : Math.sqrt(sumSq / n),
+    saturation: n === 0 ? 0 : sumSat / n,
+    edges: gradCount === 0 ? 0 : sumGrad / gradCount,
   };
+}
+
+function measureImage(
+  img: HTMLImageElement,
+  ctx: CanvasRenderingContext2D,
+): Omit<PeakReading, 'camId' | 'status'> {
+  // Source-crop the vendor chrome (logo strip top, timestamp bar bottom) so
+  // overlay text can't masquerade as scene texture.
+  const sy = img.naturalHeight * CROP_TOP;
+  const sh = img.naturalHeight * (1 - CROP_TOP - CROP_BOTTOM);
+  ctx.clearRect(0, 0, SAMPLE_W, SAMPLE_H);
+  ctx.drawImage(img, 0, sy, img.naturalWidth, sh, 0, 0, SAMPLE_W, SAMPLE_H);
+  const { data } = ctx.getImageData(0, 0, SAMPLE_W, SAMPLE_H);
+
+  const n = SAMPLE_W * SAMPLE_H;
+  const lum = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const o = i * 4;
+    lum[i] = 0.2126 * data[o] + 0.7152 * data[o + 1] + 0.0722 * data[o + 2];
+  }
+
+  const whole = measureRegion(lum, data, 0, 0, SAMPLE_W, SAMPLE_H);
+
+  const cells: CellMetrics[] = [];
+  const cw = SAMPLE_W / GRID_COLS;
+  const ch = SAMPLE_H / GRID_ROWS;
+  for (let r = 0; r < GRID_ROWS; r++) {
+    for (let c = 0; c < GRID_COLS; c++) {
+      cells.push(
+        measureRegion(
+          lum,
+          data,
+          Math.floor(c * cw),
+          Math.floor(r * ch),
+          Math.floor((c + 1) * cw),
+          Math.floor((r + 1) * ch),
+        ),
+      );
+    }
+  }
+
+  return { ...whole, cells };
 }
 
 /**
@@ -205,6 +281,7 @@ function analyzeOne(
       contrast: 0,
       saturation: 0,
       edges: 0,
+      cells: [],
     };
 
     const img = new Image();
@@ -296,6 +373,7 @@ export async function analyzePeaks(
         contrast: 0,
         saturation: 0,
         edges: 0,
+        cells: [],
       });
     }
     onProgress?.(total, total);
@@ -327,13 +405,15 @@ export async function analyzePeaks(
 }
 
 /**
- * Estimate the fog top from a set of readings.
+ * Estimate the fog band from a set of readings.
  *
- * Uses only 'fog' and 'clear' cams. Finds the elevation threshold T (a midpoint
- * between consecutive distinct usable elevations) that maximizes correctly-placed
- * cams: fog below T + clear above T. Ties break toward the lowest T (fog hugs the
- * ground). If there are enough usable cams but zero fog, that's a confident
- * "no marine layer".
+ * Uses only 'fog' and 'clear' cams. The marine layer is a band [B, T]: cams
+ * below B are clear under the deck, cams inside are socked in, cams above T
+ * are in the sun. Search all candidate (B, T) pairs (midpoints between
+ * consecutive distinct usable elevations, plus a sentinel below everything =
+ * "deck reaches the ground") maximizing correctly-placed cams; ties break
+ * toward the thinnest band. If there are enough usable cams but zero fog,
+ * that's a confident "no marine layer".
  */
 export function estimateFogTop(
   cams: PeakInput[],
@@ -362,6 +442,7 @@ export function estimateFogTop(
   if (usableCount < MIN_USABLE) {
     return {
       topM: null,
+      baseM: null,
       confidence: 'none',
       sockedBelow: 0,
       clearAbove: 0,
@@ -374,6 +455,7 @@ export function estimateFogTop(
   if (fogCount === 0) {
     return {
       topM: null,
+      baseM: null,
       confidence: 'high',
       sockedBelow: 0,
       clearAbove: usableCount,
@@ -382,50 +464,56 @@ export function estimateFogTop(
     };
   }
 
-  // Candidate thresholds: midpoints between consecutive distinct elevations.
+  // Candidate boundaries: midpoints between consecutive distinct elevations,
+  // plus a sentinel below everything ("the deck reaches the ground/sea").
   const distinct = Array.from(new Set(usable.map((u) => u.elev))).sort(
     (a, b) => a - b,
   );
-  const candidates: number[] = [];
+  const SENTINEL = distinct[0] - 1;
+  const candidates: number[] = [SENTINEL];
   for (let i = 0; i + 1 < distinct.length; i++) {
     candidates.push((distinct[i] + distinct[i + 1]) / 2);
   }
+  candidates.push(distinct[distinct.length - 1] + 1);
 
-  // Degenerate: every usable cam at the same elevation — can't separate.
-  if (candidates.length === 0) {
-    return {
-      topM: null,
-      confidence: 'low',
-      sockedBelow: fogCount,
-      clearAbove: usableCount - fogCount,
-      sampled,
-      readings,
-    };
-  }
-
-  // Pick the threshold maximizing (fog below T) + (clear above T). Candidates are
-  // ascending, so keeping strict '>' on improvement biases ties to the lowest T.
-  let bestT = candidates[0];
+  // Search all (B <= T) pairs maximizing (clear < B) + (fog in [B,T]) +
+  // (clear > T). ~50 sampled cams → ~1.3k pairs × 50 cams: trivial.
+  let bestB = SENTINEL;
+  let bestT = candidates[candidates.length - 1];
   let bestScore = -1;
-  let bestBelow = 0;
+  let bestInBand = 0;
   let bestAbove = 0;
 
-  for (const T of candidates) {
-    let fogBelow = 0;
-    let clearAbove = 0;
-    for (const u of usable) {
-      if (u.elev < T) {
-        if (u.fog) fogBelow++;
-      } else {
-        if (!u.fog) clearAbove++;
+  for (let bi = 0; bi < candidates.length; bi++) {
+    for (let ti = bi; ti < candidates.length; ti++) {
+      const B = candidates[bi];
+      const T = candidates[ti];
+      let score = 0;
+      let inBand = 0;
+      let above = 0;
+      for (const u of usable) {
+        if (u.elev < B) {
+          if (!u.fog) score++;
+        } else if (u.elev <= T) {
+          if (u.fog) {
+            score++;
+            inBand++;
+          }
+        } else if (!u.fog) {
+          score++;
+          above++;
+        }
       }
-    }
-    const score = fogBelow + clearAbove;
-    if (score > bestScore) {
-      bestScore = score;
-      bestT = T;
-      bestBelow = fogBelow;
-      bestAbove = clearAbove;
+      const better =
+        score > bestScore ||
+        (score === bestScore && T - B < bestT - bestB);
+      if (better) {
+        bestScore = score;
+        bestB = B;
+        bestT = T;
+        bestInBand = inBand;
+        bestAbove = above;
+      }
     }
   }
 
@@ -442,8 +530,9 @@ export function estimateFogTop(
 
   return {
     topM: bestT,
+    baseM: bestB <= distinct[0] ? null : bestB,
     confidence,
-    sockedBelow: bestBelow,
+    sockedBelow: bestInBand,
     clearAbove: bestAbove,
     sampled,
     readings,
