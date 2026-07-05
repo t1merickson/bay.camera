@@ -1,0 +1,14 @@
+# Netlify deploy config. Static build + one proxy rewrite.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# ops.alertcalifornia.org blocks browser TLS fingerprints (AWS WAF) while
+# allowing server-side fetches, so the client hits this same-origin path and
+# Netlify proxies it (status 200 = proxy, not redirect). Mirrors the Vite dev
+# proxy in astro.config.mjs.
+[[redirects]]
+  from = "/api/alertca"
+  to = "https://ops.alertcalifornia.org/api/getCameraDataByLoc"
+  status = 200

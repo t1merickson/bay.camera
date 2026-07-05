@@ -15,7 +15,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1825/2026/07/05/Berkeley_Downtown_1783230175_2957.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1825/2026/07/05/Berkeley_Downtown_1783230175_2957.jpg",
+      "elev_m": 62
     },
     {
       "camId": "2578",
@@ -27,7 +28,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2578/2026/07/05/Chabot_1783230157_4228.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2578/2026/07/05/Chabot_1783230157_4228.jpg",
+      "elev_m": 457
     },
     {
       "camId": "1963",
@@ -39,7 +41,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1963/2026/07/05/Fairview_Alameda_1_1783230166_1123.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1963/2026/07/05/Fairview_Alameda_1_1783230166_1123.jpg",
+      "elev_m": 316
     },
     {
       "camId": "1964",
@@ -51,7 +54,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1964/2026/07/05/Fairview_Alameda_2_1783230135_2153.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1964/2026/07/05/Fairview_Alameda_2_1783230135_2153.jpg",
+      "elev_m": 316
     },
     {
       "camId": "1983",
@@ -63,7 +67,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1983/2026/07/05/Garin_Ridge_1_1783230176_7369.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1983/2026/07/05/Garin_Ridge_1_1783230176_7369.jpg",
+      "elev_m": 451
     },
     {
       "camId": "2001",
@@ -75,7 +80,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2001/2026/07/05/Grizzly_Peak_Overlook_1_1783230155_3494.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2001/2026/07/05/Grizzly_Peak_Overlook_1_1783230155_3494.jpg",
+      "elev_m": 509
     },
     {
       "camId": "2002",
@@ -87,7 +93,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2002/2026/07/05/Grizzly_Peak_Overlook_2_1783230155_9591.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2002/2026/07/05/Grizzly_Peak_Overlook_2_1783230155_9591.jpg",
+      "elev_m": 509
     },
     {
       "camId": "2147",
@@ -99,7 +106,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2147/2026/07/05/Mt_Allison_1783230177_1862.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2147/2026/07/05/Mt_Allison_1783230177_1862.jpg",
+      "elev_m": 800
     },
     {
       "camId": "2215",
@@ -111,7 +119,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2215/2026/07/05/Oakland_Clorox_1783230173_1863.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2215/2026/07/05/Oakland_Clorox_1783230173_1863.jpg",
+      "elev_m": 14
     },
     {
       "camId": "2216",
@@ -123,7 +132,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2216/2026/07/05/Oakland_Coliseum_1783230179_8507.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2216/2026/07/05/Oakland_Coliseum_1783230179_8507.jpg",
+      "elev_m": 5
     },
     {
       "camId": "2600",
@@ -135,7 +145,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2600/2026/07/05/Sunol_Ridge_1783230175_5099.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2600/2026/07/05/Sunol_Ridge_1783230175_5099.jpg",
+      "elev_m": 643
     },
     {
       "camId": "16186",
@@ -147,7 +158,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16186/2026/07/05/Sunol_Ridge_2_1783230172_9863.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16186/2026/07/05/Sunol_Ridge_2_1783230172_9863.jpg",
+      "elev_m": 643
     },
     {
       "camId": "2502",
@@ -159,7 +171,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2502/2026/07/05/Wiedemann_Hill_1783230169_6282.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2502/2026/07/05/Wiedemann_Hill_1783230169_6282.jpg",
+      "elev_m": 560
     },
     {
       "camId": "1858",
@@ -171,7 +184,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1858/2026/07/05/Briones_Rancho_de_la_Rosa_1783230179_8175.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1858/2026/07/05/Briones_Rancho_de_la_Rosa_1783230179_8175.jpg",
+      "elev_m": 328
     },
     {
       "camId": "1855",
@@ -183,7 +197,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1855/2026/07/05/Briones_Tabletop_1783230111_5176.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1855/2026/07/05/Briones_Tabletop_1783230111_5176.jpg",
+      "elev_m": 422
     },
     {
       "camId": "18234",
@@ -195,7 +210,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/18234/2026/07/05/Byron_Hot_Springs_1_1783230154_3630.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/18234/2026/07/05/Byron_Hot_Springs_1_1783230154_3630.jpg",
+      "elev_m": 10
     },
     {
       "camId": "18235",
@@ -207,7 +223,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/18235/2026/07/05/Byron_Hot_Springs_2_1783230173_8811.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/18235/2026/07/05/Byron_Hot_Springs_2_1783230173_8811.jpg",
+      "elev_m": 10
     },
     {
       "camId": "1923",
@@ -219,7 +236,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1923/2026/07/05/Cummings_Skyway_1783230110_8066.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1923/2026/07/05/Cummings_Skyway_1783230110_8066.jpg",
+      "elev_m": 260
     },
     {
       "camId": "2592",
@@ -231,7 +249,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2592/2026/07/05/Evora_Road_1783230111_8687.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2592/2026/07/05/Evora_Road_1783230111_8687.jpg",
+      "elev_m": 167
     },
     {
       "camId": "2000",
@@ -243,7 +262,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2000/2026/07/05/Grizzly_Peak_KPFA_1783230154_7873.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2000/2026/07/05/Grizzly_Peak_KPFA_1783230154_7873.jpg",
+      "elev_m": 450
     },
     {
       "camId": "2023",
@@ -255,7 +275,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2023/2026/07/05/Highland_Peak_1_1783230153_2478.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2023/2026/07/05/Highland_Peak_1_1783230153_2478.jpg",
+      "elev_m": 772
     },
     {
       "camId": "16371",
@@ -267,7 +288,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16371/2026/07/05/Highland_Peak_2_1783230155_4965.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16371/2026/07/05/Highland_Peak_2_1783230155_4965.jpg",
+      "elev_m": 772
     },
     {
       "camId": "2054",
@@ -279,7 +301,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2054/2026/07/05/Kregor_Peak_1783230152_1752.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2054/2026/07/05/Kregor_Peak_1783230152_1752.jpg",
+      "elev_m": 563
     },
     {
       "camId": "2062",
@@ -291,7 +314,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2062/2026/07/05/Lafayette_Dunsyre_Dr_1783230157_7197.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2062/2026/07/05/Lafayette_Dunsyre_Dr_1783230157_7197.jpg",
+      "elev_m": 175
     },
     {
       "camId": "2063",
@@ -303,7 +327,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2063/2026/07/05/Lafayette_Lucas_Dr_1783230170_8037.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2063/2026/07/05/Lafayette_Lucas_Dr_1783230170_8037.jpg",
+      "elev_m": 230
     },
     {
       "camId": "2139",
@@ -315,7 +340,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2139/2026/07/05/Moraga_Alta_Mesa_1783230135_2316.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2139/2026/07/05/Moraga_Alta_Mesa_1783230135_2316.jpg",
+      "elev_m": 275
     },
     {
       "camId": "2156",
@@ -327,7 +353,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2156/2026/07/05/Mt_Diablo_1783230157_8155.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2156/2026/07/05/Mt_Diablo_1783230157_8155.jpg",
+      "elev_m": 1148
     },
     {
       "camId": "2157",
@@ -339,7 +366,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2157/2026/07/05/Mt_Diablo_North_1783230158_2636.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2157/2026/07/05/Mt_Diablo_North_1783230158_2636.jpg",
+      "elev_m": 1059
     },
     {
       "camId": "2158",
@@ -351,7 +379,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2158/2026/07/05/Mt_Diablo_West_1783230174_5584.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2158/2026/07/05/Mt_Diablo_West_1783230174_5584.jpg",
+      "elev_m": 1077
     },
     {
       "camId": "2207",
@@ -363,7 +392,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2207/2026/07/05/Mulholland_Ridge_1783230167_3245.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2207/2026/07/05/Mulholland_Ridge_1783230167_3245.jpg",
+      "elev_m": 331
     },
     {
       "camId": "2208",
@@ -375,7 +405,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2208/2026/07/05/Nichol_Knob_1783230109_9673.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2208/2026/07/05/Nichol_Knob_1783230109_9673.jpg",
+      "elev_m": 95
     },
     {
       "camId": "2329",
@@ -387,7 +418,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2329/2026/07/05/Rocky_Ridge_1_1783230158_6266.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2329/2026/07/05/Rocky_Ridge_1_1783230158_6266.jpg",
+      "elev_m": 601
     },
     {
       "camId": "2333",
@@ -399,7 +431,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2333/2026/07/05/Round_Top_1783230123_8352.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2333/2026/07/05/Round_Top_1783230123_8352.jpg",
+      "elev_m": 497
     },
     {
       "camId": "2411",
@@ -411,7 +444,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2411/2026/07/05/SRVFD_Station_31_1783230149_7049.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2411/2026/07/05/SRVFD_Station_31_1783230149_7049.jpg",
+      "elev_m": 123
     },
     {
       "camId": "2482",
@@ -423,7 +457,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2482/2026/07/05/Vollmer_Peak_1783230157_2737.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2482/2026/07/05/Vollmer_Peak_1783230157_2737.jpg",
+      "elev_m": 572
     },
     {
       "camId": "2483",
@@ -435,7 +470,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2483/2026/07/05/Vollmer_Tower_Top_1783230149_6536.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2483/2026/07/05/Vollmer_Tower_Top_1783230149_6536.jpg",
+      "elev_m": 572
     },
     {
       "camId": "2507",
@@ -447,7 +483,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2507/2026/07/05/Wildcat_Canyon_1783230174_5014.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2507/2026/07/05/Wildcat_Canyon_1783230174_5014.jpg",
+      "elev_m": 162
     },
     {
       "camId": "2508",
@@ -459,7 +496,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2508/2026/07/05/William_Rust_Summit_1783230176_3806.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2508/2026/07/05/William_Rust_Summit_1783230176_3806.jpg",
+      "elev_m": 293
     },
     {
       "camId": "1809",
@@ -471,7 +509,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1809/2026/07/05/Barnabe_Peak_East_1783230174_5342.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1809/2026/07/05/Barnabe_Peak_East_1783230174_5342.jpg",
+      "elev_m": 434
     },
     {
       "camId": "1810",
@@ -483,7 +522,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1810/2026/07/05/Barnabe_Peak_West_1783230168_8095.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1810/2026/07/05/Barnabe_Peak_West_1783230168_8095.jpg",
+      "elev_m": 434
     },
     {
       "camId": "17832",
@@ -495,7 +535,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/17832/2026/07/05/Big_Rock_Ridge_1_1783230179_2080.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/17832/2026/07/05/Big_Rock_Ridge_1_1783230179_2080.jpg",
+      "elev_m": 550
     },
     {
       "camId": "17833",
@@ -507,7 +548,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/17833/2026/07/05/Big_Rock_Ridge_2_1783230166_2363.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/17833/2026/07/05/Big_Rock_Ridge_2_1783230166_2363.jpg",
+      "elev_m": 550
     },
     {
       "camId": "1833",
@@ -519,7 +561,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1833/2026/07/05/Black_Mtn_Marin_1783230144_6434.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1833/2026/07/05/Black_Mtn_Marin_1783230144_6434.jpg",
+      "elev_m": 363
     },
     {
       "camId": "1843",
@@ -531,7 +574,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1843/2026/07/05/Bolinas_1783230165_9538.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1843/2026/07/05/Bolinas_1783230165_9538.jpg",
+      "elev_m": 103
     },
     {
       "camId": "2153",
@@ -543,7 +587,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2153/2026/07/05/Mt_Burdell_1_1783230168_7521.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2153/2026/07/05/Mt_Burdell_1_1783230168_7521.jpg",
+      "elev_m": 478
     },
     {
       "camId": "15819",
@@ -555,7 +600,8 @@
       },
       "sponsor": "ALERTCalifornia",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15819/2026/07/05/Mt_Burdell_2_1783230139_1081.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15819/2026/07/05/Mt_Burdell_2_1783230139_1081.jpg",
+      "elev_m": 478
     },
     {
       "camId": "2668",
@@ -567,7 +613,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2668/2026/07/05/Mt_Burdell_South_1783230171_6391.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2668/2026/07/05/Mt_Burdell_South_1783230171_6391.jpg",
+      "elev_m": 448
     },
     {
       "camId": "2192",
@@ -579,7 +626,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2192/2026/07/05/Mt_Tamalpais_East_1783230166_2536.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2192/2026/07/05/Mt_Tamalpais_East_1783230166_2536.jpg",
+      "elev_m": 710
     },
     {
       "camId": "2193",
@@ -591,7 +639,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2193/2026/07/05/Mt_Tamalpais_West_1783230165_2205.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2193/2026/07/05/Mt_Tamalpais_West_1783230165_2205.jpg",
+      "elev_m": 710
     },
     {
       "camId": "2194",
@@ -603,7 +652,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2194/2026/07/05/Mt_Vision_1783230140_9254.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2194/2026/07/05/Mt_Vision_1783230140_9254.jpg",
+      "elev_m": 406
     },
     {
       "camId": "2206",
@@ -615,7 +665,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2206/2026/07/05/Muir_Beach_Overlook_1783230169_6519.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2206/2026/07/05/Muir_Beach_Overlook_1783230169_6519.jpg",
+      "elev_m": 144
     },
     {
       "camId": "2354",
@@ -627,7 +678,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2354/2026/07/05/San_Pedro_1783230172_6888.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2354/2026/07/05/San_Pedro_1783230172_6888.jpg",
+      "elev_m": 299
     },
     {
       "camId": "2667",
@@ -639,7 +691,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2667/2026/07/05/San_Rafael_Hill_1783230169_8480.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2667/2026/07/05/San_Rafael_Hill_1783230169_8480.jpg",
+      "elev_m": 182
     },
     {
       "camId": "2518",
@@ -651,7 +704,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2518/2026/07/05/Wolfback_Ridge_1783230171_9316.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2518/2026/07/05/Wolfback_Ridge_1783230171_9316.jpg",
+      "elev_m": 322
     },
     {
       "camId": "1795",
@@ -663,7 +717,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1795/2026/07/05/Atlas_Peak_1_1783230119_7454.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1795/2026/07/05/Atlas_Peak_1_1783230119_7454.jpg",
+      "elev_m": 799
     },
     {
       "camId": "1796",
@@ -675,7 +730,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1796/2026/07/05/Atlas_Peak_2_1783230075_3032.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1796/2026/07/05/Atlas_Peak_2_1783230075_3032.jpg",
+      "elev_m": 799
     },
     {
       "camId": "1804",
@@ -687,7 +743,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1804/2026/07/05/Bald_Mtn_Napa_1783230173_4250.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1804/2026/07/05/Bald_Mtn_Napa_1783230173_4250.jpg",
+      "elev_m": 552
     },
     {
       "camId": "1877",
@@ -699,7 +756,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1877/2026/07/05/Capell_Valley_1_1783230132_2072.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1877/2026/07/05/Capell_Valley_1_1783230132_2072.jpg",
+      "elev_m": 582
     },
     {
       "camId": "1878",
@@ -711,7 +769,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1878/2026/07/05/Capell_Valley_2_1783230166_4350.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1878/2026/07/05/Capell_Valley_2_1783230166_4350.jpg",
+      "elev_m": 582
     },
     {
       "camId": "2599",
@@ -723,7 +782,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2599/2026/07/05/Deer_Park_West_1783230176_3301.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2599/2026/07/05/Deer_Park_West_1783230176_3301.jpg",
+      "elev_m": 482
     },
     {
       "camId": "1943",
@@ -735,7 +795,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1943/2026/07/05/Dry_Creek_1_1783230167_5078.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1943/2026/07/05/Dry_Creek_1_1783230167_5078.jpg",
+      "elev_m": 405
     },
     {
       "camId": "1944",
@@ -747,7 +808,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1944/2026/07/05/Dry_Creek_2_1783230169_6522.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1944/2026/07/05/Dry_Creek_2_1783230169_6522.jpg",
+      "elev_m": 405
     },
     {
       "camId": "2090",
@@ -759,7 +821,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2090/2026/07/05/Lower_Mt_Veeder_1_1783230170_9295.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2090/2026/07/05/Lower_Mt_Veeder_1_1783230170_9295.jpg",
+      "elev_m": 230
     },
     {
       "camId": "2091",
@@ -771,7 +834,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2091/2026/07/05/Lower_Mt_Veeder_2_1783230170_7550.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2091/2026/07/05/Lower_Mt_Veeder_2_1783230170_7550.jpg",
+      "elev_m": 230
     },
     {
       "camId": "1684",
@@ -783,7 +847,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1684/2026/07/05/Mt_Vaca_5_1783230149_1597.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1684/2026/07/05/Mt_Vaca_5_1783230149_1597.jpg",
+      "elev_m": 822
     },
     {
       "camId": "2334",
@@ -795,7 +860,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2334/2026/07/05/Rutherford_1783230176_9798.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2334/2026/07/05/Rutherford_1783230176_9798.jpg",
+      "elev_m": 301
     },
     {
       "camId": "23725",
@@ -807,7 +873,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23725/2026/07/05/Soda_Canyon_1_1783230175_5393.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23725/2026/07/05/Soda_Canyon_1_1783230175_5393.jpg",
+      "elev_m": 529
     },
     {
       "camId": "23726",
@@ -819,7 +886,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23726/2026/07/05/Soda_Canyon_2_1783230131_4642.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23726/2026/07/05/Soda_Canyon_2_1783230131_4642.jpg",
+      "elev_m": 529
     },
     {
       "camId": "2612",
@@ -831,7 +899,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2612/2026/07/05/Vacaville_1783230137_1052.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2612/2026/07/05/Vacaville_1783230137_1052.jpg",
+      "elev_m": 635
     },
     {
       "camId": "2505",
@@ -843,7 +912,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2505/2026/07/05/Wild_Horse_Valley_1_1783230176_9798.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2505/2026/07/05/Wild_Horse_Valley_1_1783230176_9798.jpg",
+      "elev_m": 488
     },
     {
       "camId": "2506",
@@ -855,7 +925,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2506/2026/07/05/Wild_Horse_Valley_2_1783230171_7481.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2506/2026/07/05/Wild_Horse_Valley_2_1783230171_7481.jpg",
+      "elev_m": 488
     },
     {
       "camId": "2522",
@@ -867,7 +938,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2522/2026/07/05/Zinfandel_1_1783230170_4526.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2522/2026/07/05/Zinfandel_1_1783230170_4526.jpg",
+      "elev_m": 391
     },
     {
       "camId": "2523",
@@ -879,7 +951,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2523/2026/07/05/Zinfandel_2_1783230175_5165.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2523/2026/07/05/Zinfandel_2_1783230175_5165.jpg",
+      "elev_m": 391
     },
     {
       "camId": "4712",
@@ -891,7 +964,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4712/2026/07/05/Walnut_Grove_1_1783230179_3676.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4712/2026/07/05/Walnut_Grove_1_1783230179_3676.jpg",
+      "elev_m": 4
     },
     {
       "camId": "4711",
@@ -903,7 +977,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4711/2026/07/05/Walnut_Grove_2_1783230169_5624.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4711/2026/07/05/Walnut_Grove_2_1783230169_5624.jpg",
+      "elev_m": 4
     },
     {
       "camId": "2015",
@@ -915,7 +990,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2015/2026/07/05/Henrietta_Peak_1_1783230168_8039.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2015/2026/07/05/Henrietta_Peak_1_1783230168_8039.jpg",
+      "elev_m": 1077
     },
     {
       "camId": "2016",
@@ -927,7 +1003,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2016/2026/07/05/Henrietta_Peak_2_1783230170_3971.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2016/2026/07/05/Henrietta_Peak_2_1783230170_3971.jpg",
+      "elev_m": 1077
     },
     {
       "camId": "2737",
@@ -939,7 +1016,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2737/2026/07/05/Rocks_Road_1_1783230168_6343.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2737/2026/07/05/Rocks_Road_1_1783230168_6343.jpg",
+      "elev_m": 257
     },
     {
       "camId": "2736",
@@ -951,7 +1029,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2736/2026/07/05/Rocks_Road_2_1783230169_7719.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2736/2026/07/05/Rocks_Road_2_1783230169_7719.jpg",
+      "elev_m": 257
     },
     {
       "camId": "2429",
@@ -963,7 +1042,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2429/2026/07/05/Sutro_Tower_2_1783230172_5768.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2429/2026/07/05/Sutro_Tower_2_1783230172_5768.jpg",
+      "elev_m": 231
     },
     {
       "camId": "1784",
@@ -975,7 +1055,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1784/2026/07/05/Allen_Peak_1783230175_4150.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1784/2026/07/05/Allen_Peak_1783230175_4150.jpg",
+      "elev_m": 722
     },
     {
       "camId": "1917",
@@ -987,7 +1068,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1917/2026/07/05/CSM_Ca%C3%B1ada_Bldg_9_1783230171_3711.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1917/2026/07/05/CSM_Ca%C3%B1ada_Bldg_9_1783230171_3711.jpg",
+      "elev_m": 217
     },
     {
       "camId": "23811",
@@ -999,7 +1081,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23811/2026/07/05/Cahill_Ridge_1_1783230171_5258.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23811/2026/07/05/Cahill_Ridge_1_1783230171_5258.jpg",
+      "elev_m": 351
     },
     {
       "camId": "23810",
@@ -1011,7 +1094,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23810/2026/07/05/Cahill_Ridge_2_1783230160_7271.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23810/2026/07/05/Cahill_Ridge_2_1783230160_7271.jpg",
+      "elev_m": 351
     },
     {
       "camId": "1885",
@@ -1023,7 +1107,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1885/2026/07/05/Castanea_Ridge_1783230166_7833.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1885/2026/07/05/Castanea_Ridge_1783230166_7833.jpg",
+      "elev_m": 722
     },
     {
       "camId": "1899",
@@ -1035,7 +1120,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1899/2026/07/05/Coll_of_San_Mateo_Bldg10_1783230175_3624.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1899/2026/07/05/Coll_of_San_Mateo_Bldg10_1783230175_3624.jpg",
+      "elev_m": 191
     },
     {
       "camId": "1900",
@@ -1047,7 +1133,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1900/2026/07/05/Coll_of_San_Mateo_Bldg36_1783230133_9166.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1900/2026/07/05/Coll_of_San_Mateo_Bldg36_1783230133_9166.jpg",
+      "elev_m": 178
     },
     {
       "camId": "2019",
@@ -1059,7 +1146,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2019/2026/07/05/Higgins_Canyon_1783230165_9890.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2019/2026/07/05/Higgins_Canyon_1783230165_9890.jpg",
+      "elev_m": 337
     },
     {
       "camId": "2039",
@@ -1071,7 +1159,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2039/2026/07/05/Jasper_Ridge_Bio_Presv_1783230172_4378.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2039/2026/07/05/Jasper_Ridge_Bio_Presv_1783230172_4378.jpg",
+      "elev_m": 118
     },
     {
       "camId": "2073",
@@ -1083,7 +1172,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2073/2026/07/05/Lane_Hill_Pescadero_1783230167_6543.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2073/2026/07/05/Lane_Hill_Pescadero_1783230167_6543.jpg",
+      "elev_m": 372
     },
     {
       "camId": "2252",
@@ -1095,7 +1185,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2252/2026/07/05/Pillar_Point_1783230178_2059.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2252/2026/07/05/Pillar_Point_1783230178_2059.jpg",
+      "elev_m": 0
     },
     {
       "camId": "2281",
@@ -1107,7 +1198,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2281/2026/07/05/Purissima_1783230162_4372.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2281/2026/07/05/Purissima_1783230162_4372.jpg",
+      "elev_m": 227
     },
     {
       "camId": "11097",
@@ -1119,7 +1211,8 @@
       },
       "sponsor": "ALERTCalifornia",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11097/2026/07/05/Redwood_City_1_1783230138_3374.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11097/2026/07/05/Redwood_City_1_1783230138_3374.jpg",
+      "elev_m": 6
     },
     {
       "camId": "11096",
@@ -1131,7 +1224,8 @@
       },
       "sponsor": "ALERTCalifornia",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11096/2026/07/05/Redwood_City_2_1783230166_3669.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11096/2026/07/05/Redwood_City_2_1783230166_3669.jpg",
+      "elev_m": 6
     },
     {
       "camId": "4706",
@@ -1143,7 +1237,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4706/2026/07/05/San_Bruno_Mountain_1783230176_4027.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4706/2026/07/05/San_Bruno_Mountain_1783230176_4027.jpg",
+      "elev_m": 387
     },
     {
       "camId": "23535",
@@ -1155,7 +1250,8 @@
       },
       "sponsor": "ALERTCalifornia",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23535/2026/07/05/Segelstad_1_1783230136_8095.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23535/2026/07/05/Segelstad_1_1783230136_8095.jpg",
+      "elev_m": 326
     },
     {
       "camId": "23536",
@@ -1167,7 +1263,8 @@
       },
       "sponsor": "ALERTCalifornia",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23536/2026/07/05/Segelstad_2_1783230177_7244.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23536/2026/07/05/Segelstad_2_1783230177_7244.jpg",
+      "elev_m": 326
     },
     {
       "camId": "2394",
@@ -1179,7 +1276,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2394/2026/07/05/Skyline_College_1783230164_2888.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2394/2026/07/05/Skyline_College_1783230164_2888.jpg",
+      "elev_m": 216
     },
     {
       "camId": "2461",
@@ -1191,7 +1289,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2461/2026/07/05/Tunitas_1783230170_4619.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2461/2026/07/05/Tunitas_1783230170_4619.jpg",
+      "elev_m": 423
     },
     {
       "camId": "15908",
@@ -1203,7 +1302,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15908/2026/07/05/Almaden_1_1783230165_2059.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15908/2026/07/05/Almaden_1_1783230165_2059.jpg",
+      "elev_m": 165
     },
     {
       "camId": "15909",
@@ -1215,7 +1315,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15909/2026/07/05/Almaden_2_1783230166_8137.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15909/2026/07/05/Almaden_2_1783230166_8137.jpg",
+      "elev_m": 165
     },
     {
       "camId": "1835",
@@ -1227,7 +1328,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1835/2026/07/05/Black_Mtn_Santa_Clara_1_1783230177_5613.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1835/2026/07/05/Black_Mtn_Santa_Clara_1_1783230177_5613.jpg",
+      "elev_m": 849
     },
     {
       "camId": "16616",
@@ -1239,7 +1341,8 @@
       },
       "sponsor": "ALERTCalifornia",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16616/2026/07/05/Black_Mtn_Santa_Clara_2_1783230155_3360.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16616/2026/07/05/Black_Mtn_Santa_Clara_2_1783230155_3360.jpg",
+      "elev_m": 849
     },
     {
       "camId": "1881",
@@ -1251,7 +1354,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1881/2026/07/05/Carol_Drive_Santa_Clara_1_1783230141_7595.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1881/2026/07/05/Carol_Drive_Santa_Clara_1_1783230141_7595.jpg",
+      "elev_m": 128
     },
     {
       "camId": "1882",
@@ -1263,7 +1367,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1882/2026/07/05/Carol_Drive_Santa_Clara_2_1783230143_5538.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1882/2026/07/05/Carol_Drive_Santa_Clara_2_1783230143_5538.jpg",
+      "elev_m": 128
     },
     {
       "camId": "1924",
@@ -1275,7 +1380,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1924/2026/07/05/Cupertino_Hills_1783230166_4128.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1924/2026/07/05/Cupertino_Hills_1783230166_4128.jpg",
+      "elev_m": 632
     },
     {
       "camId": "1978",
@@ -1287,7 +1393,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1978/2026/07/05/Foothills_Park_1783230172_8414.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1978/2026/07/05/Foothills_Park_1783230172_8414.jpg",
+      "elev_m": 278
     },
     {
       "camId": "2025",
@@ -1299,7 +1406,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2025/2026/07/05/Holiday_Lake_1_1783230146_9865.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2025/2026/07/05/Holiday_Lake_1_1783230146_9865.jpg",
+      "elev_m": 300
     },
     {
       "camId": "2026",
@@ -1311,7 +1419,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2026/2026/07/05/Holiday_Lake_2_1783230135_5136.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2026/2026/07/05/Holiday_Lake_2_1783230135_5136.jpg",
+      "elev_m": 300
     },
     {
       "camId": "2077",
@@ -1323,7 +1432,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2077/2026/07/05/Limekiln_Canyon_1783230176_5446.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2077/2026/07/05/Limekiln_Canyon_1783230176_5446.jpg",
+      "elev_m": 500
     },
     {
       "camId": "2082",
@@ -1335,7 +1445,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2082/2026/07/05/Loma_Prieta_1783230172_1590.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2082/2026/07/05/Loma_Prieta_1783230172_1590.jpg",
+      "elev_m": 1153
     },
     {
       "camId": "2658",
@@ -1347,7 +1458,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2658/2026/07/05/Milias_Ranch_1_1783230154_1827.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2658/2026/07/05/Milias_Ranch_1_1783230154_1827.jpg",
+      "elev_m": 487
     },
     {
       "camId": "2659",
@@ -1359,7 +1471,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2659/2026/07/05/Milias_Ranch_2_1783230176_3914.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2659/2026/07/05/Milias_Ranch_2_1783230176_3914.jpg",
+      "elev_m": 487
     },
     {
       "camId": "2127",
@@ -1371,7 +1484,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2127/2026/07/05/Mission_Peak_1_1783230132_7663.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2127/2026/07/05/Mission_Peak_1_1783230132_7663.jpg",
+      "elev_m": 695
     },
     {
       "camId": "2128",
@@ -1383,7 +1497,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2128/2026/07/05/Mission_Peak_2_1783230172_3225.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2128/2026/07/05/Mission_Peak_2_1783230172_3225.jpg",
+      "elev_m": 695
     },
     {
       "camId": "2136",
@@ -1395,7 +1510,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2136/2026/07/05/Montebello_Preserve_1783230173_7851.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2136/2026/07/05/Montebello_Preserve_1783230173_7851.jpg",
+      "elev_m": 726
     },
     {
       "camId": "2154",
@@ -1407,7 +1523,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2154/2026/07/05/Mt_Chual_1783230164_4057.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2154/2026/07/05/Mt_Chual_1783230164_4057.jpg",
+      "elev_m": 1040
     },
     {
       "camId": "2165",
@@ -1419,7 +1536,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2165/2026/07/05/Mt_Hamilton_SCC_1_1783230166_5328.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2165/2026/07/05/Mt_Hamilton_SCC_1_1783230166_5328.jpg",
+      "elev_m": 1268
     },
     {
       "camId": "2166",
@@ -1431,7 +1549,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2166/2026/07/05/Mt_Hamilton_SCC_2_1783230152_5840.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2166/2026/07/05/Mt_Hamilton_SCC_2_1783230152_5840.jpg",
+      "elev_m": 1268
     },
     {
       "camId": "2167",
@@ -1443,7 +1562,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2167/2026/07/05/Mt_Hamilton_SCC_3_1783230145_2499.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2167/2026/07/05/Mt_Hamilton_SCC_3_1783230145_2499.jpg",
+      "elev_m": 1280
     },
     {
       "camId": "2188",
@@ -1455,7 +1575,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2188/2026/07/05/Mt_Rodoni_1_1783230160_3709.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2188/2026/07/05/Mt_Rodoni_1_1783230160_3709.jpg",
+      "elev_m": 761
     },
     {
       "camId": "2189",
@@ -1467,7 +1588,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2189/2026/07/05/Mt_Rodoni_2_1783230175_2652.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2189/2026/07/05/Mt_Rodoni_2_1783230175_2652.jpg",
+      "elev_m": 761
     },
     {
       "camId": "2235",
@@ -1479,7 +1601,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2235/2026/07/05/Pacheco_Peak_1_1783230178_2521.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2235/2026/07/05/Pacheco_Peak_1_1783230178_2521.jpg",
+      "elev_m": 826
     },
     {
       "camId": "2236",
@@ -1491,7 +1614,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2236/2026/07/05/Pacheco_Peak_2_1783230168_8311.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2236/2026/07/05/Pacheco_Peak_2_1783230168_8311.jpg",
+      "elev_m": 826
     },
     {
       "camId": "2277",
@@ -1503,7 +1627,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2277/2026/07/05/Presson_Hill_1_1783230168_4219.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2277/2026/07/05/Presson_Hill_1_1783230168_4219.jpg",
+      "elev_m": 1020
     },
     {
       "camId": "2278",
@@ -1515,7 +1640,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2278/2026/07/05/Presson_Hill_2_1783230176_5983.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2278/2026/07/05/Presson_Hill_2_1783230176_5983.jpg",
+      "elev_m": 1020
     },
     {
       "camId": "2348",
@@ -1527,7 +1653,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2348/2026/07/05/San_Jose_Foothills_1783230180_5198.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2348/2026/07/05/San_Jose_Foothills_1783230180_5198.jpg",
+      "elev_m": 377
     },
     {
       "camId": "2414",
@@ -1539,7 +1666,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2414/2026/07/05/Stanford_Dish_1783230171_6949.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2414/2026/07/05/Stanford_Dish_1783230171_6949.jpg",
+      "elev_m": 131
     },
     {
       "camId": "2729",
@@ -1551,7 +1679,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2729/2026/07/05/Starr_Canyon_1_1783230154_8737.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2729/2026/07/05/Starr_Canyon_1_1783230154_8737.jpg",
+      "elev_m": 789
     },
     {
       "camId": "2728",
@@ -1563,7 +1692,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2728/2026/07/05/Starr_Canyon_2_1783230156_8041.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2728/2026/07/05/Starr_Canyon_2_1783230156_8041.jpg",
+      "elev_m": 789
     },
     {
       "camId": "1844",
@@ -1575,7 +1705,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1844/2026/07/05/Bonny_Doon_1783230165_8176.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1844/2026/07/05/Bonny_Doon_1783230165_8176.jpg",
+      "elev_m": 792
     },
     {
       "camId": "1859",
@@ -1587,7 +1718,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1859/2026/07/05/Brookdale_1783230169_6554.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1859/2026/07/05/Brookdale_1783230169_6554.jpg",
+      "elev_m": 334
     },
     {
       "camId": "1891",
@@ -1599,7 +1731,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1891/2026/07/05/Chalk_Mtn_Lookout_1783230170_7580.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1891/2026/07/05/Chalk_Mtn_Lookout_1783230170_7580.jpg",
+      "elev_m": 477
     },
     {
       "camId": "2608",
@@ -1611,7 +1744,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2608/2026/07/05/Dream_Inn_1783230166_5340.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2608/2026/07/05/Dream_Inn_1783230166_5340.jpg",
+      "elev_m": 16
     },
     {
       "camId": "1949",
@@ -1623,7 +1757,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1949/2026/07/05/Eagle_Rock_Lookout_1_1783230172_7153.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1949/2026/07/05/Eagle_Rock_Lookout_1_1783230172_7153.jpg",
+      "elev_m": 728
     },
     {
       "camId": "1950",
@@ -1635,7 +1770,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1950/2026/07/05/Eagle_Rock_Lookout_2_1783230164_4561.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1950/2026/07/05/Eagle_Rock_Lookout_2_1783230164_4561.jpg",
+      "elev_m": 728
     },
     {
       "camId": "2150",
@@ -1647,7 +1783,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2150/2026/07/05/Mt_Bielawski_1783230170_6779.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2150/2026/07/05/Mt_Bielawski_1783230170_6779.jpg",
+      "elev_m": 976
     },
     {
       "camId": "2654",
@@ -1659,7 +1796,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2654/2026/07/05/Scotts_Valley_1783230177_7842.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2654/2026/07/05/Scotts_Valley_1783230177_7842.jpg",
+      "elev_m": 340
     },
     {
       "camId": "2609",
@@ -1671,7 +1809,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2609/2026/07/05/Silver_Mtn_1_1783230176_4456.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2609/2026/07/05/Silver_Mtn_1_1783230176_4456.jpg",
+      "elev_m": 625
     },
     {
       "camId": "4713",
@@ -1683,7 +1822,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4713/2026/07/05/Watsonville_1_1783230175_4875.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4713/2026/07/05/Watsonville_1_1783230175_4875.jpg",
+      "elev_m": 12
     },
     {
       "camId": "4714",
@@ -1695,7 +1835,8 @@
       },
       "sponsor": "ALERTCalifornia",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4714/2026/07/05/Watsonville_2_1783230178_1352.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4714/2026/07/05/Watsonville_2_1783230178_1352.jpg",
+      "elev_m": 11
     },
     {
       "camId": "2532",
@@ -1707,7 +1848,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2532/2026/07/05/Cordelia_Green_Valley_1783230134_8613.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2532/2026/07/05/Cordelia_Green_Valley_1783230134_8613.jpg",
+      "elev_m": 390
     },
     {
       "camId": "1685",
@@ -1719,7 +1861,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1685/2026/07/05/Mt_Vaca_8_North_1783230136_7777.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1685/2026/07/05/Mt_Vaca_8_North_1783230136_7777.jpg",
+      "elev_m": 823
     },
     {
       "camId": "15652",
@@ -1731,7 +1874,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15652/2026/07/05/Mt_Vaca_8_South_1783230136_7035.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15652/2026/07/05/Mt_Vaca_8_South_1783230136_7035.jpg",
+      "elev_m": 823
     },
     {
       "camId": "2247",
@@ -1743,7 +1887,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2247/2026/07/05/Pena_Adobe_1783230172_4722.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2247/2026/07/05/Pena_Adobe_1783230172_4722.jpg",
+      "elev_m": 276
     },
     {
       "camId": "16236",
@@ -1755,7 +1900,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16236/2026/07/05/Pena_Adobe_2_1783230168_3115.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16236/2026/07/05/Pena_Adobe_2_1783230168_3115.jpg",
+      "elev_m": 276
     },
     {
       "camId": "2422",
@@ -1767,7 +1913,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2422/2026/07/05/Sugarloaf_Ridge_1783230120_4216.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2422/2026/07/05/Sugarloaf_Ridge_1783230120_4216.jpg",
+      "elev_m": 497
     },
     {
       "camId": "2423",
@@ -1779,7 +1926,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2423/2026/07/05/Suisun_Valley_1783230178_1796.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2423/2026/07/05/Suisun_Valley_1783230178_1796.jpg",
+      "elev_m": 19
     },
     {
       "camId": "2464",
@@ -1791,7 +1939,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2464/2026/07/05/Twin_Sisters_East_1_1783230173_6937.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2464/2026/07/05/Twin_Sisters_East_1_1783230173_6937.jpg",
+      "elev_m": 640
     },
     {
       "camId": "2465",
@@ -1803,7 +1952,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2465/2026/07/05/Twin_Sisters_East_2_1783230173_8787.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2465/2026/07/05/Twin_Sisters_East_2_1783230173_8787.jpg",
+      "elev_m": 640
     },
     {
       "camId": "2466",
@@ -1815,7 +1965,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2466/2026/07/05/Twin_Sisters_North_1_1783230149_8856.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2466/2026/07/05/Twin_Sisters_North_1_1783230149_8856.jpg",
+      "elev_m": 644
     },
     {
       "camId": "2467",
@@ -1827,7 +1978,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2467/2026/07/05/Twin_Sisters_North_2_1783230173_4761.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2467/2026/07/05/Twin_Sisters_North_2_1783230173_4761.jpg",
+      "elev_m": 644
     },
     {
       "camId": "1807",
@@ -1839,7 +1991,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1807/2026/07/05/Barham_North_1783230169_4826.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1807/2026/07/05/Barham_North_1783230169_4826.jpg",
+      "elev_m": 486
     },
     {
       "camId": "1808",
@@ -1851,7 +2004,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1808/2026/07/05/Barham_South_1783230170_1335.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1808/2026/07/05/Barham_South_1783230170_1335.jpg",
+      "elev_m": 486
     },
     {
       "camId": "2759",
@@ -1863,7 +2017,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2759/2026/07/05/Bodega_Bay_1783230177_3417.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2759/2026/07/05/Bodega_Bay_1783230177_3417.jpg",
+      "elev_m": 221
     },
     {
       "camId": "1851",
@@ -1875,7 +2030,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1851/2026/07/05/Brain_Ridge_1_1783230166_3494.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1851/2026/07/05/Brain_Ridge_1_1783230166_3494.jpg",
+      "elev_m": 452
     },
     {
       "camId": "1852",
@@ -1887,7 +2043,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1852/2026/07/05/Brain_Ridge_2_1783230168_2015.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1852/2026/07/05/Brain_Ridge_2_1783230168_2015.jpg",
+      "elev_m": 452
     },
     {
       "camId": "16576",
@@ -1899,7 +2056,8 @@
       },
       "sponsor": "ALERTCalifornia",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16576/2026/07/05/English_Hill_1_1783230176_9628.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16576/2026/07/05/English_Hill_1_1783230176_9628.jpg",
+      "elev_m": 277
     },
     {
       "camId": "16575",
@@ -1911,7 +2069,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16575/2026/07/05/English_Hill_2_1783230178_3901.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16575/2026/07/05/English_Hill_2_1783230178_3901.jpg",
+      "elev_m": 277
     },
     {
       "camId": "2049",
@@ -1923,7 +2082,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2049/2026/07/05/Kenwood_Ranch_Upper_1_1783230113_6680.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2049/2026/07/05/Kenwood_Ranch_Upper_1_1783230113_6680.jpg",
+      "elev_m": 467
     },
     {
       "camId": "2050",
@@ -1935,7 +2095,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2050/2026/07/05/Kenwood_Ranch_Upper_2_1783230102_2360.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2050/2026/07/05/Kenwood_Ranch_Upper_2_1783230102_2360.jpg",
+      "elev_m": 467
     },
     {
       "camId": "2715",
@@ -1947,7 +2108,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2715/2026/07/05/League_22_1783230172_8063.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2715/2026/07/05/League_22_1783230172_8063.jpg",
+      "elev_m": 412
     },
     {
       "camId": "2088",
@@ -1959,7 +2121,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2088/2026/07/05/Lower_Meyers_Grade_1_1783230179_5909.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2088/2026/07/05/Lower_Meyers_Grade_1_1783230179_5909.jpg",
+      "elev_m": 218
     },
     {
       "camId": "2089",
@@ -1971,7 +2134,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2089/2026/07/05/Lower_Meyers_Grade_2_1783230169_2959.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2089/2026/07/05/Lower_Meyers_Grade_2_1783230169_2959.jpg",
+      "elev_m": 218
     },
     {
       "camId": "2120",
@@ -1983,7 +2147,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2120/2026/07/05/Meyers_1783230170_4357.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2120/2026/07/05/Meyers_1783230170_4357.jpg",
+      "elev_m": 487
     },
     {
       "camId": "2172",
@@ -1995,7 +2160,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2172/2026/07/05/Mt_Jackson_1783230174_9276.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2172/2026/07/05/Mt_Jackson_1783230174_9276.jpg",
+      "elev_m": 496
     },
     {
       "camId": "1681",
@@ -2007,7 +2173,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1681/2026/07/05/Mt_Jackson_West_1783230146_5540.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1681/2026/07/05/Mt_Jackson_West_1783230146_5540.jpg",
+      "elev_m": 491
     },
     {
       "camId": "11022",
@@ -2019,7 +2186,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11022/2026/07/05/Osborn_Preserve_1_1783230155_5165.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11022/2026/07/05/Osborn_Preserve_1_1783230155_5165.jpg",
+      "elev_m": 646
     },
     {
       "camId": "11023",
@@ -2031,7 +2199,8 @@
       },
       "sponsor": "CALFIRE",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11023/2026/07/05/Osborn_Preserve_2_1783230131_1878.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11023/2026/07/05/Osborn_Preserve_2_1783230131_1878.jpg",
+      "elev_m": 646
     },
     {
       "camId": "1754",
@@ -2043,7 +2212,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1754/2026/07/05/Petaluma_1_1783230134_8656.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1754/2026/07/05/Petaluma_1_1783230134_8656.jpg",
+      "elev_m": 106
     },
     {
       "camId": "1755",
@@ -2055,7 +2225,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1755/2026/07/05/Petaluma_2_1783230169_7314.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1755/2026/07/05/Petaluma_2_1783230169_7314.jpg",
+      "elev_m": 106
     },
     {
       "camId": "2266",
@@ -2067,7 +2238,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2266/2026/07/05/Pole_Mtn_Lookout_1_1783230138_1814.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2266/2026/07/05/Pole_Mtn_Lookout_1_1783230138_1814.jpg",
+      "elev_m": 655
     },
     {
       "camId": "2267",
@@ -2079,7 +2251,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2267/2026/07/05/Pole_Mtn_Lookout_2_1783230164_7249.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2267/2026/07/05/Pole_Mtn_Lookout_2_1783230164_7249.jpg",
+      "elev_m": 655
     },
     {
       "camId": "2375",
@@ -2091,7 +2264,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2375/2026/07/05/Sears_Point_1783230136_7050.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2375/2026/07/05/Sears_Point_1783230136_7050.jpg",
+      "elev_m": 92
     },
     {
       "camId": "2391",
@@ -2103,7 +2277,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2391/2026/07/05/Siri_1783230176_9832.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2391/2026/07/05/Siri_1783230176_9832.jpg",
+      "elev_m": 391
     },
     {
       "camId": "2395",
@@ -2115,7 +2290,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2395/2026/07/05/Sleepy_Mtn_1783230157_3053.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2395/2026/07/05/Sleepy_Mtn_1783230157_3053.jpg",
+      "elev_m": 255
     },
     {
       "camId": "2398",
@@ -2127,7 +2303,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2398/2026/07/05/Smith_Ridge_1783230151_1462.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2398/2026/07/05/Smith_Ridge_1783230151_1462.jpg",
+      "elev_m": 523
     },
     {
       "camId": "2404",
@@ -2139,7 +2316,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2404/2026/07/05/Sonoma_Mtn_1783230147_8305.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2404/2026/07/05/Sonoma_Mtn_1783230147_8305.jpg",
+      "elev_m": 743
     },
     {
       "camId": "2472",
@@ -2151,7 +2329,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2472/2026/07/05/Upper_Meyers_Grade_1_1783230173_2440.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2472/2026/07/05/Upper_Meyers_Grade_1_1783230173_2440.jpg",
+      "elev_m": 414
     },
     {
       "camId": "2473",
@@ -2163,7 +2342,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2473/2026/07/05/Upper_Meyers_Grade_2_1783230165_5460.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2473/2026/07/05/Upper_Meyers_Grade_2_1783230165_5460.jpg",
+      "elev_m": 414
     },
     {
       "camId": "2184",
@@ -2175,7 +2355,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2184/2026/07/05/Mt_Oso_1783230165_3220.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2184/2026/07/05/Mt_Oso_1783230165_3220.jpg",
+      "elev_m": 1016
     },
     {
       "camId": "2516",
@@ -2187,7 +2368,8 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2516/2026/07/05/Winters_1_1783230152_3202.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2516/2026/07/05/Winters_1_1783230152_3202.jpg",
+      "elev_m": 44
     },
     {
       "camId": "2517",
@@ -2199,7 +2381,9 @@
       },
       "sponsor": "PG&E",
       "ptz": true,
-      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2517/2026/07/05/Winters_2_1783230168_1347.jpg"
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2517/2026/07/05/Winters_2_1783230168_1347.jpg",
+      "elev_m": 44
     }
-  ]
+  ],
+  "elevations_note": "elev_m is ground elevation in meters from the Open-Meteo elevation API (https://open-meteo.com/), backed by Copernicus DEM 90m — not the camera mount height, and coastal cams may read ~0m."
 }

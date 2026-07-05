@@ -13,5 +13,8 @@
   "dependencies": {
     "astro": "^4.15.0",
     "maplibre-gl": "^4.7.1"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.3.0"
   }
 }

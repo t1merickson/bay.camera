@@ -16,9 +16,10 @@
   --land: 210 24% 95%;
   --land-line: 214 20% 80%;
   --shadow: 0 4px 20px -4px rgba(15, 23, 42, .18);
-  --r-satellite: 215 16% 52%; --r-golden-gate: 12 76% 55%; --r-san-francisco: 217 91% 60%;
-  --r-north-bay: 142 65% 42%; --r-east-bay: 262 78% 66%; --r-peninsula: 189 82% 42%;
-  --r-south-bay: 32 90% 52%; --r-santa-cruz: 330 76% 58%;
+  /* region hues, desaturated so a full map reads calm (mirror map.ts REGION_COLORS) */
+  --r-satellite: 215 14% 54%; --r-golden-gate: 12 58% 54%; --r-san-francisco: 217 62% 56%;
+  --r-north-bay: 142 42% 42%; --r-east-bay: 262 46% 62%; --r-peninsula: 189 55% 42%;
+  --r-south-bay: 32 62% 50%; --r-santa-cruz: 330 48% 56%;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -85,6 +86,7 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
 .cond-t { font-weight: 650; font-size: 0.95rem; }
 .cond-d { color: hsl(var(--muted-foreground)); }
 .cond-d.is-fog { color: hsl(var(--accent)); font-weight: 600; }
+#fog-chip { font-size: 0.82rem; } #fog-chip[hidden] { display: none; } /* .cond's inline-flex beats UA [hidden] */
 @media (max-width: 720px) { .conditions { display: none; } }
 
 /* buttons */
@@ -148,6 +150,67 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .panel-list:not([hidden]) ~ .legend-map { left: 344px; }
 .legend-item { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; color: hsl(var(--muted-foreground)); }
 @media (max-width: 900px) { .legend-map { display: none; } }
+
+/* ---- layer toggle group ---- */
+.layer-group { display: inline-flex; border: 1px solid hsl(var(--border)); border-radius: var(--radius); overflow: hidden; background: hsl(var(--card)); }
+.btn-layer { border: 0; border-radius: 0; background: transparent; }
+.btn-layer + .btn-layer { border-left: 1px solid hsl(var(--border)); }
+.btn-layer[aria-pressed="true"] { background: hsl(var(--accent) / .14); color: hsl(var(--accent)); font-weight: 600; }
+.btn-layer[aria-pressed="true"]:hover { background: hsl(var(--accent) / .2); }
+
+/* ---- hover popover (floating thumbnail card) ---- */
+.map-pop {
+  position: absolute; top: 0; left: 0; z-index: 14; width: 240px;
+  background: hsl(var(--card) / .96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid hsl(var(--border)); border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden; pointer-events: none; opacity: 0; transition: opacity .12s;
+}
+.map-pop.is-open { opacity: 1; }
+.map-pop-media { aspect-ratio: 16 / 10; background: hsl(var(--muted)); }
+.map-pop-media[hidden] { display: none; }
+.map-pop-media img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .18s; }
+.map-pop-media.is-loaded img { opacity: 1; }
+.map-pop-meta { display: flex; flex-direction: column; gap: 1px; padding: 8px 10px; }
+.map-pop-title { font-size: 0.8rem; font-weight: 600; line-height: 1.3; }
+.map-pop-sub { font-size: 0.7rem; color: hsl(var(--muted-foreground)); }
+.map-pop-sub[hidden] { display: none; }
+
+/* ---- microclimate temp pills ---- */
+.wx-pill {
+  display: none; align-items: center; gap: 4px; padding: 2px 7px;
+  background: hsl(var(--card) / .92); border: 1px solid hsl(var(--border));
+  border-radius: 999px; box-shadow: 0 1px 4px rgba(15, 23, 42, .12);
+  font-size: 12px; line-height: 1.4; cursor: default; position: relative;
+}
+.wx-pill.is-on { display: inline-flex; }
+.wx-t { font-weight: 650; letter-spacing: -0.01em; }
+.wx-w { display: inline-flex; color: hsl(var(--muted-foreground)); }
+.wx-name {
+  position: absolute; top: calc(100% + 3px); left: 50%; transform: translateX(-50%);
+  white-space: nowrap; font-size: 10px; color: hsl(var(--muted-foreground));
+  background: hsl(var(--card) / .85); padding: 0 5px; border-radius: 4px; opacity: 0; transition: opacity .12s;
+}
+.wx-pill:hover .wx-name { opacity: 1; }
+.wx-pill:hover { z-index: 5; }
+
+/* ---- marine layer (fog-top) card ---- */
+.fog-card {
+  position: fixed; right: 12px; bottom: 12px; z-index: 12; width: 232px;
+  background: hsl(var(--card) / .92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid hsl(var(--border)); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 10px 12px;
+}
+.fog-card[hidden] { display: none; }
+body.cam-open .fog-card { right: 384px; }
+.fog-head { font-size: 0.64rem; text-transform: uppercase; letter-spacing: .06em; color: hsl(var(--muted-foreground)); font-weight: 600; margin-bottom: 3px; }
+.fog-main { font-size: 0.9rem; }
+.fog-main strong { font-size: 1.05rem; font-weight: 650; letter-spacing: -0.01em; }
+.fog-conf { font-size: 0.62rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; padding: 1px 6px; border-radius: 999px; border: 1px solid hsl(var(--border)); color: hsl(var(--muted-foreground)); vertical-align: 2px; margin-left: 4px; }
+.fog-conf-high { color: hsl(142 45% 38%); border-color: hsl(142 45% 38% / .4); }
+.fog-conf-medium { color: hsl(32 62% 44%); border-color: hsl(32 62% 44% / .4); }
+.fog-sub { font-size: 0.72rem; color: hsl(var(--muted-foreground)); margin-top: 2px; }
+/* keep the fog card clear of maplibre zoom controls */
+.fog-card:not([hidden]) ~ * .maplibregl-ctrl-bottom-right, body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 96px; }
 
 /* ---- mobile: panels become bottom sheets ---- */
 @media (max-width: 640px) {
