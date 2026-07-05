@@ -1,0 +1,282 @@
+---
+import { REGIONS, cameras, pinned } from '../lib/cameras';
+
+const REFRESH: Record<string, number> = {
+  satellite: 300000, caltrans: 60000, alertcalifornia: 60000, abc7: 30000,
+  wunderground: 60000, axis: 20000, institutional: 60000, hobbyist: 60000, ipcamlive: 30000,
+};
+const camData = cameras.map((c) => ({
+  id: c.id, name: c.name, region: c.region, type: c.type,
+  kind: c.embed.kind, src: c.embed.src, page: c.embed.page,
+  attribution: c.attribution, sources: c.sources, donation: c.donation,
+  refresh: REFRESH[c.type] ?? 60000,
+  lat: c.coords?.lat ?? null, lng: c.coords?.lng ?? null,
+}));
+const geojson = {
+  type: 'FeatureCollection',
+  features: pinned.map((c) => ({
+    type: 'Feature',
+    geometry: { type: 'Point', coordinates: [c.coords!.lng, c.coords!.lat] },
+    properties: { id: c.id, region: c.region, name: c.name },
+  })),
+};
+const regionLabel = Object.fromEntries(REGIONS.map((r) => [r.slug, r.label]));
+const activeRegions = REGIONS.filter((r) => cameras.some((c) => c.region === r.slug));
+---
+<!doctype html>
+<html lang="en" data-live="off">
+<head>
+  <meta charset="utf-8" />
+  <title>bay.camera — Bay Area fog, light &amp; weather cameras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="A full-screen interactive map of live webcams and weather across the San Francisco Bay Area for watching fog, marine layer, and light." />
+  <link rel="stylesheet" href="/styles/main.css" />
+</head>
+<body class="app">
+  <div id="map" class="map-stage"></div>
+
+  <header class="hud hud-top">
+    <div class="brand"><h1>bay.camera</h1></div>
+    <div class="conditions" id="conditions"><span class="cond-loading">conditions…</span></div>
+    <div class="hud-actions">
+      <button class="btn" id="clouds-btn" aria-pressed="false">Clouds</button>
+      <button class="btn" id="browse-btn" aria-expanded="false">Cameras</button>
+      <label class="live-toggle">
+        <input type="checkbox" id="live-switch" class="live-input" />
+        <span class="live-switch" aria-hidden="true"><span class="live-thumb"></span></span>
+        <span class="live-label">Live</span>
+      </label>
+    </div>
+  </header>
+
+  <aside class="panel panel-list" id="panel-list" hidden aria-label="Camera list">
+    <div class="panel-head">
+      <strong>Cameras <span class="muted" id="list-count"></span></strong>
+      <button class="icon-btn" id="list-close" aria-label="Close">✕</button>
+    </div>
+    <div class="legend" id="filter-chips">
+      {activeRegions.map((r) => (
+        <button class="chip" data-region-chip={r.slug} aria-pressed="false"><span class={`dot region-${r.slug}`}></span>{r.label}</button>
+      ))}
+      <button class="chip chip-all" data-region-chip="all" aria-pressed="true">All</button>
+    </div>
+    <div class="cam-list" id="cam-list">
+      {activeRegions.map((r) => (
+        <div class="cam-list-group" data-region-section={r.slug}>
+          <div class="cam-list-region">{r.label}</div>
+          {cameras.filter((c) => c.region === r.slug).map((c) => (
+            <button class="cam-list-item" data-id={c.id}>
+              <span class={`dot region-${c.region}`}></span><span class="cli-name">{c.name}</span>
+            </button>
+          ))}
+        </div>
+      ))}
+    </div>
+  </aside>
+
+  <aside class="panel panel-cam" id="panel-cam" hidden aria-label="Camera preview">
+    <div class="panel-head">
+      <strong id="cam-title">Camera</strong>
+      <button class="icon-btn" id="cam-close" aria-label="Close">✕</button>
+    </div>
+    <div class="cam-view" id="cam-view"></div>
+    <div class="cam-info" id="cam-info"></div>
+  </aside>
+
+  <div class="legend legend-map">
+    {activeRegions.map((r) => (
+      <span class="legend-item"><span class={`dot region-${r.slug}`}></span>{r.label}</span>
+    ))}
+  </div>
+
+  <script type="application/json" id="cam-data" set:html={JSON.stringify(camData)}></script>
+  <script type="application/json" id="cam-geojson" set:html={JSON.stringify(geojson)}></script>
+  <script type="application/json" id="region-labels" set:html={JSON.stringify(regionLabel)}></script>
+
+  <script>
+    import maplibregl from 'maplibre-gl';
+    import 'maplibre-gl/dist/maplibre-gl.css';
+
+    const CAM = JSON.parse(document.getElementById('cam-data').textContent);
+    const GEO = JSON.parse(document.getElementById('cam-geojson').textContent);
+    const RLABEL = JSON.parse(document.getElementById('region-labels').textContent);
+    const byId = Object.fromEntries(CAM.map((c) => [c.id, c]));
+    const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+    const REGION_COLORS = {
+      'satellite': 'hsl(215,16%,52%)', 'golden-gate': 'hsl(12,76%,55%)', 'san-francisco': 'hsl(217,91%,60%)',
+      'north-bay': 'hsl(142,65%,42%)', 'east-bay': 'hsl(262,78%,66%)', 'peninsula': 'hsl(189,82%,42%)',
+      'south-bay': 'hsl(32,90%,52%)', 'santa-cruz': 'hsl(330,76%,58%)',
+    };
+    const carto = (s) => ['a', 'b', 'c'].map((h) => `https://${h}.basemaps.cartocdn.com/${s}/{z}/{x}/{y}.png`);
+
+    const map = new maplibregl.Map({
+      container: 'map', attributionControl: false, minZoom: 5, maxZoom: 16,
+      center: [-122.3, 37.75], zoom: 8,
+      style: {
+        version: 8,
+        glyphs: 'https://fonts.openmaptiles.org/{fontstack}/{range}.pbf',
+        sources: { base: { type: 'raster', tileSize: 256, attribution: '© OpenStreetMap, © CARTO', tiles: carto(dark ? 'dark_all' : 'light_all') } },
+        layers: [{ id: 'base', type: 'raster', source: 'base' }],
+      },
+    });
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+    map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
+    map.on('load', () => {
+      map.fitBounds([[-123.15, 36.9], [-121.5, 38.35]], { padding: { top: 72, bottom: 40, left: 40, right: 40 }, duration: 0 });
+
+      const regionMatch = ['match', ['get', 'region']];
+      for (const [k, v] of Object.entries(REGION_COLORS)) regionMatch.push(k, v);
+      regionMatch.push('#888');
+
+      map.addSource('cams', { type: 'geojson', data: GEO, cluster: true, clusterRadius: 40, clusterMaxZoom: 12 });
+      map.addLayer({ id: 'clusters', type: 'circle', source: 'cams', filter: ['has', 'point_count'], paint: {
+        'circle-color': dark ? 'hsl(217,28%,24%)' : 'hsl(214,32%,90%)',
+        'circle-stroke-color': dark ? 'hsl(217,20%,42%)' : 'hsl(214,25%,72%)', 'circle-stroke-width': 1,
+        'circle-radius': ['step', ['get', 'point_count'], 15, 6, 19, 15, 25],
+      }});
+      map.addLayer({ id: 'cluster-count', type: 'symbol', source: 'cams', filter: ['has', 'point_count'],
+        layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['Noto Sans Bold'], 'text-size': 12 },
+        paint: { 'text-color': dark ? '#eaf0f7' : '#1f2430' } });
+      map.addLayer({ id: 'cam-selected', type: 'circle', source: 'cams', filter: ['==', ['get', 'id'], '___none___'], paint: {
+        'circle-radius': 11, 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-width': 3,
+        'circle-stroke-color': dark ? '#ffffff' : 'hsl(217,91%,45%)',
+      }});
+      map.addLayer({ id: 'cam-point', type: 'circle', source: 'cams', filter: ['!', ['has', 'point_count']], paint: {
+        'circle-color': regionMatch, 'circle-radius': 6.5,
+        'circle-stroke-color': dark ? 'hsl(222,44%,8%)' : '#ffffff', 'circle-stroke-width': 2,
+      }});
+
+      map.on('click', 'clusters', (e) => {
+        const f = map.queryRenderedFeatures(e.point, { layers: ['clusters'] })[0];
+        map.getSource('cams').getClusterExpansionZoom(f.properties.cluster_id).then((z) => map.easeTo({ center: f.geometry.coordinates, zoom: z }));
+      });
+      map.on('click', 'cam-point', (e) => openCam(e.features[0].properties.id));
+      for (const l of ['clusters', 'cam-point']) {
+        map.on('mouseenter', l, () => map.getCanvas().style.cursor = 'pointer');
+        map.on('mouseleave', l, () => map.getCanvas().style.cursor = '');
+      }
+
+      setupClouds();
+      const m = location.hash.match(/^#cam\/(.+)$/); if (m) { const id = decodeURIComponent(m[1]); if (byId[id]) openCam(id); }
+    });
+
+    // ---- clouds / satellite overlay (RainViewer infrared — free, no key) ----
+    let cloudsReady = false;
+    async function setupClouds() {
+      try {
+        const j = await (await fetch('https://api.rainviewer.com/public/weather-maps.json')).json();
+        const frames = j.satellite && j.satellite.infrared; if (!frames || !frames.length) return;
+        const path = frames[frames.length - 1].path;
+        map.addSource('clouds', { type: 'raster', tileSize: 256, tiles: [`${j.host}${path}/256/{z}/{x}/{y}/0/0_0.png`] });
+        map.addLayer({ id: 'clouds', type: 'raster', source: 'clouds', layout: { visibility: 'none' }, paint: { 'raster-opacity': 0.55 } }, 'clusters');
+        cloudsReady = true;
+      } catch {}
+    }
+    const cloudsBtn = document.getElementById('clouds-btn');
+    cloudsBtn.onclick = () => {
+      if (!cloudsReady) return;
+      const on = map.getLayoutProperty('clouds', 'visibility') !== 'visible';
+      map.setLayoutProperty('clouds', 'visibility', on ? 'visible' : 'none');
+      cloudsBtn.setAttribute('aria-pressed', String(on));
+    };
+
+    // ---- camera preview panel ----
+    const panelCam = document.getElementById('panel-cam');
+    const camView = document.getElementById('cam-view');
+    const camInfo = document.getElementById('cam-info');
+    let previewTimer = null, activeId = null;
+    const isLive = () => document.documentElement.dataset.live === 'on';
+    function stopPreviewTimer() { if (previewTimer) { clearInterval(previewTimer); previewTimer = null; } }
+    const EXT = '<svg class="ext" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"/></svg>';
+    const esc = (s) => String(s).replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+
+    function openCam(id) {
+      const c = byId[id]; if (!c) return;
+      activeId = id; stopPreviewTimer();
+      document.getElementById('cam-title').textContent = c.name;
+      camView.className = 'cam-view'; camView.innerHTML = '';
+      if (c.kind === 'image' && c.src) {
+        const a = document.createElement('a'); a.href = c.page || c.src; a.target = '_blank';
+        const img = document.createElement('img'); img.alt = c.name; img.src = c.src;
+        img.onerror = () => camView.classList.add('is-offline');
+        a.appendChild(img); camView.appendChild(a);
+        if (isLive()) { const base = c.src, sep = base.includes('?') ? '&' : '?', started = Date.now();
+          previewTimer = setInterval(() => {
+            if (Date.now() - started > 12 * 3600 * 1000) { stopPreviewTimer(); sw.checked = false; document.documentElement.dataset.live = 'off'; try { localStorage.setItem('bay-camera:live', '0'); } catch {} return; }
+            if (!document.hidden) img.src = base + sep + 't=' + Date.now();
+          }, c.refresh); }
+      } else if (c.kind === 'iframe') {
+        if (isLive() && c.src) { const f = document.createElement('iframe'); f.src = c.src; f.allow = 'autoplay; fullscreen'; f.loading = 'lazy'; camView.appendChild(f); }
+        else { const b = document.createElement('button'); b.className = 'cam-embed-play'; b.innerHTML = '▶ Play live video'; b.onclick = () => { sw.checked = true; setLive(true); openCam(id); }; camView.appendChild(b); }
+      } else { const a = document.createElement('a'); a.className = 'cam-open'; a.href = c.page; a.target = '_blank'; a.innerHTML = 'Open camera ' + EXT; camView.appendChild(a); }
+      let html = `<p class="cam-name"><span class="dot region-${c.region}"></span>${esc(RLABEL[c.region] || '')}</p>`;
+      html += `<p class="cam-attr">${esc(c.attribution)}</p>`;
+      for (const s of c.sources) html += `<p class="cam-source"><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ${EXT}</a></p>`;
+      if (c.page) html += `<p class="cam-source"><a href="${esc(c.page)}" target="_blank" rel="noopener">Source page ${EXT}</a></p>`;
+      if (c.donation) html += `<p class="cam-donate"><a href="${esc(c.donation.url)}" target="_blank" rel="noopener">♥ ${esc(c.donation.text)}</a></p>`;
+      camInfo.innerHTML = html;
+      panelCam.hidden = false;
+      document.body.classList.add('cam-open');
+      document.querySelectorAll('.cam-list-item').forEach((el) => el.classList.toggle('active', el.dataset.id === id));
+      if (map.getLayer('cam-selected')) map.setFilter('cam-selected', ['==', ['get', 'id'], id]);
+      if (c.lat != null) map.flyTo({ center: [c.lng, c.lat], zoom: Math.max(map.getZoom(), 10.5), padding: { right: 360 }, duration: 700 });
+      try { history.replaceState(null, '', '#cam/' + encodeURIComponent(id)); } catch {}
+    }
+    function closeCam() {
+      panelCam.hidden = true; document.body.classList.remove('cam-open'); stopPreviewTimer(); activeId = null;
+      document.querySelectorAll('.cam-list-item.active').forEach((el) => el.classList.remove('active'));
+      if (map.getLayer('cam-selected')) map.setFilter('cam-selected', ['==', ['get', 'id'], '___none___']);
+      try { history.replaceState(null, '', location.pathname + location.search); } catch {}
+    }
+    document.getElementById('cam-close').onclick = closeCam;
+    document.querySelectorAll('.cam-list-item').forEach((el) => el.addEventListener('click', () => openCam(el.dataset.id)));
+
+    // ---- browse list ----
+    const panelList = document.getElementById('panel-list');
+    const browseBtn = document.getElementById('browse-btn');
+    document.getElementById('list-count').textContent = `(${CAM.length})`;
+    const toggleList = (open) => { panelList.hidden = !open; browseBtn.setAttribute('aria-expanded', String(open)); };
+    browseBtn.onclick = () => toggleList(panelList.hidden);
+    document.getElementById('list-close').onclick = () => toggleList(false);
+
+    // ---- region filter ----
+    const chips = document.querySelectorAll('[data-region-chip]');
+    chips.forEach((c) => c.addEventListener('click', () => {
+      const slug = c.dataset.regionChip;
+      chips.forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.regionChip === slug)));
+      document.querySelectorAll('[data-region-section]').forEach((sec) => { sec.hidden = slug !== 'all' && sec.dataset.regionSection !== slug; });
+      if (map.getLayer('cam-point')) {
+        const all = slug === 'all';
+        map.setLayoutProperty('clusters', 'visibility', all ? 'visible' : 'none');
+        map.setLayoutProperty('cluster-count', 'visibility', all ? 'visible' : 'none');
+        map.setFilter('cam-point', all ? ['!', ['has', 'point_count']] : ['all', ['!', ['has', 'point_count']], ['==', ['get', 'region'], slug]]);
+      }
+    }));
+
+    // ---- live toggle ----
+    const sw = document.getElementById('live-switch');
+    function setLive(on) { document.documentElement.dataset.live = on ? 'on' : 'off'; if (activeId) openCam(activeId); }
+    window.setLive = setLive;
+    try { if (localStorage.getItem('bay-camera:live') === '1') sw.checked = true; } catch {}
+    sw.addEventListener('change', () => { try { localStorage.setItem('bay-camera:live', sw.checked ? '1' : '0'); } catch {} setLive(sw.checked); });
+    setLive(sw.checked);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeCam(); toggleList(false); } });
+
+    // ---- live conditions (NWS: coast vs bay fog read) ----
+    async function obs(station) {
+      try { const r = await fetch(`https://api.weather.gov/stations/${station}/observations/latest`, { headers: { Accept: 'application/geo+json' } });
+        if (!r.ok) return null; const p = (await r.json()).properties;
+        return { desc: p.textDescription || '—', f: p.temperature?.value != null ? Math.round(p.temperature.value * 9 / 5 + 32) : null, visMi: p.visibility?.value != null ? p.visibility.value / 1609 : null };
+      } catch { return null; }
+    }
+    (async () => {
+      const el = document.getElementById('conditions');
+      const [coast, bay] = await Promise.all([obs('KHAF'), obs('KSFO')]);
+      if (!coast && !bay) { el.innerHTML = '<span class="cond-loading">conditions unavailable</span>'; return; }
+      const foggy = (o) => o && ((o.visMi != null && o.visMi < 3) || /fog|mist|haze/i.test(o.desc));
+      const cell = (name, o) => o ? `<span class="cond"><b>${name}</b> <span class="cond-t">${o.f ?? '–'}°</span> <span class="cond-d ${foggy(o) ? 'is-fog' : ''}">${esc(o.desc)}</span></span>` : '';
+      el.innerHTML = cell('Coast', coast) + cell('Bay', bay);
+    })();
+  </script>
+</body>
+</html>

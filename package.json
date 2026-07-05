@@ -1,0 +1,17 @@
+{
+  "name": "bay-camera",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "fetch:alertca": "python3 scripts/fetch-alertcalifornia.py",
+    "build:map": "python3 scripts/build-map.py"
+  },
+  "dependencies": {
+    "astro": "^4.15.0",
+    "maplibre-gl": "^4.7.1"
+  }
+}

@@ -1,0 +1,1374 @@
+{
+  "schemaVersion": 1,
+  "note": "Single source of truth. See docs/data-model.md for the schema and docs/vendors.md for type definitions. All entries ported from the legacy index.html are status:unverified until a liveness pass runs.",
+  "cameras": [
+    {
+      "id": "goes-sf-bay-fog-today",
+      "name": "San Francisco Bay",
+      "region": "satellite",
+      "coords": null,
+      "type": "satellite",
+      "embed": {
+        "kind": "image",
+        "src": "https://fog.today/current.jpg",
+        "page": "https://fog.today/"
+      },
+      "attribution": "GOES-16, NOAA",
+      "sources": [
+        {
+          "label": "2 hour timelapse",
+          "url": "https://fog.today/"
+        }
+      ],
+      "donation": null,
+      "status": "live",
+      "flags": [],
+      "notes": "Hero cloud-layer loop. VERIFIED 2026-07: https now works (http 301-redirects to https), ~680KB JPEG, Last-Modified fresh. Mixed-content resolved."
+    },
+    {
+      "id": "goes-west-norcal-noaa",
+      "name": "Northern California",
+      "region": "satellite",
+      "coords": null,
+      "type": "satellite",
+      "embed": {
+        "kind": "image",
+        "src": "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/psw/GEOCOLOR/1200x1200.jpg",
+        "page": "https://www.star.nesdis.noaa.gov/GOES/sector.php?sat=G18&sector=psw"
+      },
+      "attribution": "GOES-18 (GOES-West), NOAA STAR",
+      "sources": [
+        {
+          "label": "Full-res 2400px",
+          "url": "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/psw/GEOCOLOR/latest.jpg"
+        },
+        {
+          "label": "Animated loop (GIF)",
+          "url": "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/psw/GEOCOLOR/GOES18-PSW-GEOCOLOR-600x600.gif"
+        }
+      ],
+      "donation": null,
+      "status": "live",
+      "flags": [],
+      "notes": "VERIFIED 2026-07: NOAA STAR GOES-18 GeoColor, Pacific Southwest (psw) sector = the Bay Area sector NWS MTR itself embeds. ~5 min cadence. Sizes 300/600/1200/2400; use 600 for a light thumbnail, 1200 here for detail. The crop-to-bay trick (gongruya's CroppedImage) applies. Replaces the old commented-out SSD GOES-WEST link."
+    },
+    {
+      "id": "ocean-beach-kellys-cove",
+      "name": "Ocean Beach, Kelly's Cove",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.7757,
+        "lng": -122.5132,
+        "confidence": "approx"
+      },
+      "type": "angelcam",
+      "embed": {
+        "kind": "iframe",
+        "src": "https://v.angelcam.com/iframe?v=91lx8g0gyo&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkb21haW4iOiJvYi1rYy5jb20iLCJleHAiOjE1NTY3MzE2MzQsImNhbWVyYV9pZCI6NzQ4Njh9.rlqG9zy80Pe5SimVeFPUNeS4bDGDALFgObT6HfqF3Tg",
+        "page": "http://ob-kc.com/"
+      },
+      "attribution": "ob-kc",
+      "sources": [],
+      "donation": null,
+      "status": "dead",
+      "flags": [
+        "token-expiry",
+        "heavy"
+      ],
+      "notes": "DEAD: AngelCam JWT expired May 2019."
+    },
+    {
+      "id": "ocean-beach-great-hwy-gjpc",
+      "name": "Ocean Beach, Great Hwy",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.7597,
+        "lng": -122.5107,
+        "confidence": "approx"
+      },
+      "type": "wunderground",
+      "embed": {
+        "kind": "image",
+        "src": "https://icons.wunderground.com/webcamramdisk/g/j/gjpc/1/current.jpg",
+        "page": "https://www.wunderground.com/dashboard/webcam/gjpc/1"
+      },
+      "attribution": "GJPC, Weather Underground",
+      "sources": [
+        {
+          "label": "Last 24 hours timelapse",
+          "url": "https://www.wunderground.com/webcams/gjpc/1/video.html?&filename=current.mp4"
+        }
+      ],
+      "donation": null,
+      "status": "dead",
+      "flags": [],
+      "notes": "DEAD (2026-07): icons.wunderground.com/webcamramdisk host unreachable (curl+py both fail to connect). WU retired these post-IBM."
+    },
+    {
+      "id": "fort-funston",
+      "name": "Fort Funston",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.7169,
+        "lng": -122.503,
+        "confidence": "known"
+      },
+      "type": "hobbyist",
+      "embed": {
+        "kind": "image",
+        "src": "http://www.flyfunston.org/newwebcam/panolarge.jpg",
+        "page": "http://www.flyfunston.org/newwebcam/"
+      },
+      "attribution": "Fellow Feathers of Fort Funston",
+      "sources": [],
+      "donation": null,
+      "status": "dead",
+      "flags": [
+        "mixed-content",
+        "unstable-host"
+      ],
+      "notes": "DEAD (2026-07): flyfunston.org/newwebcam/panolarge.jpg returns 404."
+    },
+    {
+      "id": "crissy-field-east-beach",
+      "name": "Crissy Field East Beach",
+      "region": "golden-gate",
+      "coords": {
+        "lat": 37.8043,
+        "lng": -122.452,
+        "confidence": "known"
+      },
+      "type": "axis",
+      "embed": {
+        "kind": "link",
+        "src": null,
+        "page": "http://173.164.254.148/1/siteproxy.html"
+      },
+      "attribution": "Golden Gate National Parks Conservancy",
+      "sources": [
+        {
+          "label": "Live, Interactive Control",
+          "url": "http://173.164.254.148/1/siteproxy.html"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "mixed-content",
+        "unstable-host"
+      ],
+      "notes": "Raw-IP Axis cam; legacy note said 'need to extract stream without iframe'. Link-only for now."
+    },
+    {
+      "id": "sf-earthcam",
+      "name": "San Francisco (EarthCam)",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.808,
+        "lng": -122.42,
+        "confidence": "approx"
+      },
+      "type": "earthcam",
+      "embed": {
+        "kind": "link",
+        "src": null,
+        "page": "https://www.earthcam.com/usa/california/sanfrancisco/?cam=rowingclub"
+      },
+      "attribution": "EarthCam",
+      "sources": [
+        {
+          "label": "EarthCam SF Bayfront (Sometimes GGB)",
+          "url": "https://www.earthcam.com/usa/california/sanfrancisco/?cam=rowingclub"
+        },
+        {
+          "label": "EarthCam SF Skyline",
+          "url": "https://www.earthcam.com/usa/california/sanfrancisco/?cam=sanfranciscoskyline"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy",
+        "hotlink-protection"
+      ],
+      "notes": "EarthCam gates embeds; link-out only."
+    },
+    {
+      "id": "salesforce-tower-cbs",
+      "name": "Salesforce Tower",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.7897,
+        "lng": -122.3972,
+        "confidence": "known"
+      },
+      "type": "anvato",
+      "embed": {
+        "kind": "iframe",
+        "src": null,
+        "page": "https://sanfrancisco.cbslocal.com/salesforce-tower-cameras/"
+      },
+      "attribution": "CBS SF BayArea",
+      "sources": [
+        {
+          "label": "Salesforce Tower Cameras",
+          "url": "https://sanfrancisco.cbslocal.com/salesforce-tower-cameras/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy"
+      ],
+      "notes": "Legacy embedded FOUR stacked Anvato players (c507-c510). cbslocal.com now redirects to cbsnews.com; embed keys likely stale. Very heavy - prime de-bloat target."
+    },
+    {
+      "id": "emeryville-abc7",
+      "name": "Emeryville",
+      "region": "east-bay",
+      "coords": {
+        "lat": 37.8313,
+        "lng": -122.2852,
+        "confidence": "known"
+      },
+      "type": "abc7",
+      "embed": {
+        "kind": "image",
+        "src": "https://cdns.abclocal.go.com/three/kgo/webcam/emeryville.jpg",
+        "page": "https://abc7news.com/weather/cams/east-bay1/"
+      },
+      "attribution": "ABC7 News",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "ABC7 skycam; light JPEG, historically reliable."
+    },
+    {
+      "id": "berkeley-hills-lawrence-hall",
+      "name": "Berkeley Hills",
+      "region": "east-bay",
+      "coords": {
+        "lat": 37.8791,
+        "lng": -122.2458,
+        "confidence": "known"
+      },
+      "type": "institutional",
+      "embed": {
+        "kind": "image",
+        "src": "http://static.lawrencehallofscience.org/scienceview/scienceview.berkeley.edu/html/view/view_assets/images/newview.jpg",
+        "page": "http://static.lawrencehallofscience.org/scienceview/scienceview.berkeley.edu/html/view/index.php"
+      },
+      "attribution": "Lawrence Hall of Science (UC Berkeley)",
+      "sources": [
+        {
+          "label": "Yesterday timelapse",
+          "url": "http://static.lawrencehallofscience.org/scienceview/scienceview.berkeley.edu/html/view/view_assets/timelapse/yesterdayview.mp4"
+        }
+      ],
+      "donation": null,
+      "status": "dead",
+      "flags": [
+        "mixed-content"
+      ],
+      "notes": "DEAD (2026-07): lawrencehallofscience static host now returns HTML, not the image - cam moved/retired. Good Berkeley panorama worth re-finding."
+    },
+    {
+      "id": "tiburon-west-sheltons",
+      "name": "Tiburon looking West",
+      "region": "north-bay",
+      "coords": {
+        "lat": 37.8853,
+        "lng": -122.4567,
+        "confidence": "approx"
+      },
+      "type": "hobbyist",
+      "embed": {
+        "kind": "image",
+        "src": "https://www.sheltons.net/wx/webcam.jpg",
+        "page": "https://www.sheltons.net/wx/station.html"
+      },
+      "attribution": "Rich Shelton",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host"
+      ],
+      "notes": "Personal weather station, looks toward the Golden Gate. https now works (confirmed on gongruya's live site) -> mixed-content resolved. Donation-ask candidate."
+    },
+    {
+      "id": "tiburon-south-wideasleep1",
+      "name": "Tiburon looking South",
+      "region": "north-bay",
+      "coords": {
+        "lat": 37.88,
+        "lng": -122.46,
+        "confidence": "approx"
+      },
+      "type": "wunderground",
+      "embed": {
+        "kind": "image",
+        "src": "https://icons.wunderground.com/webcamramdisk/w/i/wideasleep1/1/current.jpg",
+        "page": "https://www.wunderground.com/dashboard/webcam/wideasleep1/1"
+      },
+      "attribution": "wideasleep1, Weather Underground",
+      "sources": [
+        {
+          "label": "Last 24 hours timelapse",
+          "url": "https://www.wunderground.com/webcams/wideasleep1/1/video.html?&filename=current.mp4"
+        }
+      ],
+      "donation": null,
+      "status": "dead",
+      "flags": [],
+      "notes": "DEAD (2026-07): same WU webcamramdisk host unreachable. Was the wideasleep1 handle in the shared screenshot."
+    },
+    {
+      "id": "mt-tam-peak-abc7",
+      "name": "Mt. Tamalpais Peak",
+      "region": "north-bay",
+      "coords": {
+        "lat": 37.9236,
+        "lng": -122.5965,
+        "confidence": "known"
+      },
+      "type": "abc7",
+      "embed": {
+        "kind": "image",
+        "src": "https://cdns.abclocal.go.com/three/kgo/webcam/tam.jpg",
+        "page": "http://abc7news.com/weather/cams/north-bay/"
+      },
+      "attribution": "ABC7 News",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "Above-the-fog vantage; great for marine-layer top."
+    },
+    {
+      "id": "lick-observatory-west",
+      "name": "Lick Observatory, Looking West",
+      "region": "south-bay",
+      "coords": {
+        "lat": 37.3414,
+        "lng": -121.6429,
+        "confidence": "known"
+      },
+      "type": "institutional",
+      "embed": {
+        "kind": "image",
+        "src": "http://mthamilton.ucolick.org/hamcam/Cam1.ts.JPG",
+        "page": "http://mthamilton.ucolick.org/hamcam/hamcam1.html"
+      },
+      "attribution": "Lick Observatory",
+      "sources": [
+        {
+          "label": "All HamCams",
+          "url": "http://mthamilton.ucolick.org/hamcam/index.html"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "mixed-content"
+      ],
+      "notes": "Mt Hamilton overlooking San Jose / South Bay fog. http asset. Multiple HamCam angles available."
+    },
+    {
+      "id": "sjsu-meteorology",
+      "name": "San Jose State University",
+      "region": "south-bay",
+      "coords": {
+        "lat": 37.3352,
+        "lng": -121.8811,
+        "confidence": "known"
+      },
+      "type": "institutional",
+      "embed": {
+        "kind": "link",
+        "src": null,
+        "page": "http://www.sjsu.edu/meteorology/weather_climate/webcam/index.html"
+      },
+      "attribution": "SJSU Dept. Of Meteorology, Climate Science",
+      "sources": [
+        {
+          "label": "3 Webcams",
+          "url": "http://www.sjsu.edu/meteorology/weather_climate/webcam/index.html"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "mixed-content"
+      ],
+      "notes": "Three met-department cams; extract direct JPEG endpoints."
+    },
+    {
+      "id": "muir-beach-sigward",
+      "name": "Muir Beach",
+      "region": "north-bay",
+      "coords": {
+        "lat": 37.859,
+        "lng": -122.5772,
+        "confidence": "known"
+      },
+      "type": "hobbyist",
+      "embed": {
+        "kind": "image",
+        "src": "http://sigward.com/MuirBeach.jpg",
+        "page": "http://sigward.com/"
+      },
+      "attribution": "Sigward Moser",
+      "sources": [],
+      "donation": null,
+      "status": "dead",
+      "flags": [
+        "mixed-content",
+        "unstable-host"
+      ],
+      "notes": "DEAD (2026-07): sigward.com/MuirBeach.jpg returns 404."
+    },
+    {
+      "id": "half-moon-bay-sams-chowder",
+      "name": "Half Moon Bay",
+      "region": "peninsula",
+      "coords": {
+        "lat": 37.5028,
+        "lng": -122.482,
+        "confidence": "known"
+      },
+      "type": "axis",
+      "embed": {
+        "kind": "image",
+        "src": "https://samcam1.samschowderhouse.com:20001/axis-cgi/jpg/image.cgi?resolution=640x480&color=1&clock=1&date=1",
+        "page": "https://www.samschowderhouse.com/about-sams/samcam.html"
+      },
+      "attribution": "Sam's Chowder House",
+      "sources": [
+        {
+          "label": "Second angle (samcam2)",
+          "url": "https://samcam2.samschowderhouse.com:20002/axis-cgi/jpg/image.cgi?resolution=640x480&color=1&clock=1&date=1"
+        }
+      ],
+      "donation": null,
+      "status": "dead",
+      "flags": [
+        "unstable-host"
+      ],
+      "notes": "DEAD/UNREACHABLE (2026-07): samcam1.samschowderhouse.com:20001 does not resolve/connect. Restaurant cam server down or gone; re-check (they may restore it)."
+    },
+    {
+      "id": "santa-cruz-main-beach-usgs",
+      "name": "Santa Cruz Main Beach",
+      "region": "santa-cruz",
+      "coords": {
+        "lat": 36.9628,
+        "lng": -122.0247,
+        "confidence": "known"
+      },
+      "type": "satellite",
+      "embed": {
+        "kind": "image",
+        "src": "https://cmgp-coastcam.s3-us-west-2.amazonaws.com/cameras/dreaminn/latest/c1_snap.jpg",
+        "page": "https://www.usgs.gov/media/webcams/santa-cruz-main-beach-webcam-snapshot"
+      },
+      "attribution": "USGS",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "USGS CoastCam from Dream Inn. Plain S3 JPEG - very stable pattern; more CoastCam sites exist."
+    },
+    {
+      "id": "santa-cruz-harbor",
+      "name": "Santa Cruz Port District",
+      "region": "santa-cruz",
+      "coords": {
+        "lat": 36.967,
+        "lng": -122.001,
+        "confidence": "known"
+      },
+      "type": "axis",
+      "embed": {
+        "kind": "link",
+        "src": null,
+        "page": "https://www.santacruzharbor.org/cruz-harbor-web-cam/"
+      },
+      "attribution": "Santa Cruz Harbor",
+      "sources": [
+        {
+          "label": "Live, controllable webcam",
+          "url": "https://www.santacruzharbor.org/cruz-harbor-web-cam/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "Controllable cam overlooking the lighthouse; find the snapshot endpoint."
+    },
+    {
+      "id": "ndbc-46026-sf-bar-buoycam",
+      "name": "SF Bar Buoy (offshore, NDBC 46026)",
+      "region": "satellite",
+      "coords": {
+        "lat": 37.75,
+        "lng": -122.838,
+        "confidence": "known"
+      },
+      "type": "satellite",
+      "embed": {
+        "kind": "link",
+        "src": null,
+        "page": "https://www.ndbc.noaa.gov/station_page.php?station=46026"
+      },
+      "attribution": "NOAA National Data Buoy Center",
+      "sources": [
+        {
+          "label": "Buoy cam gallery",
+          "url": "https://www.ndbc.noaa.gov/buoycam.php?station=46026"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host"
+      ],
+      "notes": "VERIFIED LIVE (2026-07-04): example frame https://www.ndbc.noaa.gov/images/buoycam/W49A_2026_07_05_0410.jpg returned 200, image/jpeg, ~34KB, ~50min old at fetch. Filename encodes internal buoy ID (W49A for station 46026) + UTC timestamp (YYYY_MM_DD_HHMM), so there is NO static 'latest.jpg' -- must scrape buoycam.php?station=46026 (or station_page.php) each poll to discover the current filename, then fetch that. Daylight-only (real camera, not IR), roughly hourly cadence. This is a literal sea-level photo 18nm west of the Golden Gate -- genuinely different vantage than satellite (surface-level marine layer check). embed.kind set to 'link' rather than 'image' because src is not stable; a build-time or client-side script would need to resolve the current image URL first. Other NDBC stations with buoycams exist too (e.g. 46013 Bodega Bay, 46042 Monterey) -- same pattern, worth enumerating if more sea-level angles wanted."
+    },
+    {
+      "id": "usgs-coastcam-sunset-state-beach",
+      "name": "Sunset State Beach (Monterey Bay)",
+      "region": "satellite",
+      "coords": {
+        "lat": 36.93,
+        "lng": -121.83,
+        "confidence": "approx"
+      },
+      "type": "satellite",
+      "embed": {
+        "kind": "image",
+        "src": "https://cmgp-coastcam.s3-us-west-2.amazonaws.com/cameras/sunset/latest/c1_snap.jpg",
+        "page": "https://www.usgs.gov/programs/cmhrp/science/usgs-coastcams"
+      },
+      "attribution": "USGS",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "VERIFIED LIVE (2026-07-04): c1_snap.jpg returned 200, valid JPEG (~313KB, FFD8FFE0 header). Site slug 'sunset' = Sunset State Beach, Watsonville CA, ~15mi south of Santa Cruz / Monterey Bay -- NOT SF Bay proper, judgment call on geographic scope but it's the ONLY other live USGS CoastCam site anywhere near us. c2_snap.jpg (camera 2, looking north per USGS description) very likely also exists but wasn't independently fetched. URL SCHEME (confirmed): https://cmgp-coastcam.s3-us-west-2.amazonaws.com/cameras/<site-slug>/latest/c<N>_snap.jpg where N=1,2,3... per camera head at that site. Bucket root listing is BLOCKED (403, no public XML index) so enumeration must be by confirming known slugs from USGS's own program page, not by browsing S3. Exhaustively checked: no other CoastCam sites exist anywhere near Pacifica, Ocean Beach/SF, Point Reyes, Half Moon Bay, Marin, or North Bay -- rest of the national network is Atlantic (MA, Puerto Rico), Alaska, and Gulf (FL), irrelevant to us. Only 'dreaminn' (already in cameras.json) and 'sunset' (this entry) are Pacific-coast-relevant."
+    },
+    {
+      "id": "caltrans-tve73-us101-spencer-ave-sausalito",
+      "name": "US-101 at Spencer Ave, Sausalito (Golden Gate approach)",
+      "region": "golden-gate",
+      "coords": {
+        "lat": 37.85081,
+        "lng": -122.48975,
+        "confidence": "known"
+      },
+      "type": "caltrans",
+      "embed": {
+        "kind": "image",
+        "src": "https://cwwp2.dot.ca.gov/data/d4/cctv/image/tve73us101spenceravenue/tve73us101spenceravenue.jpg",
+        "page": "https://cwwp2.dot.ca.gov/vm/loc/d4/allcctv.htm"
+      },
+      "attribution": "Caltrans District 4",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "VERIFIED LIVE (2026-07-04 ~22:19 PDT): 200 OK image/jpeg, showed a genuinely foggy nighttime shot -- great atmosphere, best of the batch for fog. Marin side approach to the Golden Gate Bridge (Caltrans has no camera on the GG span itself; it's owned by the Golden Gate Bridge Highway & Transportation District, not Caltrans). New vendor type 'caltrans' -- see notes on URL scheme below; add a docs/vendors.md section: signature cwwp2.dot.ca.gov/data/d4/cctv/image/, still JPEG, standardized refresh, public domain, excellent resiliency."
+    },
+    {
+      "id": "caltrans-tvd32-bay-bridge-sas-tower-east",
+      "name": "Bay Bridge, SAS Tower East (I-80)",
+      "region": "golden-gate",
+      "coords": {
+        "lat": 37.81526,
+        "lng": -122.35855,
+        "confidence": "known"
+      },
+      "type": "caltrans",
+      "embed": {
+        "kind": "image",
+        "src": "https://cwwp2.dot.ca.gov/data/d4/cctv/image/tvd32i80baybridgesastowereast/tvd32i80baybridgesastowereast.jpg",
+        "page": "https://cwwp2.dot.ca.gov/vm/loc/d4/allcctv.htm"
+      },
+      "attribution": "Caltrans District 4",
+      "sources": [
+        {
+          "label": "Bay Bridge SAS Tower West (paired cam)",
+          "url": "https://cwwp2.dot.ca.gov/data/d4/cctv/image/tvd33i80baybridgesastowerwest/tvd33i80baybridgesastowerwest.jpg"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "VERIFIED LIVE (2026-07-04): 200 OK image/jpeg, clear night traffic shot, camera literally mounted on the Bay Bridge Self-Anchored Suspension tower. Excellent bridge/fog coverage cluster here -- TVD-series covers SAS tower, YBI tunnel approach, toll plaza, Skyway curve."
+    },
+    {
+      "id": "caltrans-tvr45-richmond-san-rafael-toll-plaza",
+      "name": "Richmond-San Rafael Bridge, Toll Plaza (I-580)",
+      "region": "north-bay",
+      "coords": {
+        "lat": 37.93184,
+        "lng": -122.40127,
+        "confidence": "known"
+      },
+      "type": "caltrans",
+      "embed": {
+        "kind": "image",
+        "src": "https://cwwp2.dot.ca.gov/data/d4/cctv/image/tvr45i580attollplaza/tvr45i580attollplaza.jpg",
+        "page": "https://cwwp2.dot.ca.gov/vm/loc/d4/allcctv.htm"
+      },
+      "attribution": "Caltrans District 4",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "VERIFIED LIVE (2026-07-04): 200 OK image/jpeg. RSR Bridge has very dense Caltrans coverage -- TVR-series has ~25+ cameras spanning both decks/piers from San Quentin side to Richmond side (e.g. TVR01 upper deck Pier 59 was 'temporarily unavailable' at test time -- some cams in this cluster intermittently serve a 200-OK placeholder image when down, worth a liveness check that looks past mere HTTP 200)."
+    },
+    {
+      "id": "caltrans-tve15-san-mateo-bridge-metering",
+      "name": "San Mateo Bridge, Metering Lights (SR-92)",
+      "region": "peninsula",
+      "coords": {
+        "lat": 37.61734,
+        "lng": -122.15411,
+        "confidence": "known"
+      },
+      "type": "caltrans",
+      "embed": {
+        "kind": "image",
+        "src": "https://cwwp2.dot.ca.gov/data/d4/cctv/image/tve15sr92sanmateobridgemeteringlights/tve15sr92sanmateobridgemeteringlights.jpg",
+        "page": "https://cwwp2.dot.ca.gov/vm/loc/d4/allcctv.htm"
+      },
+      "attribution": "Caltrans District 4",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "VERIFIED LIVE (2026-07-04): 200 OK image/jpeg. San Mateo Bridge has full span coverage under TVE01-TVE15 (incline, substations 2-7, metering lights); TVE02 'San Mateo Bridge Incline' was temporarily unavailable at test time -- worth trying that one too if this one ever dies, same cluster."
+    },
+    {
+      "id": "caltrans-tv959-dumbarton-toll-plaza",
+      "name": "Dumbarton Bridge, Toll Plaza (SR-84)",
+      "region": "peninsula",
+      "coords": {
+        "lat": 37.53321,
+        "lng": -122.08558,
+        "confidence": "known"
+      },
+      "type": "caltrans",
+      "embed": {
+        "kind": "image",
+        "src": "https://cwwp2.dot.ca.gov/data/d4/cctv/image/tv959sr84atjwotollplaza/tv959sr84atjwotollplaza.jpg",
+        "page": "https://cwwp2.dot.ca.gov/vm/loc/d4/allcctv.htm"
+      },
+      "attribution": "Caltrans District 4",
+      "sources": [
+        {
+          "label": "Dumbarton Mainspan (paired cam, intermittent)",
+          "url": "https://cwwp2.dot.ca.gov/data/d4/cctv/image/tv953sr84w84jeomainspan/tv953sr84w84jeomainspan.jpg"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "VERIFIED LIVE (2026-07-04): 200 OK image/jpeg. Dumbarton well covered under SR-84 (toll plaza, mainspan, midspan substation, Fremont/Newark/Menlo Park approaches). Mainspan cam (TV953) was temporarily unavailable at test time."
+    },
+    {
+      "id": "caltrans-tv388-sr1-presidio-tunnel-sf",
+      "name": "Highway 1, South of Presidio Tunnel (SF)",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.79138,
+        "lng": -122.46968,
+        "confidence": "known"
+      },
+      "type": "caltrans",
+      "embed": {
+        "kind": "image",
+        "src": "https://cwwp2.dot.ca.gov/data/d4/cctv/image/tv388sr1justsouthofpresidiotunnel/tv388sr1justsouthofpresidiotunnel.jpg",
+        "page": "https://cwwp2.dot.ca.gov/vm/loc/d4/allcctv.htm"
+      },
+      "attribution": "Caltrans District 4",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "Image endpoint returned 'temporarily unavailable' placeholder at test time (URL structure valid, HTTP 200 but not a real frame) -- re-check before promoting to live. SR-1 coverage in D4 is SPARSE overall: only 4 cameras total statewide-district-wide on SR-1 (this one, plus 3 near Half Moon Bay), none found near Devil's Slide, Pacifica proper, Muir Beach, or Stinson Beach despite searching by name/nearby-place. Included anyway since it's the only SF-side SR-1 gov cam and worth a re-check."
+    },
+    {
+      "id": "caltrans-tv072-sr1-half-moon-bay",
+      "name": "Highway 1 at Ruisseau Francais Ave, Half Moon Bay",
+      "region": "peninsula",
+      "coords": {
+        "lat": 37.48335,
+        "lng": -122.44643,
+        "confidence": "known"
+      },
+      "type": "caltrans",
+      "embed": {
+        "kind": "image",
+        "src": "https://cwwp2.dot.ca.gov/data/d4/cctv/image/tv072sr1ruisseaufrancaisavenue/tv072sr1ruisseaufrancaisavenue.jpg",
+        "page": "https://cwwp2.dot.ca.gov/vm/loc/d4/allcctv.htm"
+      },
+      "attribution": "Caltrans District 4",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "Image endpoint returned 'temporarily unavailable' placeholder at test time -- re-check. One of only 3 SR-1 cams near Half Moon Bay (others: Capistrano Rd, and Coronado St which is inService:false per the JSON index). Coastal Hwy 1 fog vantage, near existing half-moon-bay-sams-chowder entry but a different angle (road-level vs harbor)."
+    },
+    {
+      "id": "point-reyes-beach-nps",
+      "name": "Point Reyes Beach",
+      "region": "north-bay",
+      "coords": {
+        "lat": 38.0223,
+        "lng": -122.9728,
+        "confidence": "approx"
+      },
+      "type": "satellite",
+      "embed": {
+        "kind": "image",
+        "src": "https://www.nps.gov/featurecontent/ard/webcams/images/pore.jpg",
+        "page": "https://www.nps.gov/pore/learn/photosmultimedia/webcams.htm"
+      },
+      "attribution": "National Park Service, Air Resources Division",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "VERIFIED LIVE (2026-07-04): 200 OK image/jpeg, fresh timestamp, refreshes ~every 15min. Part of NPS ARD's national air-quality webcam network (same program used at other parks for visibility monitoring) -- direct first-party NPS image, not a third-party link-out. View looks north-northeast from the lighthouse visitor center area toward Point Reyes Beach. Coords are approximate (lighthouse visitor center vicinity, ~38.0223/-122.9728) -- NPS doesn't publish exact camera mount coordinates. type set to 'satellite' per instructions (standardized gov still-image vendor bucket) though it's a plain webcam, not orbital -- flag for a human to reconsider if a dedicated 'nps' type is preferred later. GGNRA itself (nps.gov/goga) has NO NPS-operated cameras -- their webcams page only links third parties we may already have or could add separately: Fort Funston (flyfunston.org, already in our set), Muir Beach (sigward.com, already in our set), Mt Tam (rntl.net -- different from our existing ABC7 Mt Tam cam, could be a second angle), Stinson Beach (webcoos.org). Alcatraz cam confirmed OFFLINE. Muir Woods confirmed NO webcam exists."
+    },
+    {
+      "id": "pillar-point-harbor-hmbyc",
+      "name": "Pillar Point Harbor",
+      "region": "peninsula",
+      "coords": {
+        "lat": 37.503,
+        "lng": -122.4912,
+        "confidence": "known"
+      },
+      "type": "ipcamlive",
+      "embed": {
+        "kind": "image",
+        "src": "http://s133.ipcamlive.com/streams/850b9zuje16fv3skh/snapshot.jpg",
+        "page": "https://www.hmbyc.org/livevideo"
+      },
+      "attribution": "Half Moon Bay Yacht Club",
+      "sources": [
+        {
+          "label": "Live player + timelapse",
+          "url": "https://www.hmbyc.org/livevideo"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "mixed-content",
+        "unstable-host"
+      ],
+      "notes": "New vendor: ipcamlive.com (self-serve IP-camera hosting platform, alias 63ea74c6a29d6, streamid 850b9zuje16fv3skh, server s133). Player page embeds via g1.ipcamlive.com/player/player.php?alias=63ea74c6a29d6 with domain-lock enabled (only plays inside hmbyc.org's iframe -> hotlink-protection risk for the player, but the direct snapshot.jpg endpoint returned 200 with a fresh JPEG and no referer needed at check time). Verified live 2026-07-04 night IR shot: harbor water, dock, lights, benches. http asset -> mixed-content. Different angle/operator than our existing Sam's Chowder House axis cam (across the harbor). Server subdomain (s133) and streamid can rotate if the camera reconnects -- treat as fragile, re-derive alias/streamid from the player page's inline JS if the src goes stale."
+    },
+    {
+      "id": "santa-cruz-cowells-beach-usgs",
+      "name": "Santa Cruz, Cowell's Beach",
+      "region": "santa-cruz",
+      "coords": {
+        "lat": 36.9628,
+        "lng": -122.0247,
+        "confidence": "known"
+      },
+      "type": "satellite",
+      "embed": {
+        "kind": "image",
+        "src": "https://cmgp-coastcam.s3-us-west-2.amazonaws.com/cameras/dreaminn/latest/c2_snap.jpg",
+        "page": "https://www.usgs.gov/centers/pcmsc/science/using-video-imagery-study-coastal-change-santa-cruz-beaches"
+      },
+      "attribution": "USGS",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "Second camera (c2, looks south over Cowell's Beach/the Wharf) on the same Dream Inn rooftop rig as our existing santa-cruz-main-beach-usgs (c1, looks east). Same building, different angle -- kept as a separate entry since it's a genuinely distinct, useful view (fog bank + horizon + surf break), matching the vetting note that same-building cams should be judged individually. Verified live: dusk shot showing marine layer over the bay, wharf lights, and Cowell's Beach. Same stable S3 JPEG pattern as our existing entry."
+    },
+    {
+      "id": "ano-nuevo-mainland-parks",
+      "name": "Año Nuevo State Park, Mainland",
+      "region": "peninsula",
+      "coords": {
+        "lat": 37.1194,
+        "lng": -122.3069,
+        "confidence": "approx"
+      },
+      "type": "ca-state-parks-hls",
+      "embed": {
+        "kind": "iframe",
+        "src": "https://video.parks.ca.gov/AnoNuevo/AnoMainLand.stream/playlist.m3u8",
+        "page": "https://www.parks.ca.gov/?page_Id=31947"
+      },
+      "attribution": "California State Parks",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy"
+      ],
+      "notes": "New vendor: California State Parks self-hosted HLS (video.parks.ca.gov), not a YouTube embed. Direct .m3u8 manifest verified live -- pulled the current chunklist (actively incrementing media sequence, ~28000s) and downloaded a real .ts segment (200, 159KB) confirming an actively streaming camera, not a stale manifest. Overlooks the elephant-seal colony/dunes near the park entrance off Hwy 1; coords are the parking-lot/visitor-center approx location, not the exact camera mount. No snapshot JPEG alternative found -- would need an <video>/hls.js wrapper (heavy) rather than a plain <img>. A companion 'Island' camera (video.parks.ca.gov/AnoNuevo/Island.stream/playlist.m3u8) 404s -- dead, do not add."
+    },
+    {
+      "id": "bay-bridge-abc7-youtube",
+      "name": "San Francisco-Oakland Bay Bridge",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.7955,
+        "lng": -122.3937,
+        "confidence": "approx"
+      },
+      "type": "youtube-live",
+      "embed": {
+        "kind": "iframe",
+        "src": "https://www.youtube.com/watch?v=CXYr04BWvmc",
+        "page": "https://abc7news.com/weather/cams/bay-bridge/"
+      },
+      "attribution": "ABC7 News Bay Area (KGO-TV)",
+      "sources": [
+        {
+          "label": "ABC7 Bay Bridge Cam page",
+          "url": "https://abc7news.com/weather/cams/bay-bridge/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy"
+      ],
+      "notes": "Confirmed live right now (isLiveNow:true via YouTube internal API check) and thumbnail shows a clean full-span bridge/sky/bay view, no fog haze but great clear-day baseline. Channel: ABC7 News Bay Area / @abc7news. Lightweight at-rest thumbnail: https://i.ytimg.com/vi/CXYr04BWvmc/hqdefault.jpg. Exact camera mount location (which building) not published; coords are an approx placement near the SF-side bridge vantage seen in frame. This is a NEW find distinct from the existing dead/stale Salesforce Tower CBS/Anvato entry already in cameras.json -- ABC7 also has Emeryville and Mt Tam JPEG cams already in the set, but not this one. Re-check periodically since ABC7 has churned cam URLs before (NBC Bay Area cams are mostly dead)."
+    },
+    {
+      "id": "treasure-island-mersea-youtube",
+      "name": "Treasure Island, Mersea Restaurant",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.8226,
+        "lng": -122.3714,
+        "confidence": "approx"
+      },
+      "type": "youtube-live",
+      "embed": {
+        "kind": "iframe",
+        "src": "https://www.youtube.com/watch?v=BSWhGNXxT9A",
+        "page": "https://www.mersea.restaurant/"
+      },
+      "attribution": "Mersea Restaurant Bar & Venue, via Teleport.camera",
+      "sources": [
+        {
+          "label": "Mersea Restaurant",
+          "url": "https://www.mersea.restaurant/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy"
+      ],
+      "notes": "Confirmed live right now (isLiveNow:true). Channel: Teleport.camera. Wide SF skyline-across-the-bay view from Treasure Island patio -- includes restaurant furniture in foreground but skyline/bay/sky dominates the frame; camera reportedly also has presets/PTZ toward Golden Gate Bridge and Alcatraz per the restaurant's own Facebook posts. Lightweight at-rest thumbnail: https://i.ytimg.com/vi/BSWhGNXxT9A/hqdefault.jpg. Note: an older video ID (17L1ahq27ro) for the same setup returned 'Not Found' via oEmbed -- operators appear to rotate/restart the stream periodically, so expect this video ID to go stale and need re-discovery via the restaurant's site or channel page (https://www.youtube.com/@Teleport.camera)."
+    },
+    {
+      "id": "pacifica-pier-beach-chamberlin",
+      "name": "Pacifica Pier and Beach",
+      "region": "peninsula",
+      "coords": {
+        "lat": 37.6335,
+        "lng": -122.4964,
+        "confidence": "known"
+      },
+      "type": "youtube-live",
+      "embed": {
+        "kind": "iframe",
+        "src": "https://www.youtube.com/watch?v=yLJCR5TlHoI",
+        "page": "https://www.pacificaview.net/livecam/"
+      },
+      "attribution": "David Chamberlin, Chamberlin Nature",
+      "sources": [
+        {
+          "label": "Pacifica View live cameras",
+          "url": "https://www.pacificaview.net/livecam/"
+        },
+        {
+          "label": "Chamberlin Nature",
+          "url": "https://www.chamberlinnature.com/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy"
+      ],
+      "notes": "Confirmed live right now (isLiveNow:true). One of four roof-mounted 4K cams (Ubiquiti G5Pro, RTSP->YouTube HLS) run by a hobbyist photographer overlooking Pacifica Municipal Pier / Sharp Park Beach. Wide promenade+ocean+sky view, American flag in frame at capture time. Lightweight at-rest thumbnail: https://i.ytimg.com/vi/yLJCR5TlHoI/hqdefault.jpg. No donation link found on site or channel, but this is exactly the 'soul of the project' personal-hobbyist category -- worth re-checking for a Patreon/support link later. Sibling cams below are the other 3 angles from the same rig/operator."
+    },
+    {
+      "id": "pacifica-sharp-park-beach-chamberlin",
+      "name": "Sharp Park Beach, Pacifica",
+      "region": "peninsula",
+      "coords": {
+        "lat": 37.6355,
+        "lng": -122.496,
+        "confidence": "approx"
+      },
+      "type": "youtube-live",
+      "embed": {
+        "kind": "iframe",
+        "src": "https://www.youtube.com/watch?v=Xy2sgld2m8E",
+        "page": "https://www.pacificaview.net/livecam/"
+      },
+      "attribution": "David Chamberlin, Chamberlin Nature",
+      "sources": [
+        {
+          "label": "Pacifica View live cameras",
+          "url": "https://www.pacificaview.net/livecam/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy"
+      ],
+      "notes": "Confirmed live right now (isLiveNow:true). Sibling cam to pacifica-pier-beach-chamberlin, same operator/rig, tighter framing on the surf line at Sharp Park Beach -- big breaking waves visible in thumbnail. Thumbnail: https://i.ytimg.com/vi/Xy2sgld2m8E/hqdefault.jpg. Consider deduping/merging with the pier cam at data-entry time if the map pins end up on top of each other (same building, different angles)."
+    },
+    {
+      "id": "pacifica-mori-point-chamberlin",
+      "name": "Mori Point, Pacifica",
+      "region": "peninsula",
+      "coords": {
+        "lat": 37.6202,
+        "lng": -122.4983,
+        "confidence": "known"
+      },
+      "type": "youtube-live",
+      "embed": {
+        "kind": "iframe",
+        "src": "https://www.youtube.com/watch?v=UYu-TjvAVFs",
+        "page": "https://www.pacificaview.net/livecam/"
+      },
+      "attribution": "David Chamberlin, Chamberlin Nature",
+      "sources": [
+        {
+          "label": "Pacifica View live cameras",
+          "url": "https://www.pacificaview.net/livecam/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy"
+      ],
+      "notes": "Confirmed live right now (isLiveNow:true). Sibling cam to pacifica-pier-beach-chamberlin, same operator/rig, looking south toward Mori Point headland and the curved coastline -- good horizon/marine-layer vantage. Thumbnail: https://i.ytimg.com/vi/UYu-TjvAVFs/hqdefault.jpg."
+    },
+    {
+      "id": "golden-gate-bridge-ipcamlive",
+      "name": "Golden Gate Bridge",
+      "region": "golden-gate",
+      "coords": {
+        "lat": 37.8199,
+        "lng": -122.4783,
+        "confidence": "approx"
+      },
+      "type": "ipcamlive",
+      "embed": {
+        "kind": "image",
+        "src": "https://g1.ipcamlive.com/player/snapshot.php?alias=5e863c6e0e66d",
+        "page": "https://g1.ipcamlive.com/player/player.php?alias=5e863c6e0e66d"
+      },
+      "attribution": "ipcamlive (operator unidentified)",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host",
+        "attribution-unknown"
+      ],
+      "notes": "Recrawl found the light snapshot endpoint (snapshot.php?alias=<alias> 302-redirects to a live JPEG) -- use it instead of the heavy iframe. VETTING CONCERN: no aggregator identifies the actual camera owner, so it fails our attribution rule (#3) as-is; confirm operator + exact vantage (SF vs Marin side) in daylight before publishing. Snapshot server subdomain rotates; always hit snapshot.php, not the resolved s<NN> URL."
+    },
+    {
+      "id": "caltrans-tve68-ggb-vista-point",
+      "name": "Golden Gate Bridge — US-101 Vista Point",
+      "region": "golden-gate",
+      "coords": {
+        "lat": 37.83298,
+        "lng": -122.48011,
+        "confidence": "known"
+      },
+      "type": "caltrans",
+      "embed": {
+        "kind": "image",
+        "src": "https://cwwp2.dot.ca.gov/data/d4/cctv/image/tve68us101atbowersvistapointexit/tve68us101atbowersvistapointexit.jpg",
+        "page": "https://cwwp2.dot.ca.gov/data/d4/cctv/cctvStatusD04.json"
+      },
+      "attribution": "Caltrans District 4",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [],
+      "notes": "Standout of the Caltrans set: direct bridge-tower view from the Marin Vista Point. Caltrans serves a 'Temporarily Unavailable' placeholder (HTTP 200) when down, so liveness checks must inspect the image, not just the status code."
+    },
+    {
+      "id": "ocean-beach-sunset-oceanbeach-org",
+      "name": "Ocean Beach (sunset)",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.7594,
+        "lng": -122.5107,
+        "confidence": "approx"
+      },
+      "type": "hobbyist",
+      "embed": {
+        "kind": "image",
+        "src": "https://www.oceanbeach.org/images/sunset.jpg",
+        "page": "https://www.oceanbeach.org/webcam.html"
+      },
+      "attribution": "oceanbeach.org",
+      "sources": [],
+      "donation": null,
+      "status": "dead",
+      "flags": [],
+      "notes": "DEAD (verified 2026-07): https://www.oceanbeach.org/images/sunset.jpg returns 404 on direct fetch, despite being linked from gongruya's live site. Kept per the 'don't delete dead cams' rule; re-check for a moved path before reviving."
+    },
+    {
+      "id": "ocean-beach-cliff-house-vm",
+      "name": "Ocean Beach, Cliff House",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.7787,
+        "lng": -122.5137,
+        "confidence": "known"
+      },
+      "type": "institutional",
+      "embed": {
+        "kind": "image",
+        "src": "https://video-monitoring.com/beachcams/oceanbeach/static/s4latest_.jpg",
+        "page": "https://video-monitoring.com/beachcams/oceanbeach/"
+      },
+      "attribution": "Erdman, NPS, USGS (video-monitoring.com)",
+      "sources": [],
+      "donation": null,
+      "status": "dead",
+      "flags": [],
+      "notes": "DEAD/STALE (verified 2026-07): video-monitoring.com Cliff House feed loads (200) but Last-Modified is March 2023 across every mirror -- frozen, not live. This is the same cam Tim hid as 'too blurry' long ago; it appears to have since died entirely. Kept as history."
+    },
+    {
+      "id": "south-end-rowing-club-youtube",
+      "name": "Aquatic Park (South End Rowing Club)",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.80806,
+        "lng": -122.42167,
+        "confidence": "known"
+      },
+      "type": "youtube-live",
+      "embed": {
+        "kind": "iframe",
+        "src": "https://www.youtube.com/embed/live_stream?channel=UCnlzUImPPun6OpOEaT7X2aw",
+        "page": "https://serc.com/webcam"
+      },
+      "attribution": "South End Rowing Club",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy"
+      ],
+      "notes": "Rooftop cam pans Alcatraz / Muni Pier with a partial westward GGB slice. Channel-based live_stream (videoId rotates). Thumbnail: i.ytimg.com/vi/<current-id>/hqdefault.jpg."
+    },
+    {
+      "id": "abc7-rooftop-embarcadero",
+      "name": "ABC7 Rooftop (Embarcadero)",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.7975,
+        "lng": -122.3999,
+        "confidence": "approx"
+      },
+      "type": "youtube-live",
+      "embed": {
+        "kind": "iframe",
+        "src": "https://www.youtube.com/watch?v=G8RIAgPxaMc",
+        "page": "https://abc7news.com/weather/cams/abc7-rooftop/"
+      },
+      "attribution": "ABC7 / KGO-TV",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy"
+      ],
+      "notes": "KGO rooftop over the Embarcadero. ABC7's own site showed 'ON NOW'; YouTube mirror live-status couldn't be confirmed via fetch. Note: the ABC7 native m3u8 is the 24/7 news simulcast, not a dedicated roof feed — the YouTube mirror is the cleaner embed."
+    },
+    {
+      "id": "pier-23-cafe-youtube",
+      "name": "Pier 23, Embarcadero",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.8034,
+        "lng": -122.401,
+        "confidence": "known"
+      },
+      "type": "youtube-live",
+      "embed": {
+        "kind": "iframe",
+        "src": "https://www.youtube.com/watch?v=a5IW4I-z2rs",
+        "page": "https://www.youtube.com/watch?v=a5IW4I-z2rs"
+      },
+      "attribution": "StreamTime LIVE / Pier 23 Cafe",
+      "sources": [],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "heavy"
+      ],
+      "notes": "Bay-facing over the Embarcadero (ship traffic, Treasure Island, Bay Bridge approach, F-line). isLive:true confirmed."
+    },
+    {
+      "id": "sutro-tower-2-alertcalifornia",
+      "name": "Sutro Tower",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.755306,
+        "lng": -122.452751,
+        "confidence": "known"
+      },
+      "type": "alertcalifornia",
+      "embed": {
+        "kind": "image",
+        "src": "https://img.cdn.prod.alertwest.com/data/img/2429/2026/07/05/Sutro_Tower_2_1783229367_7463.jpg",
+        "page": "https://cameras.alertcalifornia.org/"
+      },
+      "attribution": "ALERTCalifornia, UC San Diego (sponsored by PG&E)",
+      "sources": [
+        {
+          "label": "ALERTCalifornia camera network",
+          "url": "https://alertcalifornia.org/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host",
+        "rotating-url"
+      ],
+      "notes": "ALERTCalifornia cam id 2429 (AXIS Q6075-E on Sutro Tower, elev 833ft) -- elevated vantage above the city, great for marine-layer-top shots. The src embeds a rotating unix-timestamp filename that 404s within ~1-2 min; a live integration must re-poll the API (getCameraDataByLoc) to resolve the current filename before each display. The src here is a captured example, not a stable link. Sibling 'Sutro_Tower_1' (id 2428) was offline at crawl time."
+    },
+    {
+      "id": "fogcam-sfsu",
+      "name": "FogCam (SF State University)",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.7241,
+        "lng": -122.4802,
+        "confidence": "known"
+      },
+      "type": "institutional",
+      "embed": {
+        "kind": "image",
+        "src": "https://imgproxy.windy.com/_/normal/plain/current/1345864882/original.jpg",
+        "page": "https://www.fogcam.org/"
+      },
+      "attribution": "Academic Technology, San Francisco State University",
+      "sources": [
+        {
+          "label": "FogCam home",
+          "url": "https://www.fogcam.org/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host"
+      ],
+      "notes": "The world oldest continuously-operating webcam (1994). SFSU campus/sky near Lake Merced - fog visible, not coastal, but iconic. fogcam.org is JS-gated with no clean direct image; the src here is the Windy imgproxy mirror (webcam id 1345864882) - fragile dependency, find a first-party JPEG endpoint before publishing."
+    },
+    {
+      "id": "st-francis-yc-docks",
+      "name": "St. Francis Yacht Club (Marina)",
+      "region": "san-francisco",
+      "coords": {
+        "lat": 37.8069,
+        "lng": -122.4372,
+        "confidence": "known"
+      },
+      "type": "institutional",
+      "embed": {
+        "kind": "image",
+        "src": "https://imgproxy.windy.com/_/normal/plain/current/1668627106/original.jpg",
+        "page": "https://www.stfyc.com/web-cams"
+      },
+      "attribution": "St. Francis Yacht Club",
+      "sources": [
+        {
+          "label": "StFYC web-cams",
+          "url": "https://www.stfyc.com/web-cams"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host"
+      ],
+      "notes": "Marina + open horizon toward the Golden Gate - good day fog/sky. Official page stfyc.com/web-cams is JS-only; src is the Windy imgproxy mirror (id 1668627106) - find first-party JPEG before publishing. A second Race Deck cam exists but its direct URL was not isolable."
+    },
+    {
+      "id": "grizzly-peak-alertcalifornia",
+      "name": "Grizzly Peak Overlook (Berkeley Hills)",
+      "region": "east-bay",
+      "coords": {
+        "lat": 37.873692,
+        "lng": -122.219879,
+        "confidence": "known"
+      },
+      "type": "alertcalifornia",
+      "embed": {
+        "kind": "image",
+        "src": "https://img.cdn.prod.alertwest.com/data/img/2001/2026/07/05/Grizzly_Peak_Overlook_1_1783230155_3494.jpg",
+        "page": "https://cameras.alertcalifornia.org/"
+      },
+      "attribution": "ALERTCalifornia, UC San Diego (sponsored by PG&E)",
+      "sources": [
+        {
+          "label": "ALERTCalifornia network",
+          "url": "https://alertcalifornia.org/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host",
+        "rotating-url"
+      ],
+      "notes": "The classic Berkeley-hills overlook of the Bay, Golden Gate, and the fog pouring through it. ALERTCalifornia camId=2001 (PTZ - framing can shift). src is a rotating snapshot that expires in ~1-2 min; renderer must re-resolve via scripts/fetch-alertcalifornia.py / the API. Full 183-cam Bay layer in data/alertcalifornia-bay.json."
+    },
+    {
+      "id": "big-rock-ridge-alertcalifornia",
+      "name": "Big Rock Ridge (Marin)",
+      "region": "north-bay",
+      "coords": {
+        "lat": 38.059288,
+        "lng": -122.604385,
+        "confidence": "known"
+      },
+      "type": "alertcalifornia",
+      "embed": {
+        "kind": "image",
+        "src": "https://img.cdn.prod.alertwest.com/data/img/17832/2026/07/05/Big_Rock_Ridge_1_1783230179_2080.jpg",
+        "page": "https://cameras.alertcalifornia.org/"
+      },
+      "attribution": "ALERTCalifornia, UC San Diego (sponsored by PG&E)",
+      "sources": [
+        {
+          "label": "ALERTCalifornia network",
+          "url": "https://alertcalifornia.org/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host",
+        "rotating-url"
+      ],
+      "notes": "Marin's second-tallest peak, over Novato/San Rafael/Lucas Valley - marine-layer top. ALERTCalifornia camId=17832 (PTZ - framing can shift). src is a rotating snapshot that expires in ~1-2 min; renderer must re-resolve via scripts/fetch-alertcalifornia.py / the API. Full 183-cam Bay layer in data/alertcalifornia-bay.json."
+    },
+    {
+      "id": "mission-peak-alertcalifornia",
+      "name": "Mission Peak (Fremont)",
+      "region": "south-bay",
+      "coords": {
+        "lat": 37.475399,
+        "lng": -121.860901,
+        "confidence": "known"
+      },
+      "type": "alertcalifornia",
+      "embed": {
+        "kind": "image",
+        "src": "https://img.cdn.prod.alertwest.com/data/img/2127/2026/07/05/Mission_Peak_1_1783230132_7663.jpg",
+        "page": "https://cameras.alertcalifornia.org/"
+      },
+      "attribution": "ALERTCalifornia, UC San Diego (sponsored by CALFIRE)",
+      "sources": [
+        {
+          "label": "ALERTCalifornia network",
+          "url": "https://alertcalifornia.org/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host",
+        "rotating-url"
+      ],
+      "notes": "Iconic South Bay summit; sweeping valley + bay fog vantage. ALERTCalifornia camId=2127 (PTZ - framing can shift). src is a rotating snapshot that expires in ~1-2 min; renderer must re-resolve via scripts/fetch-alertcalifornia.py / the API. Full 183-cam Bay layer in data/alertcalifornia-bay.json."
+    },
+    {
+      "id": "bolinas-alertcalifornia",
+      "name": "Bolinas (Marin coast)",
+      "region": "north-bay",
+      "coords": {
+        "lat": 37.935799,
+        "lng": -122.706497,
+        "confidence": "known"
+      },
+      "type": "alertcalifornia",
+      "embed": {
+        "kind": "image",
+        "src": "https://img.cdn.prod.alertwest.com/data/img/1843/2026/07/05/Bolinas_1783230165_9538.jpg",
+        "page": "https://cameras.alertcalifornia.org/"
+      },
+      "attribution": "ALERTCalifornia, UC San Diego (sponsored by PG&E)",
+      "sources": [
+        {
+          "label": "ALERTCalifornia network",
+          "url": "https://alertcalifornia.org/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host",
+        "rotating-url"
+      ],
+      "notes": "Outer Marin coast - watches the marine layer come off the Pacific. ALERTCalifornia camId=1843 (PTZ - framing can shift). src is a rotating snapshot that expires in ~1-2 min; renderer must re-resolve via scripts/fetch-alertcalifornia.py / the API. Full 183-cam Bay layer in data/alertcalifornia-bay.json."
+    },
+    {
+      "id": "loma-prieta-alertcalifornia",
+      "name": "Loma Prieta (Santa Cruz Mtns)",
+      "region": "south-bay",
+      "coords": {
+        "lat": 37.11042,
+        "lng": -121.843697,
+        "confidence": "known"
+      },
+      "type": "alertcalifornia",
+      "embed": {
+        "kind": "image",
+        "src": "https://img.cdn.prod.alertwest.com/data/img/2082/2026/07/05/Loma_Prieta_1783230172_1590.jpg",
+        "page": "https://cameras.alertcalifornia.org/"
+      },
+      "attribution": "ALERTCalifornia, UC San Diego (sponsored by PG&E)",
+      "sources": [
+        {
+          "label": "ALERTCalifornia network",
+          "url": "https://alertcalifornia.org/"
+        }
+      ],
+      "donation": null,
+      "status": "unverified",
+      "flags": [
+        "unstable-host",
+        "rotating-url"
+      ],
+      "notes": "Highest peak in the Santa Cruz Mountains - above-the-fog panorama. ALERTCalifornia camId=2082 (PTZ - framing can shift). src is a rotating snapshot that expires in ~1-2 min; renderer must re-resolve via scripts/fetch-alertcalifornia.py / the API. Full 183-cam Bay layer in data/alertcalifornia-bay.json."
+    }
+  ]
+}

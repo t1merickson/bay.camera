@@ -1,0 +1,2205 @@
+{
+  "source": "ALERTCalifornia (UC San Diego / Cal Fire), https://alertcalifornia.org/",
+  "api": "https://ops.alertcalifornia.org/api/getCameraDataByLoc",
+  "note": "Bay Area online Axis peak cameras. image_url is a snapshot that expires in ~1-2 min; re-run this script (or re-poll the API) to refresh. Public-domain / public-safety network.",
+  "generated_from_api_at_field": "camScreenshot timestamps; wall-clock not stamped here (regenerate for current URLs)",
+  "count": 183,
+  "cameras": [
+    {
+      "camId": "1825",
+      "name": "Berkeley Downtown",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.870701,
+        "lon": -122.268501
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1825/2026/07/05/Berkeley_Downtown_1783230175_2957.jpg"
+    },
+    {
+      "camId": "2578",
+      "name": "Chabot",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.820419,
+        "lon": -122.185417
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2578/2026/07/05/Chabot_1783230157_4228.jpg"
+    },
+    {
+      "camId": "1963",
+      "name": "Fairview Alameda 1",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.662838,
+        "lon": -122.025764
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1963/2026/07/05/Fairview_Alameda_1_1783230166_1123.jpg"
+    },
+    {
+      "camId": "1964",
+      "name": "Fairview Alameda 2",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.662838,
+        "lon": -122.025764
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1964/2026/07/05/Fairview_Alameda_2_1783230135_2153.jpg"
+    },
+    {
+      "camId": "1983",
+      "name": "Garin Ridge 1",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.655411,
+        "lon": -122.002686
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1983/2026/07/05/Garin_Ridge_1_1783230176_7369.jpg"
+    },
+    {
+      "camId": "2001",
+      "name": "Grizzly Peak Overlook 1",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.873692,
+        "lon": -122.219879
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2001/2026/07/05/Grizzly_Peak_Overlook_1_1783230155_3494.jpg"
+    },
+    {
+      "camId": "2002",
+      "name": "Grizzly Peak Overlook 2",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.873692,
+        "lon": -122.219879
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2002/2026/07/05/Grizzly_Peak_Overlook_2_1783230155_9591.jpg"
+    },
+    {
+      "camId": "2147",
+      "name": "Mt Allison",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.499161,
+        "lon": -121.871536
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2147/2026/07/05/Mt_Allison_1783230177_1862.jpg"
+    },
+    {
+      "camId": "2215",
+      "name": "Oakland Clorox",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.803799,
+        "lon": -122.272301
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2215/2026/07/05/Oakland_Clorox_1783230173_1863.jpg"
+    },
+    {
+      "camId": "2216",
+      "name": "Oakland Coliseum",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.747162,
+        "lon": -122.203171
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2216/2026/07/05/Oakland_Coliseum_1783230179_8507.jpg"
+    },
+    {
+      "camId": "2600",
+      "name": "Sunol Ridge",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.620219,
+        "lon": -121.922154
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2600/2026/07/05/Sunol_Ridge_1783230175_5099.jpg"
+    },
+    {
+      "camId": "16186",
+      "name": "Sunol Ridge 2",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.620219,
+        "lon": -121.922154
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16186/2026/07/05/Sunol_Ridge_2_1783230172_9863.jpg"
+    },
+    {
+      "camId": "2502",
+      "name": "Wiedemann Hill",
+      "county": "Alameda",
+      "coords": {
+        "lat": 37.738091,
+        "lon": -121.994751
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2502/2026/07/05/Wiedemann_Hill_1783230169_6282.jpg"
+    },
+    {
+      "camId": "1858",
+      "name": "Briones Rancho de la Rosa",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.9627,
+        "lon": -122.166603
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1858/2026/07/05/Briones_Rancho_de_la_Rosa_1783230179_8175.jpg"
+    },
+    {
+      "camId": "1855",
+      "name": "Briones Tabletop",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.932339,
+        "lon": -122.123383
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1855/2026/07/05/Briones_Tabletop_1783230111_5176.jpg"
+    },
+    {
+      "camId": "18234",
+      "name": "Byron Hot Springs 1",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.845369,
+        "lon": -121.622877
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/18234/2026/07/05/Byron_Hot_Springs_1_1783230154_3630.jpg"
+    },
+    {
+      "camId": "18235",
+      "name": "Byron Hot Springs 2",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.845369,
+        "lon": -121.622877
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/18235/2026/07/05/Byron_Hot_Springs_2_1783230173_8811.jpg"
+    },
+    {
+      "camId": "1923",
+      "name": "Cummings Skyway",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 38.028957,
+        "lon": -122.197517
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1923/2026/07/05/Cummings_Skyway_1783230110_8066.jpg"
+    },
+    {
+      "camId": "2592",
+      "name": "Evora Road",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 38.021195,
+        "lon": -121.987778
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2592/2026/07/05/Evora_Road_1783230111_8687.jpg"
+    },
+    {
+      "camId": "2000",
+      "name": "Grizzly Peak KPFA",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.865196,
+        "lon": -122.221001
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2000/2026/07/05/Grizzly_Peak_KPFA_1783230154_7873.jpg"
+    },
+    {
+      "camId": "2023",
+      "name": "Highland Peak 1",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.814499,
+        "lon": -121.808327
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2023/2026/07/05/Highland_Peak_1_1783230153_2478.jpg"
+    },
+    {
+      "camId": "16371",
+      "name": "Highland Peak 2",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.814499,
+        "lon": -121.808327
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16371/2026/07/05/Highland_Peak_2_1783230155_4965.jpg"
+    },
+    {
+      "camId": "2054",
+      "name": "Kregor Peak",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.94302,
+        "lon": -121.891121
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2054/2026/07/05/Kregor_Peak_1783230152_1752.jpg"
+    },
+    {
+      "camId": "2062",
+      "name": "Lafayette Dunsyre Dr",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.900501,
+        "lon": -122.086403
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2062/2026/07/05/Lafayette_Dunsyre_Dr_1783230157_7197.jpg"
+    },
+    {
+      "camId": "2063",
+      "name": "Lafayette Lucas Dr",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.86779,
+        "lon": -122.083237
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2063/2026/07/05/Lafayette_Lucas_Dr_1783230170_8037.jpg"
+    },
+    {
+      "camId": "2139",
+      "name": "Moraga Alta Mesa",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.835899,
+        "lon": -122.117897
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2139/2026/07/05/Moraga_Alta_Mesa_1783230135_2316.jpg"
+    },
+    {
+      "camId": "2156",
+      "name": "Mt Diablo",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.88129,
+        "lon": -121.915482
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2156/2026/07/05/Mt_Diablo_1783230157_8155.jpg"
+    },
+    {
+      "camId": "2157",
+      "name": "Mt Diablo North",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.892639,
+        "lon": -121.899223
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2157/2026/07/05/Mt_Diablo_North_1783230158_2636.jpg"
+    },
+    {
+      "camId": "2158",
+      "name": "Mt Diablo West",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.881699,
+        "lon": -121.919083
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2158/2026/07/05/Mt_Diablo_West_1783230174_5584.jpg"
+    },
+    {
+      "camId": "2207",
+      "name": "Mulholland Ridge",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.858479,
+        "lon": -122.142792
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2207/2026/07/05/Mulholland_Ridge_1783230167_3245.jpg"
+    },
+    {
+      "camId": "2208",
+      "name": "Nichol Knob",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.920311,
+        "lon": -122.382057
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2208/2026/07/05/Nichol_Knob_1783230109_9673.jpg"
+    },
+    {
+      "camId": "2329",
+      "name": "Rocky Ridge 1",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.815887,
+        "lon": -122.062332
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2329/2026/07/05/Rocky_Ridge_1_1783230158_6266.jpg"
+    },
+    {
+      "camId": "2333",
+      "name": "Round Top",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.85088,
+        "lon": -122.192429
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2333/2026/07/05/Round_Top_1783230123_8352.jpg"
+    },
+    {
+      "camId": "2411",
+      "name": "SRVFD Station 31",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.809509,
+        "lon": -121.99263
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2411/2026/07/05/SRVFD_Station_31_1783230149_7049.jpg"
+    },
+    {
+      "camId": "2482",
+      "name": "Vollmer Peak",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.883511,
+        "lon": -122.221878
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2482/2026/07/05/Vollmer_Peak_1783230157_2737.jpg"
+    },
+    {
+      "camId": "2483",
+      "name": "Vollmer Tower Top",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.883511,
+        "lon": -122.221878
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2483/2026/07/05/Vollmer_Tower_Top_1783230149_6536.jpg"
+    },
+    {
+      "camId": "2507",
+      "name": "Wildcat Canyon",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.95676,
+        "lon": -122.316551
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2507/2026/07/05/Wildcat_Canyon_1783230174_5014.jpg"
+    },
+    {
+      "camId": "2508",
+      "name": "William Rust Summit",
+      "county": "ContraCosta",
+      "coords": {
+        "lat": 37.92643,
+        "lon": -122.290863
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2508/2026/07/05/William_Rust_Summit_1783230176_3806.jpg"
+    },
+    {
+      "camId": "1809",
+      "name": "Barnabe Peak East",
+      "county": "Marin",
+      "coords": {
+        "lat": 38.026779,
+        "lon": -122.716362
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1809/2026/07/05/Barnabe_Peak_East_1783230174_5342.jpg"
+    },
+    {
+      "camId": "1810",
+      "name": "Barnabe Peak West",
+      "county": "Marin",
+      "coords": {
+        "lat": 38.026779,
+        "lon": -122.716362
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1810/2026/07/05/Barnabe_Peak_West_1783230168_8095.jpg"
+    },
+    {
+      "camId": "17832",
+      "name": "Big Rock Ridge 1",
+      "county": "Marin",
+      "coords": {
+        "lat": 38.059288,
+        "lon": -122.604385
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/17832/2026/07/05/Big_Rock_Ridge_1_1783230179_2080.jpg"
+    },
+    {
+      "camId": "17833",
+      "name": "Big Rock Ridge 2",
+      "county": "Marin",
+      "coords": {
+        "lat": 38.059288,
+        "lon": -122.604385
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/17833/2026/07/05/Big_Rock_Ridge_2_1783230166_2363.jpg"
+    },
+    {
+      "camId": "1833",
+      "name": "Black Mtn Marin",
+      "county": "Marin",
+      "coords": {
+        "lat": 38.082298,
+        "lon": -122.7668
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1833/2026/07/05/Black_Mtn_Marin_1783230144_6434.jpg"
+    },
+    {
+      "camId": "1843",
+      "name": "Bolinas",
+      "county": "Marin",
+      "coords": {
+        "lat": 37.935799,
+        "lon": -122.706497
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1843/2026/07/05/Bolinas_1783230165_9538.jpg"
+    },
+    {
+      "camId": "2153",
+      "name": "Mt Burdell 1",
+      "county": "Marin",
+      "coords": {
+        "lat": 38.149868,
+        "lon": -122.593246
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2153/2026/07/05/Mt_Burdell_1_1783230168_7521.jpg"
+    },
+    {
+      "camId": "15819",
+      "name": "Mt Burdell 2",
+      "county": "Marin",
+      "coords": {
+        "lat": 38.149868,
+        "lon": -122.593246
+      },
+      "sponsor": "ALERTCalifornia",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15819/2026/07/05/Mt_Burdell_2_1783230139_1081.jpg"
+    },
+    {
+      "camId": "2668",
+      "name": "Mt Burdell South",
+      "county": "Marin",
+      "coords": {
+        "lat": 38.145003,
+        "lon": -122.594031
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2668/2026/07/05/Mt_Burdell_South_1783230171_6391.jpg"
+    },
+    {
+      "camId": "2192",
+      "name": "Mt Tamalpais East",
+      "county": "Marin",
+      "coords": {
+        "lat": 37.927662,
+        "lon": -122.578384
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2192/2026/07/05/Mt_Tamalpais_East_1783230166_2536.jpg"
+    },
+    {
+      "camId": "2193",
+      "name": "Mt Tamalpais West",
+      "county": "Marin",
+      "coords": {
+        "lat": 37.927662,
+        "lon": -122.578384
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2193/2026/07/05/Mt_Tamalpais_West_1783230165_2205.jpg"
+    },
+    {
+      "camId": "2194",
+      "name": "Mt Vision",
+      "county": "Marin",
+      "coords": {
+        "lat": 38.079868,
+        "lon": -122.866943
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2194/2026/07/05/Mt_Vision_1783230140_9254.jpg"
+    },
+    {
+      "camId": "2206",
+      "name": "Muir Beach Overlook",
+      "county": "Marin",
+      "coords": {
+        "lat": 37.8633,
+        "lon": -122.585503
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2206/2026/07/05/Muir_Beach_Overlook_1783230169_6519.jpg"
+    },
+    {
+      "camId": "2354",
+      "name": "San Pedro",
+      "county": "Marin",
+      "coords": {
+        "lat": 37.9902,
+        "lon": -122.500099
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2354/2026/07/05/San_Pedro_1783230172_6888.jpg"
+    },
+    {
+      "camId": "2667",
+      "name": "San Rafael Hill",
+      "county": "Marin",
+      "coords": {
+        "lat": 37.9812,
+        "lon": -122.529378
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2667/2026/07/05/San_Rafael_Hill_1783230169_8480.jpg"
+    },
+    {
+      "camId": "2518",
+      "name": "Wolfback Ridge",
+      "county": "Marin",
+      "coords": {
+        "lat": 37.851002,
+        "lon": -122.498299
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2518/2026/07/05/Wolfback_Ridge_1783230171_9316.jpg"
+    },
+    {
+      "camId": "1795",
+      "name": "Atlas Peak 1",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.452831,
+        "lon": -122.266777
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1795/2026/07/05/Atlas_Peak_1_1783230119_7454.jpg"
+    },
+    {
+      "camId": "1796",
+      "name": "Atlas Peak 2",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.452831,
+        "lon": -122.266777
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1796/2026/07/05/Atlas_Peak_2_1783230075_3032.jpg"
+    },
+    {
+      "camId": "1804",
+      "name": "Bald Mtn Napa",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.4263,
+        "lon": -122.490303
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1804/2026/07/05/Bald_Mtn_Napa_1783230173_4250.jpg"
+    },
+    {
+      "camId": "1877",
+      "name": "Capell Valley 1",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.488029,
+        "lon": -122.224709
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1877/2026/07/05/Capell_Valley_1_1783230132_2072.jpg"
+    },
+    {
+      "camId": "1878",
+      "name": "Capell Valley 2",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.488029,
+        "lon": -122.224709
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1878/2026/07/05/Capell_Valley_2_1783230166_4350.jpg"
+    },
+    {
+      "camId": "2599",
+      "name": "Deer Park West",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.54618,
+        "lon": -122.454876
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2599/2026/07/05/Deer_Park_West_1783230176_3301.jpg"
+    },
+    {
+      "camId": "1943",
+      "name": "Dry Creek 1",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.365799,
+        "lon": -122.389198
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1943/2026/07/05/Dry_Creek_1_1783230167_5078.jpg"
+    },
+    {
+      "camId": "1944",
+      "name": "Dry Creek 2",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.365799,
+        "lon": -122.389198
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1944/2026/07/05/Dry_Creek_2_1783230169_6522.jpg"
+    },
+    {
+      "camId": "2090",
+      "name": "Lower Mt Veeder 1",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.3381,
+        "lon": -122.362503
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2090/2026/07/05/Lower_Mt_Veeder_1_1783230170_9295.jpg"
+    },
+    {
+      "camId": "2091",
+      "name": "Lower Mt Veeder 2",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.3381,
+        "lon": -122.362503
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2091/2026/07/05/Lower_Mt_Veeder_2_1783230170_7550.jpg"
+    },
+    {
+      "camId": "1684",
+      "name": "Mt Vaca 5",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.4146,
+        "lon": -122.118202
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1684/2026/07/05/Mt_Vaca_5_1783230149_1597.jpg"
+    },
+    {
+      "camId": "2334",
+      "name": "Rutherford",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.46003,
+        "lon": -122.462395
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2334/2026/07/05/Rutherford_1783230176_9798.jpg"
+    },
+    {
+      "camId": "23725",
+      "name": "Soda Canyon 1",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.408681,
+        "lon": -122.278425
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23725/2026/07/05/Soda_Canyon_1_1783230175_5393.jpg"
+    },
+    {
+      "camId": "23726",
+      "name": "Soda Canyon 2",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.408681,
+        "lon": -122.278425
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23726/2026/07/05/Soda_Canyon_2_1783230131_4642.jpg"
+    },
+    {
+      "camId": "2612",
+      "name": "Vacaville",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.360895,
+        "lon": -122.073562
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2612/2026/07/05/Vacaville_1783230137_1052.jpg"
+    },
+    {
+      "camId": "2505",
+      "name": "Wild Horse Valley 1",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.344898,
+        "lon": -122.203003
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2505/2026/07/05/Wild_Horse_Valley_1_1783230176_9798.jpg"
+    },
+    {
+      "camId": "2506",
+      "name": "Wild Horse Valley 2",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.344898,
+        "lon": -122.203003
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2506/2026/07/05/Wild_Horse_Valley_2_1783230171_7481.jpg"
+    },
+    {
+      "camId": "2522",
+      "name": "Zinfandel 1",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.46867,
+        "lon": -122.477623
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2522/2026/07/05/Zinfandel_1_1783230170_4526.jpg"
+    },
+    {
+      "camId": "2523",
+      "name": "Zinfandel 2",
+      "county": "Napa",
+      "coords": {
+        "lat": 38.46867,
+        "lon": -122.477623
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2523/2026/07/05/Zinfandel_2_1783230175_5165.jpg"
+    },
+    {
+      "camId": "4712",
+      "name": "Walnut Grove 1",
+      "county": "Sacramento",
+      "coords": {
+        "lat": 38.24691,
+        "lon": -121.501901
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4712/2026/07/05/Walnut_Grove_1_1783230179_3676.jpg"
+    },
+    {
+      "camId": "4711",
+      "name": "Walnut Grove 2",
+      "county": "Sacramento",
+      "coords": {
+        "lat": 38.24691,
+        "lon": -121.501901
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4711/2026/07/05/Walnut_Grove_2_1783230169_5624.jpg"
+    },
+    {
+      "camId": "2015",
+      "name": "Henrietta Peak 1",
+      "county": "SanBenito",
+      "coords": {
+        "lat": 36.9034,
+        "lon": -121.230103
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2015/2026/07/05/Henrietta_Peak_1_1783230168_8039.jpg"
+    },
+    {
+      "camId": "2016",
+      "name": "Henrietta Peak 2",
+      "county": "SanBenito",
+      "coords": {
+        "lat": 36.9034,
+        "lon": -121.230103
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2016/2026/07/05/Henrietta_Peak_2_1783230170_3971.jpg"
+    },
+    {
+      "camId": "2737",
+      "name": "Rocks Road 1",
+      "county": "SanBenito",
+      "coords": {
+        "lat": 36.853547,
+        "lon": -121.601609
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2737/2026/07/05/Rocks_Road_1_1783230168_6343.jpg"
+    },
+    {
+      "camId": "2736",
+      "name": "Rocks Road 2",
+      "county": "SanBenito",
+      "coords": {
+        "lat": 36.853547,
+        "lon": -121.601609
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2736/2026/07/05/Rocks_Road_2_1783230169_7719.jpg"
+    },
+    {
+      "camId": "2429",
+      "name": "Sutro Tower 2",
+      "county": "SanFrancisco",
+      "coords": {
+        "lat": 37.755306,
+        "lon": -122.452751
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2429/2026/07/05/Sutro_Tower_2_1783230172_5768.jpg"
+    },
+    {
+      "camId": "1784",
+      "name": "Allen Peak",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.386902,
+        "lon": -122.294601
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1784/2026/07/05/Allen_Peak_1783230175_4150.jpg"
+    },
+    {
+      "camId": "1917",
+      "name": "CSM Cañada Bldg 9",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.448399,
+        "lon": -122.265198
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1917/2026/07/05/CSM_Ca%C3%B1ada_Bldg_9_1783230171_3711.jpg"
+    },
+    {
+      "camId": "23811",
+      "name": "Cahill Ridge 1",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.504503,
+        "lon": -122.371044
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23811/2026/07/05/Cahill_Ridge_1_1783230171_5258.jpg"
+    },
+    {
+      "camId": "23810",
+      "name": "Cahill Ridge 2",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.504503,
+        "lon": -122.371044
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23810/2026/07/05/Cahill_Ridge_2_1783230160_7271.jpg"
+    },
+    {
+      "camId": "1885",
+      "name": "Castanea Ridge",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.298557,
+        "lon": -122.174019
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1885/2026/07/05/Castanea_Ridge_1783230166_7833.jpg"
+    },
+    {
+      "camId": "1899",
+      "name": "Coll of San Mateo Bldg10",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.536407,
+        "lon": -122.335266
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1899/2026/07/05/Coll_of_San_Mateo_Bldg10_1783230175_3624.jpg"
+    },
+    {
+      "camId": "1900",
+      "name": "Coll of San Mateo Bldg36",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.537663,
+        "lon": -122.337219
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1900/2026/07/05/Coll_of_San_Mateo_Bldg36_1783230133_9166.jpg"
+    },
+    {
+      "camId": "2019",
+      "name": "Higgins Canyon",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.453449,
+        "lon": -122.375458
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2019/2026/07/05/Higgins_Canyon_1783230165_9890.jpg"
+    },
+    {
+      "camId": "2039",
+      "name": "Jasper Ridge Bio Presv",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.405281,
+        "lon": -122.239601
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2039/2026/07/05/Jasper_Ridge_Bio_Presv_1783230172_4378.jpg"
+    },
+    {
+      "camId": "2073",
+      "name": "Lane Hill Pescadero",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.273308,
+        "lon": -122.341454
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2073/2026/07/05/Lane_Hill_Pescadero_1783230167_6543.jpg"
+    },
+    {
+      "camId": "2252",
+      "name": "Pillar Point",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.501495,
+        "lon": -122.483154
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2252/2026/07/05/Pillar_Point_1783230178_2059.jpg"
+    },
+    {
+      "camId": "2281",
+      "name": "Purissima",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.42374,
+        "lon": -122.405449
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2281/2026/07/05/Purissima_1783230162_4372.jpg"
+    },
+    {
+      "camId": "11097",
+      "name": "Redwood City 1",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.488216,
+        "lon": -122.230957
+      },
+      "sponsor": "ALERTCalifornia",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11097/2026/07/05/Redwood_City_1_1783230138_3374.jpg"
+    },
+    {
+      "camId": "11096",
+      "name": "Redwood City 2",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.488216,
+        "lon": -122.230957
+      },
+      "sponsor": "ALERTCalifornia",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11096/2026/07/05/Redwood_City_2_1783230166_3669.jpg"
+    },
+    {
+      "camId": "4706",
+      "name": "San Bruno Mountain",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.687371,
+        "lon": -122.435452
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4706/2026/07/05/San_Bruno_Mountain_1783230176_4027.jpg"
+    },
+    {
+      "camId": "23535",
+      "name": "Segelstad 1",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.356376,
+        "lon": -122.318393
+      },
+      "sponsor": "ALERTCalifornia",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23535/2026/07/05/Segelstad_1_1783230136_8095.jpg"
+    },
+    {
+      "camId": "23536",
+      "name": "Segelstad 2",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.356376,
+        "lon": -122.318393
+      },
+      "sponsor": "ALERTCalifornia",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/23536/2026/07/05/Segelstad_2_1783230177_7244.jpg"
+    },
+    {
+      "camId": "2394",
+      "name": "Skyline College",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.628502,
+        "lon": -122.469704
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2394/2026/07/05/Skyline_College_1783230164_2888.jpg"
+    },
+    {
+      "camId": "2461",
+      "name": "Tunitas",
+      "county": "SanMateo",
+      "coords": {
+        "lat": 37.386688,
+        "lon": -122.341438
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2461/2026/07/05/Tunitas_1783230170_4619.jpg"
+    },
+    {
+      "camId": "15908",
+      "name": "Almaden 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.194245,
+        "lon": -121.847187
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15908/2026/07/05/Almaden_1_1783230165_2059.jpg"
+    },
+    {
+      "camId": "15909",
+      "name": "Almaden 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.194245,
+        "lon": -121.847187
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15909/2026/07/05/Almaden_2_1783230166_8137.jpg"
+    },
+    {
+      "camId": "1835",
+      "name": "Black Mtn Santa Clara 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.3186,
+        "lon": -122.147301
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1835/2026/07/05/Black_Mtn_Santa_Clara_1_1783230177_5613.jpg"
+    },
+    {
+      "camId": "16616",
+      "name": "Black Mtn Santa Clara 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.3186,
+        "lon": -122.147301
+      },
+      "sponsor": "ALERTCalifornia",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16616/2026/07/05/Black_Mtn_Santa_Clara_2_1783230155_3360.jpg"
+    },
+    {
+      "camId": "1881",
+      "name": "Carol Drive Santa Clara 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.287498,
+        "lon": -121.865799
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1881/2026/07/05/Carol_Drive_Santa_Clara_1_1783230141_7595.jpg"
+    },
+    {
+      "camId": "1882",
+      "name": "Carol Drive Santa Clara 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.287498,
+        "lon": -121.865799
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1882/2026/07/05/Carol_Drive_Santa_Clara_2_1783230143_5538.jpg"
+    },
+    {
+      "camId": "1924",
+      "name": "Cupertino Hills",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.291801,
+        "lon": -122.106003
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1924/2026/07/05/Cupertino_Hills_1783230166_4128.jpg"
+    },
+    {
+      "camId": "1978",
+      "name": "Foothills Park",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.366447,
+        "lon": -122.173805
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1978/2026/07/05/Foothills_Park_1783230172_8414.jpg"
+    },
+    {
+      "camId": "2025",
+      "name": "Holiday Lake 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.151501,
+        "lon": -121.609901
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2025/2026/07/05/Holiday_Lake_1_1783230146_9865.jpg"
+    },
+    {
+      "camId": "2026",
+      "name": "Holiday Lake 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.151501,
+        "lon": -121.609901
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2026/2026/07/05/Holiday_Lake_2_1783230135_5136.jpg"
+    },
+    {
+      "camId": "2077",
+      "name": "Limekiln Canyon",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.202499,
+        "lon": -121.95488
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2077/2026/07/05/Limekiln_Canyon_1783230176_5446.jpg"
+    },
+    {
+      "camId": "2082",
+      "name": "Loma Prieta",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.11042,
+        "lon": -121.843697
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2082/2026/07/05/Loma_Prieta_1783230172_1590.jpg"
+    },
+    {
+      "camId": "2658",
+      "name": "Milias Ranch 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.048428,
+        "lon": -121.48786
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2658/2026/07/05/Milias_Ranch_1_1783230154_1827.jpg"
+    },
+    {
+      "camId": "2659",
+      "name": "Milias Ranch 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.048428,
+        "lon": -121.48786
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2659/2026/07/05/Milias_Ranch_2_1783230176_3914.jpg"
+    },
+    {
+      "camId": "2127",
+      "name": "Mission Peak 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.475399,
+        "lon": -121.860901
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2127/2026/07/05/Mission_Peak_1_1783230132_7663.jpg"
+    },
+    {
+      "camId": "2128",
+      "name": "Mission Peak 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.475399,
+        "lon": -121.860901
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2128/2026/07/05/Mission_Peak_2_1783230172_3225.jpg"
+    },
+    {
+      "camId": "2136",
+      "name": "Montebello Preserve",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.324726,
+        "lon": -122.167801
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2136/2026/07/05/Montebello_Preserve_1783230173_7851.jpg"
+    },
+    {
+      "camId": "2154",
+      "name": "Mt Chual",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.11935,
+        "lon": -121.834267
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2154/2026/07/05/Mt_Chual_1783230164_4057.jpg"
+    },
+    {
+      "camId": "2165",
+      "name": "Mt Hamilton SCC 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.341301,
+        "lon": -121.642899
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2165/2026/07/05/Mt_Hamilton_SCC_1_1783230166_5328.jpg"
+    },
+    {
+      "camId": "2166",
+      "name": "Mt Hamilton SCC 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.341301,
+        "lon": -121.642899
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2166/2026/07/05/Mt_Hamilton_SCC_2_1783230152_5840.jpg"
+    },
+    {
+      "camId": "2167",
+      "name": "Mt Hamilton SCC 3",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.341499,
+        "lon": -121.642403
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2167/2026/07/05/Mt_Hamilton_SCC_3_1783230145_2499.jpg"
+    },
+    {
+      "camId": "2188",
+      "name": "Mt Rodoni 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.218102,
+        "lon": -122.0326
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2188/2026/07/05/Mt_Rodoni_1_1783230160_3709.jpg"
+    },
+    {
+      "camId": "2189",
+      "name": "Mt Rodoni 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.218102,
+        "lon": -122.0326
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2189/2026/07/05/Mt_Rodoni_2_1783230175_2652.jpg"
+    },
+    {
+      "camId": "2235",
+      "name": "Pacheco Peak 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.007889,
+        "lon": -121.28746
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2235/2026/07/05/Pacheco_Peak_1_1783230178_2521.jpg"
+    },
+    {
+      "camId": "2236",
+      "name": "Pacheco Peak 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.007889,
+        "lon": -121.28746
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2236/2026/07/05/Pacheco_Peak_2_1783230168_8311.jpg"
+    },
+    {
+      "camId": "2277",
+      "name": "Presson Hill 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.166565,
+        "lon": -121.926453
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2277/2026/07/05/Presson_Hill_1_1783230168_4219.jpg"
+    },
+    {
+      "camId": "2278",
+      "name": "Presson Hill 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.166565,
+        "lon": -121.926453
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2278/2026/07/05/Presson_Hill_2_1783230176_5983.jpg"
+    },
+    {
+      "camId": "2348",
+      "name": "San Jose Foothills",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.352745,
+        "lon": -121.770378
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2348/2026/07/05/San_Jose_Foothills_1783230180_5198.jpg"
+    },
+    {
+      "camId": "2414",
+      "name": "Stanford Dish",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.411789,
+        "lon": -122.17968
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2414/2026/07/05/Stanford_Dish_1783230171_6949.jpg"
+    },
+    {
+      "camId": "2729",
+      "name": "Starr Canyon 1",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.184729,
+        "lon": -121.554674
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2729/2026/07/05/Starr_Canyon_1_1783230154_8737.jpg"
+    },
+    {
+      "camId": "2728",
+      "name": "Starr Canyon 2",
+      "county": "SantaClara",
+      "coords": {
+        "lat": 37.184729,
+        "lon": -121.554674
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2728/2026/07/05/Starr_Canyon_2_1783230156_8041.jpg"
+    },
+    {
+      "camId": "1844",
+      "name": "Bonny Doon",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 37.130001,
+        "lon": -122.165298
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1844/2026/07/05/Bonny_Doon_1783230165_8176.jpg"
+    },
+    {
+      "camId": "1859",
+      "name": "Brookdale",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 37.113949,
+        "lon": -122.104172
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1859/2026/07/05/Brookdale_1783230169_6554.jpg"
+    },
+    {
+      "camId": "1891",
+      "name": "Chalk Mtn Lookout",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 37.160137,
+        "lon": -122.303497
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1891/2026/07/05/Chalk_Mtn_Lookout_1783230170_7580.jpg"
+    },
+    {
+      "camId": "2608",
+      "name": "Dream Inn",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 36.961332,
+        "lon": -122.025227
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2608/2026/07/05/Dream_Inn_1783230166_5340.jpg"
+    },
+    {
+      "camId": "1949",
+      "name": "Eagle Rock Lookout 1",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 37.147499,
+        "lon": -122.195198
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1949/2026/07/05/Eagle_Rock_Lookout_1_1783230172_7153.jpg"
+    },
+    {
+      "camId": "1950",
+      "name": "Eagle Rock Lookout 2",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 37.147499,
+        "lon": -122.195198
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1950/2026/07/05/Eagle_Rock_Lookout_2_1783230164_4561.jpg"
+    },
+    {
+      "camId": "2150",
+      "name": "Mt Bielawski",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 37.222698,
+        "lon": -122.093903
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2150/2026/07/05/Mt_Bielawski_1783230170_6779.jpg"
+    },
+    {
+      "camId": "2654",
+      "name": "Scotts Valley",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 37.090163,
+        "lon": -122.021152
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2654/2026/07/05/Scotts_Valley_1783230177_7842.jpg"
+    },
+    {
+      "camId": "2609",
+      "name": "Silver Mtn 1",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 37.1103,
+        "lon": -121.9341
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2609/2026/07/05/Silver_Mtn_1_1783230176_4456.jpg"
+    },
+    {
+      "camId": "4713",
+      "name": "Watsonville 1",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 36.908399,
+        "lon": -121.755682
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4713/2026/07/05/Watsonville_1_1783230175_4875.jpg"
+    },
+    {
+      "camId": "4714",
+      "name": "Watsonville 2",
+      "county": "SantaCruz",
+      "coords": {
+        "lat": 36.908746,
+        "lon": -121.756065
+      },
+      "sponsor": "ALERTCalifornia",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/4714/2026/07/05/Watsonville_2_1783230178_1352.jpg"
+    },
+    {
+      "camId": "2532",
+      "name": "Cordelia Green Valley",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.247379,
+        "lon": -122.203705
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2532/2026/07/05/Cordelia_Green_Valley_1783230134_8613.jpg"
+    },
+    {
+      "camId": "1685",
+      "name": "Mt Vaca 8 North",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.415298,
+        "lon": -122.111198
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1685/2026/07/05/Mt_Vaca_8_North_1783230136_7777.jpg"
+    },
+    {
+      "camId": "15652",
+      "name": "Mt Vaca 8 South",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.415298,
+        "lon": -122.111198
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/15652/2026/07/05/Mt_Vaca_8_South_1783230136_7035.jpg"
+    },
+    {
+      "camId": "2247",
+      "name": "Pena Adobe",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.319149,
+        "lon": -121.99276
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2247/2026/07/05/Pena_Adobe_1783230172_4722.jpg"
+    },
+    {
+      "camId": "16236",
+      "name": "Pena Adobe 2",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.319149,
+        "lon": -121.99276
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16236/2026/07/05/Pena_Adobe_2_1783230168_3115.jpg"
+    },
+    {
+      "camId": "2422",
+      "name": "Sugarloaf Ridge",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.264198,
+        "lon": -122.216599
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2422/2026/07/05/Sugarloaf_Ridge_1783230120_4216.jpg"
+    },
+    {
+      "camId": "2423",
+      "name": "Suisun Valley",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.263302,
+        "lon": -122.092102
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2423/2026/07/05/Suisun_Valley_1783230178_1796.jpg"
+    },
+    {
+      "camId": "2464",
+      "name": "Twin Sisters East 1",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.303711,
+        "lon": -122.16806
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2464/2026/07/05/Twin_Sisters_East_1_1783230173_6937.jpg"
+    },
+    {
+      "camId": "2465",
+      "name": "Twin Sisters East 2",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.303711,
+        "lon": -122.16806
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2465/2026/07/05/Twin_Sisters_East_2_1783230173_8787.jpg"
+    },
+    {
+      "camId": "2466",
+      "name": "Twin Sisters North 1",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.3032,
+        "lon": -122.168503
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2466/2026/07/05/Twin_Sisters_North_1_1783230149_8856.jpg"
+    },
+    {
+      "camId": "2467",
+      "name": "Twin Sisters North 2",
+      "county": "Solano",
+      "coords": {
+        "lat": 38.3032,
+        "lon": -122.168503
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2467/2026/07/05/Twin_Sisters_North_2_1783230173_4761.jpg"
+    },
+    {
+      "camId": "1807",
+      "name": "Barham North",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.508801,
+        "lon": -122.6633
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1807/2026/07/05/Barham_North_1783230169_4826.jpg"
+    },
+    {
+      "camId": "1808",
+      "name": "Barham South",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.508801,
+        "lon": -122.6633
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1808/2026/07/05/Barham_South_1783230170_1335.jpg"
+    },
+    {
+      "camId": "2759",
+      "name": "Bodega Bay",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.341701,
+        "lon": -123.020507
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2759/2026/07/05/Bodega_Bay_1783230177_3417.jpg"
+    },
+    {
+      "camId": "1851",
+      "name": "Brain Ridge 1",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.539921,
+        "lon": -123.16703
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1851/2026/07/05/Brain_Ridge_1_1783230166_3494.jpg"
+    },
+    {
+      "camId": "1852",
+      "name": "Brain Ridge 2",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.539921,
+        "lon": -123.16703
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1852/2026/07/05/Brain_Ridge_2_1783230168_2015.jpg"
+    },
+    {
+      "camId": "16576",
+      "name": "English Hill 1",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.345179,
+        "lon": -122.861893
+      },
+      "sponsor": "ALERTCalifornia",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16576/2026/07/05/English_Hill_1_1783230176_9628.jpg"
+    },
+    {
+      "camId": "16575",
+      "name": "English Hill 2",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.345179,
+        "lon": -122.861893
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/16575/2026/07/05/English_Hill_2_1783230178_3901.jpg"
+    },
+    {
+      "camId": "2049",
+      "name": "Kenwood Ranch Upper 1",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.447208,
+        "lon": -122.554993
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2049/2026/07/05/Kenwood_Ranch_Upper_1_1783230113_6680.jpg"
+    },
+    {
+      "camId": "2050",
+      "name": "Kenwood Ranch Upper 2",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.447208,
+        "lon": -122.554993
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2050/2026/07/05/Kenwood_Ranch_Upper_2_1783230102_2360.jpg"
+    },
+    {
+      "camId": "2715",
+      "name": "League 22",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.17896,
+        "lon": -122.76572
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2715/2026/07/05/League_22_1783230172_8063.jpg"
+    },
+    {
+      "camId": "2088",
+      "name": "Lower Meyers Grade 1",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.483757,
+        "lon": -123.170189
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2088/2026/07/05/Lower_Meyers_Grade_1_1783230179_5909.jpg"
+    },
+    {
+      "camId": "2089",
+      "name": "Lower Meyers Grade 2",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.483757,
+        "lon": -123.170189
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2089/2026/07/05/Lower_Meyers_Grade_2_1783230169_2959.jpg"
+    },
+    {
+      "camId": "2120",
+      "name": "Meyers",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.514301,
+        "lon": -123.196999
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2120/2026/07/05/Meyers_1783230170_4357.jpg"
+    },
+    {
+      "camId": "2172",
+      "name": "Mt Jackson",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.539669,
+        "lon": -122.961319
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2172/2026/07/05/Mt_Jackson_1783230174_9276.jpg"
+    },
+    {
+      "camId": "1681",
+      "name": "Mt Jackson West",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.539921,
+        "lon": -122.961891
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1681/2026/07/05/Mt_Jackson_West_1783230146_5540.jpg"
+    },
+    {
+      "camId": "11022",
+      "name": "Osborn Preserve 1",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.353607,
+        "lon": -122.591003
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11022/2026/07/05/Osborn_Preserve_1_1783230155_5165.jpg"
+    },
+    {
+      "camId": "11023",
+      "name": "Osborn Preserve 2",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.353607,
+        "lon": -122.591003
+      },
+      "sponsor": "CALFIRE",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/11023/2026/07/05/Osborn_Preserve_2_1783230131_1878.jpg"
+    },
+    {
+      "camId": "1754",
+      "name": "Petaluma 1",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.222797,
+        "lon": -122.653656
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1754/2026/07/05/Petaluma_1_1783230134_8656.jpg"
+    },
+    {
+      "camId": "1755",
+      "name": "Petaluma 2",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.222797,
+        "lon": -122.653656
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/1755/2026/07/05/Petaluma_2_1783230169_7314.jpg"
+    },
+    {
+      "camId": "2266",
+      "name": "Pole Mtn Lookout 1",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.505402,
+        "lon": -123.120003
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2266/2026/07/05/Pole_Mtn_Lookout_1_1783230138_1814.jpg"
+    },
+    {
+      "camId": "2267",
+      "name": "Pole Mtn Lookout 2",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.505402,
+        "lon": -123.120003
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2267/2026/07/05/Pole_Mtn_Lookout_2_1783230164_7249.jpg"
+    },
+    {
+      "camId": "2375",
+      "name": "Sears Point",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.1604,
+        "lon": -122.463585
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2375/2026/07/05/Sears_Point_1783230136_7050.jpg"
+    },
+    {
+      "camId": "2391",
+      "name": "Siri",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.488602,
+        "lon": -123.034897
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2391/2026/07/05/Siri_1783230176_9832.jpg"
+    },
+    {
+      "camId": "2395",
+      "name": "Sleepy Mtn",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.231949,
+        "lon": -122.497498
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2395/2026/07/05/Sleepy_Mtn_1783230157_3053.jpg"
+    },
+    {
+      "camId": "2398",
+      "name": "Smith Ridge",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.517395,
+        "lon": -123.172325
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2398/2026/07/05/Smith_Ridge_1783230151_1462.jpg"
+    },
+    {
+      "camId": "2404",
+      "name": "Sonoma Mtn",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.348202,
+        "lon": -122.578102
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2404/2026/07/05/Sonoma_Mtn_1783230147_8305.jpg"
+    },
+    {
+      "camId": "2472",
+      "name": "Upper Meyers Grade 1",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.525173,
+        "lon": -123.202797
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2472/2026/07/05/Upper_Meyers_Grade_1_1783230173_2440.jpg"
+    },
+    {
+      "camId": "2473",
+      "name": "Upper Meyers Grade 2",
+      "county": "Sonoma",
+      "coords": {
+        "lat": 38.525173,
+        "lon": -123.202797
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2473/2026/07/05/Upper_Meyers_Grade_2_1783230165_5460.jpg"
+    },
+    {
+      "camId": "2184",
+      "name": "Mt Oso",
+      "county": "Stanislaus",
+      "coords": {
+        "lat": 37.50692,
+        "lon": -121.373489
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2184/2026/07/05/Mt_Oso_1783230165_3220.jpg"
+    },
+    {
+      "camId": "2516",
+      "name": "Winters 1",
+      "county": "Yolo",
+      "coords": {
+        "lat": 38.521198,
+        "lon": -121.983101
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2516/2026/07/05/Winters_1_1783230152_3202.jpg"
+    },
+    {
+      "camId": "2517",
+      "name": "Winters 2",
+      "county": "Yolo",
+      "coords": {
+        "lat": 38.521198,
+        "lon": -121.983101
+      },
+      "sponsor": "PG&E",
+      "ptz": true,
+      "image_url": "https://img.cdn.prod.alertwest.com/data/img/2517/2026/07/05/Winters_2_1783230168_1347.jpg"
+    }
+  ]
+}
