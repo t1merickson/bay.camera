@@ -23,7 +23,8 @@ export const regionMatchExpr = (): any => {
   return e as any;
 };
 
-const carto = (s: string) => ['a', 'b', 'c'].map((h) => `https://${h}.basemaps.cartocdn.com/${s}/{z}/{x}/{y}.png`);
+// @2x tiles render retina-crisp at tileSize 256.
+const carto = (s: string) => ['a', 'b', 'c'].map((h) => `https://${h}.basemaps.cartocdn.com/${s}/{z}/{x}/{y}@2x.png`);
 
 export const BAY_BOUNDS: [[number, number], [number, number]] = [[-123.15, 36.9], [-121.5, 38.35]];
 

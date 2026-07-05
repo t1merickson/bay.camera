@@ -128,7 +128,7 @@ export async function initConditions() {
   if (!coast && !bay) { el.innerHTML = '<span class="cond-loading">conditions unavailable</span>'; return; }
   const foggy = (o: Obs | null) => !!o && ((o.visMi != null && o.visMi < 3) || /fog|mist|haze/i.test(o.desc));
   const cell = (name: string, o: Obs | null) => o
-    ? `<span class="cond"><b>${name}</b> <span class="cond-t">${o.f ?? '–'}°</span> <span class="cond-d ${foggy(o) ? 'is-fog' : ''}">${escText(o.desc)}</span></span>`
+    ? `<span class="cond"><b>${name}</b> <span class="cond-t">${o.f ?? '–'}°</span>${o.desc && o.desc !== '—' ? ` <span class="cond-d ${foggy(o) ? 'is-fog' : ''}">${escText(o.desc)}</span>` : ''}</span>`
     : '';
   el.innerHTML = cell('Coast', coast) + cell('Bay', bay);
 }

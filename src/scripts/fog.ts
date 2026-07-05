@@ -27,7 +27,9 @@ export function addGoesLayer(map: maplibregl.Map) {
   map.addLayer({
     id: 'goes', type: 'raster', source: 'goes',
     layout: { visibility: 'none' },
-    paint: { 'raster-opacity': 0.88, 'raster-fade-duration': 300 },
+    // Fade back as you overzoom past the sensor's ~1 km/px so streets stay
+    // readable under the (increasingly blurry) cloud field.
+    paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 8, 0.88, 10, 0.8, 12, 0.55] as any, 'raster-fade-duration': 300 },
   }, 'labels');
   // While visible, re-point tiles at the newest granule every 10 min.
   window.setInterval(() => {
@@ -54,6 +56,7 @@ function stratifiedSample(n: number): typeof peaks {
 }
 
 let lastRun = 0;
+let lastSampleSize = 0;
 let lastEstimate: FogTopEstimate | null = null;
 let running: Promise<void> | null = null;
 const allReadings = new Map<string, PeakReading>();
@@ -105,7 +108,9 @@ function renderEstimate(est: FogTopEstimate, sampled: number, fogElevs: number[]
 
 export function runFogAnalysis(map: maplibregl.Map, sampleSize: number, force = false): Promise<void> {
   if (running) return running;
-  if (!force && Date.now() - lastRun < 10 * 60 * 1000 && lastEstimate) return Promise.resolve();
+  // A bigger requested sample upgrades a still-fresh smaller run (the boot
+  // probe is 12 cams; the Fog toggle wants the full pass).
+  if (!force && sampleSize <= lastSampleSize && Date.now() - lastRun < 10 * 60 * 1000 && lastEstimate) return Promise.resolve();
   running = (async () => {
     const main = $('fog-main'), sub = $('fog-sub');
     const sample = stratifiedSample(sampleSize);
@@ -124,6 +129,7 @@ export function runFogAnalysis(map: maplibregl.Map, sampleSize: number, force = 
     const est = estimateFogTop(inputs, readings);
     lastEstimate = est;
     lastRun = Date.now();
+    lastSampleSize = sampleSize;
     // Debug/verification handle: per-cam readings joined with elevations.
     (window as any).__fogDebug = {
       est: { topM: est.topM, baseM: est.baseM, confidence: est.confidence, sampled: est.sampled },

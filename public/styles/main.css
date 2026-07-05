@@ -210,7 +210,7 @@ body.cam-open .fog-card { right: 384px; }
 .fog-conf-medium { color: hsl(32 62% 44%); border-color: hsl(32 62% 44% / .4); }
 .fog-sub { font-size: 0.72rem; color: hsl(var(--muted-foreground)); margin-top: 2px; }
 /* keep the fog card clear of maplibre zoom controls */
-.fog-card:not([hidden]) ~ * .maplibregl-ctrl-bottom-right, body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 96px; }
+body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 128px; }
 
 /* ---- mobile: panels become bottom sheets ---- */
 @media (max-width: 640px) {
