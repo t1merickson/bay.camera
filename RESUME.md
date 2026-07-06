@@ -144,7 +144,13 @@ Their fog stack, fully decoded (their client is richly commented):
    gradient + coastal dew-point spread (both already in fetched data) as
    honest "fog likely tonight" heuristics.
 2. **Deploy to Netlify** — config exists, untested end-to-end. Domain still
-   undecided (Tim gave bay.camera to gongruya).
+   undecided (Tim gave bay.camera to gongruya). At deploy time, add CDN
+   caching to the proxies: the /api/alertca 200-rewrite should become an
+   edge/function response with `Netlify-CDN-Cache-Control: s-maxage=60`
+   (it pipes ~0.9MB gzipped per miss — this is the bandwidth line to watch);
+   weather stays browser→Open-Meteo direct (zero cost to us, ~1.6k concurrent
+   visitor-hours/day of free quota) until traffic justifies the same
+   s-maxage=600 edge-cache treatment.
 3. **Design iteration with Tim's eyes** — dark-basemap contrast (Carto dark
    is very dark at z8), fog-card typography, temp-pill density at low zoom.
 4. **Night mode for fog card** — currently says "cameras too dark to read"
