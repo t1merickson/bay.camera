@@ -15,11 +15,191 @@ let map: maplibregl.Map;
 let previewTimer: number | null = null;
 let activeId: string | null = null;
 
+interface WeatherSpot { name: string; lat: number; lng: number; }
+let weatherSpots: WeatherSpot[] = [];
+interface WeatherCurrent {
+  temperature_2m?: number;
+  apparent_temperature?: number;
+  relative_humidity_2m?: number;
+  dew_point_2m?: number;
+  cloud_cover?: number;
+  visibility?: number;
+  wind_speed_10m?: number;
+  wind_gusts_10m?: number;
+  wind_direction_10m?: number;
+  weather_code?: number;
+}
+interface WeatherForecast {
+  current?: WeatherCurrent;
+  hourly?: { time?: string[]; temperature_2m?: number[] };
+  daily?: { sunrise?: string[]; sunset?: string[] };
+}
+
+const WEATHER_CODE_LABELS: Record<number, string> = {
+  0: 'Clear',
+  1: 'Mostly clear',
+  2: 'Partly cloudy',
+  3: 'Overcast',
+  45: 'Fog',
+  48: 'Fog',
+  51: 'Drizzle',
+  53: 'Drizzle',
+  55: 'Drizzle',
+  56: 'Freezing drizzle',
+  57: 'Freezing drizzle',
+  61: 'Rain',
+  63: 'Rain',
+  65: 'Rain',
+  66: 'Freezing rain',
+  67: 'Freezing rain',
+  71: 'Snow',
+  73: 'Snow',
+  75: 'Snow',
+  77: 'Snow',
+  80: 'Showers',
+  81: 'Showers',
+  82: 'Showers',
+  85: 'Snow showers',
+  86: 'Snow showers',
+  95: 'Thunderstorm',
+  96: 'Thunderstorm w/ hail',
+  99: 'Thunderstorm w/ hail',
+};
+const COMPASS = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+const WEATHER_CURRENT_FIELDS = [
+  'temperature_2m',
+  'apparent_temperature',
+  'relative_humidity_2m',
+  'dew_point_2m',
+  'cloud_cover',
+  'visibility',
+  'wind_speed_10m',
+  'wind_gusts_10m',
+  'wind_direction_10m',
+  'weather_code',
+].join(',');
+
 const $ = (id: string) => document.getElementById(id)!;
 const isLive = () => document.documentElement.dataset.live === 'on';
 const sw = () => $('live-switch') as HTMLInputElement;
 
 function stopPreviewTimer() { if (previewTimer) { clearInterval(previewTimer); previewTimer = null; } }
+const slugFor = (name: string) => name.toLowerCase().trim().replace(/\s+/g, '-');
+const num = (value: unknown) => typeof value === 'number' && Number.isFinite(value) ? value : null;
+const temp = (value: unknown) => {
+  const n = num(value);
+  return n == null ? '—' : `${Math.round(n)}°`;
+};
+const tempF = (value: unknown) => {
+  const n = num(value);
+  return n == null ? '—' : `${Math.round(n)}°F`;
+};
+const percent = (value: unknown) => {
+  const n = num(value);
+  return n == null ? '—' : `${Math.round(n)}%`;
+};
+const detailRow = (label: string, value: string) =>
+  `<div class="wxd-row"><div class="wxd-label">${esc(label)}</div><div class="wxd-value">${esc(value)}</div></div>`;
+
+function weatherUrl(spot: WeatherSpot) {
+  return 'https://api.open-meteo.com/v1/forecast?' + [
+    `latitude=${encodeURIComponent(String(spot.lat))}`,
+    `longitude=${encodeURIComponent(String(spot.lng))}`,
+    `current=${WEATHER_CURRENT_FIELDS}`,
+    'hourly=temperature_2m',
+    'forecast_hours=12',
+    'daily=sunrise,sunset',
+    'forecast_days=1',
+    'temperature_unit=fahrenheit',
+    'wind_speed_unit=mph',
+    'timezone=America%2FLos_Angeles',
+  ].join('&');
+}
+
+async function fetchWeather(spot: WeatherSpot): Promise<WeatherForecast> {
+  const r = await fetch(weatherUrl(spot));
+  if (!r.ok) throw new Error(`open-meteo ${r.status}`);
+  return await r.json() as WeatherForecast;
+}
+
+function conditionLabel(value: unknown) {
+  const code = num(value);
+  return code == null ? '—' : WEATHER_CODE_LABELS[code] ?? '—';
+}
+
+function compass(value: unknown) {
+  const deg = num(value);
+  if (deg == null) return '—';
+  const normalized = ((deg % 360) + 360) % 360;
+  return COMPASS[Math.round(normalized / 22.5) % 16];
+}
+
+function wind(current: WeatherCurrent) {
+  const speed = num(current.wind_speed_10m);
+  if (speed == null) return '—';
+  const gust = num(current.wind_gusts_10m);
+  const gustText = gust == null ? '' : ` (gusts ${Math.round(gust)} mph)`;
+  return `${compass(current.wind_direction_10m)} ${Math.round(speed)} mph${gustText}`;
+}
+
+function visibility(value: unknown) {
+  const meters = num(value);
+  if (meters == null) return '—';
+  if (meters >= 16000) return '10+ mi';
+  return `${(meters / 1609.344).toFixed(1)} mi`;
+}
+
+function timeParts(value?: string) {
+  const m = value?.match(/T(\d{2}):(\d{2})/);
+  if (!m) return null;
+  return { hour: Number(m[1]), minute: Number(m[2]) };
+}
+
+function clock(value?: string) {
+  const t = timeParts(value);
+  if (!t) return '—';
+  const hour = t.hour % 12 || 12;
+  return `${hour}:${String(t.minute).padStart(2, '0')} ${t.hour < 12 ? 'AM' : 'PM'}`;
+}
+
+function hourLabel(value?: string) {
+  const t = timeParts(value);
+  if (!t) return '—';
+  return `${t.hour % 12 || 12}${t.hour < 12 ? 'a' : 'p'}`;
+}
+
+function hourlyStrip(data: WeatherForecast) {
+  const times = data.hourly?.time ?? [];
+  const temps = data.hourly?.temperature_2m ?? [];
+  const html = times.slice(0, 12).map((time, i) =>
+    `<div class="wxd-hour"><div class="wxd-hour-time">${esc(hourLabel(time))}</div><div class="wxd-hour-temp">${esc(temp(temps[i]))}</div></div>`
+  ).join('');
+  return html || '<div class="wxd-hours-empty">Hourly forecast unavailable</div>';
+}
+
+function renderWeather(data: WeatherForecast) {
+  const current = data.current ?? {};
+  $('cam-view').innerHTML =
+    '<div class="wxd-hero">' +
+    `<div class="wxd-temp">${esc(temp(current.temperature_2m))}</div>` +
+    `<div class="wxd-condition">${esc(conditionLabel(current.weather_code))}</div>` +
+    `<div class="wxd-feels">feels like ${esc(temp(current.apparent_temperature))}</div>` +
+    '</div>';
+  $('cam-info').innerHTML =
+    '<div class="wxd-grid">' +
+    detailRow('Humidity', percent(current.relative_humidity_2m)) +
+    detailRow('Dew point', tempF(current.dew_point_2m)) +
+    detailRow('Wind', wind(current)) +
+    detailRow('Cloud cover', percent(current.cloud_cover)) +
+    detailRow('Visibility', visibility(current.visibility)) +
+    detailRow('Sunrise', clock(data.daily?.sunrise?.[0])) +
+    detailRow('Sunset', clock(data.daily?.sunset?.[0])) +
+    '</div>' +
+    '<div class="wxd-hours">' +
+    '<div class="wxd-hours-title">Next 12 hours</div>' +
+    `<div class="wxd-hours-strip">${hourlyStrip(data)}</div>` +
+    '</div>';
+}
 
 export function setLive(on: boolean) {
   document.documentElement.dataset.live = on ? 'on' : 'off';
@@ -136,11 +316,46 @@ export async function openPeakCam(p: { camId: string; name: string; county: stri
   setSelected(map, null);
 }
 
+export async function openWeather(spot: WeatherSpot) {
+  const slug = slugFor(spot.name);
+  activeId = 'wx:' + slug;
+  const id = activeId;
+  stopPreviewTimer();
+  $('cam-title').textContent = spot.name;
+  const camView = $('cam-view');
+  camView.className = 'cam-view wx-view';
+  camView.innerHTML = '<div class="wxd-hero"><div class="wxd-loading">Loading weather...</div></div>';
+  $('cam-info').innerHTML = '';
+  ($('panel-cam') as HTMLElement).hidden = false;
+  document.body.classList.add('cam-open');
+  document.querySelectorAll('.cam-list-item.active').forEach((el) => el.classList.remove('active'));
+  setSelected(map, null);
+  map.flyTo({ center: [spot.lng, spot.lat], zoom: Math.max(map.getZoom(), 10.5), padding: { right: 360 }, duration: 700 });
+  try { history.replaceState(null, '', '#wx/' + encodeURIComponent(slug)); } catch {}
+  try {
+    const data = await fetchWeather(spot);
+    if (activeId !== id) return;
+    renderWeather(data);
+  } catch {
+    if (activeId !== id) return;
+    camView.innerHTML = '<div class="wxd-hero"><div class="wxd-error">Weather unavailable</div></div>';
+    $('cam-info').innerHTML = '';
+  }
+}
+
+export function registerWeatherSpots(spots: WeatherSpot[]) {
+  weatherSpots = spots;
+}
+
 export function closeCam() {
   ($('panel-cam') as HTMLElement).hidden = true;
   document.body.classList.remove('cam-open');
   stopPreviewTimer();
   activeId = null;
+  const camView = $('cam-view');
+  camView.className = 'cam-view';
+  camView.innerHTML = '';
+  $('cam-info').innerHTML = '';
   document.querySelectorAll('.cam-list-item.active').forEach((el) => el.classList.remove('active'));
   setSelected(map, null);
   try { history.replaceState(null, '', location.pathname + location.search); } catch {}
@@ -185,5 +400,15 @@ export function initPanels(m: maplibregl.Map) {
 
   // deep link
   const m2 = location.hash.match(/^#cam\/(.+)$/);
-  if (m2) { const id = decodeURIComponent(m2[1]); if (camById[id]) openCam(id); }
+  if (m2) {
+    const id = decodeURIComponent(m2[1]);
+    if (camById[id]) openCam(id);
+  } else {
+    const wx = location.hash.match(/^#wx\/(.+)$/);
+    if (wx) {
+      const slug = decodeURIComponent(wx[1]);
+      const spot = weatherSpots.find((s) => slugFor(s.name) === slug);
+      if (spot) openWeather(spot);
+    }
+  }
 }

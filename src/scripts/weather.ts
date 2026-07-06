@@ -5,11 +5,12 @@
  * Also feeds the HUD coast-vs-bay readout (NWS KHAF / KSFO observations).
  */
 import maplibregl from 'maplibre-gl';
+import { openWeather, registerWeatherSpots } from './panel';
 
-interface Spot { name: string; lat: number; lng: number; }
+export interface Spot { name: string; lat: number; lng: number; }
 // West→east transects across every gap in the coastal hills. Order matters
 // only for readability; Open-Meteo returns results in request order.
-const SPOTS: Spot[] = [
+export const SPOTS: Spot[] = [
   { name: 'Bodega Bay', lat: 38.333, lng: -123.048 },
   { name: 'Ocean Beach', lat: 37.760, lng: -122.509 },
   { name: 'Downtown SF', lat: 37.792, lng: -122.399 },
@@ -28,6 +29,7 @@ const SPOTS: Spot[] = [
   { name: 'San Jose', lat: 37.336, lng: -121.891 },
   { name: 'Santa Cruz', lat: 36.972, lng: -122.026 },
 ];
+registerWeatherSpots(SPOTS);
 
 export interface SpotReading extends Spot {
   tempF: number; windMph: number; windDir: number; humidity: number; cloud: number;
@@ -79,13 +81,27 @@ function render(map: maplibregl.Map, readings: SpotReading[]) {
       `<span class="wx-t" style="color:${tempColor(r.tempF)}">${r.tempF}°</span>` +
       `<span class="wx-w" style="transform:rotate(${rot}deg)">${ARROW}</span>`;
     el.title = `${r.name} — ${r.tempF}°F · wind ${r.windMph} mph · ${r.humidity}% RH · ${r.cloud}% cloud`;
+    el.tabIndex = 0;
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', `${r.name} weather details`);
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openWeather(r);
+    });
+    el.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      openWeather(r);
+    });
     const label = document.createElement('span');
     label.className = 'wx-name';
     label.textContent = r.name;
     el.appendChild(label);
-    return new maplibregl.Marker({ element: el, anchor: 'center' })
+    const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
       .setLngLat([r.lng, r.lat])
       .addTo(map);
+    marker.getElement().setAttribute('aria-label', `${r.name} weather details`);
+    return marker;
   });
   setTempsVisible(tempsOn);
 }
