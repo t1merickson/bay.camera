@@ -84,12 +84,38 @@ windy-style instrument:
 - Vestigial (still delete-safe): `src/lib/project.ts`, `src/lib/basemap.json`,
   `scripts/build-map.py`, `scripts/ca-counties.geojson`, root `index.html`.
 
+## Evening session addendum (same day, Codex-implemented, Claude-judged)
+
+- **Cam-click white-map bug fixed**: `.cam-open` anchor style collided with
+  the `body.cam-open` state class → body went inline-flex → map collapsed to
+  0px. Anchor renamed `cam-open-link`. (Same disease as the old
+  `.hide-broken` incident — check `getComputedStyle(document.body).display`
+  first when layout implodes.)
+- **Weather pills are clickable**: right panel with current conditions,
+  humidity/dew/wind/gusts/cloud/visibility/sunrise-sunset + next-12h strip,
+  `#wx/<slug>` deep links (`openWeather` in panel.ts). NOTE: MapLibre's
+  Marker constructor overwrites the element's aria-label — re-apply after
+  `.addTo(map)`.
+- **Fog layer is night-capable**: below −3° solar elevation (NOAA formula in
+  fog.ts) the 'goes' layer swaps GeoColor → Band 13 Clean IR
+  (`GOES-West_ABI_Band13_Clean_Infrared`, TileMatrixSet Level6 — note
+  Level6, not 7). Source is recreated on mode flip (maxzoom differs). In
+  Band 13, fog = brighter gray than clear sky. Peak-cam analysis is gated
+  off at night (near-IR frames evade the dark threshold and read
+  "all clear" — misleading), card says estimate resumes at sunrise.
+- Codex delegation works well here: `codex exec` briefs live in the session
+  scratchpad pattern; ALERTCalifornia/GIBS URLs must be pre-verified by the
+  orchestrator (Codex sandbox has no DNS).
+
 ## Next moves (priority order)
 
 1. **Morning fog session.** Everything was built/calibrated at 11am–noon as
    the deck burned off (patchy). Load it at 8am on a foggy July morning and
    sanity-check the band estimate against KHAF/KSFO + eyeballs. Thresholds
-   live at the top of `fogtop.ts`.
+   live at the top of `fogtop.ts`. Verify the night→day IR handoff at dawn.
+1b. **Predictive fog card (awaiting Tim's verdict):** coast–inland temp
+   gradient + coastal dew-point spread (both already in fetched data) as
+   honest "fog likely tonight" heuristics.
 2. **Deploy to Netlify** — config exists, untested end-to-end. Domain still
    undecided (Tim gave bay.camera to gongruya).
 3. **Design iteration with Tim's eyes** — dark-basemap contrast (Carto dark
