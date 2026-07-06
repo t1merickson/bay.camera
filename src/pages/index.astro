@@ -75,6 +75,13 @@ const activeRegions = REGIONS.filter((r) => cameras.some((c) => c.region === r.s
     <div class="fog-sub" id="fog-sub"></div>
   </aside>
 
+  <div id="peaks-legend" class="legend legend-map peaks-legend" hidden>
+    <span class="legend-item"><span class="dot dot-peak-clear"></span>Clear</span>
+    <span class="legend-item"><span class="dot dot-peak-fog"></span>In fog</span>
+    <span class="legend-item"><span class="dot dot-peak-dark"></span>Dark</span>
+    <span class="legend-item"><span class="dot dot-peak-unsampled"></span>Unsampled</span>
+  </div>
+
   <div class="legend legend-map">
     {activeRegions.map((r) => (
       <span class="legend-item"><span class={`dot region-${r.slug}`}></span>{r.label}</span>

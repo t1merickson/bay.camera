@@ -29,6 +29,7 @@ map.on('load', () => {
   const tempsBtn = document.getElementById('temps-btn')!;
   const peaksBtn = document.getElementById('peaks-btn')!;
   const fogCard = document.getElementById('fog-card') as HTMLElement;
+  const peaksLegend = document.getElementById('peaks-legend') as HTMLElement;
 
   const pressed = (b: HTMLElement) => b.getAttribute('aria-pressed') === 'true';
   const setPressed = (b: HTMLElement, on: boolean) => b.setAttribute('aria-pressed', String(on));
@@ -49,6 +50,7 @@ map.on('load', () => {
     const on = !pressed(peaksBtn);
     setPressed(peaksBtn, on);
     setPeaksVisible(map, on);
+    peaksLegend.hidden = !on;
   };
 
   // Temps on by default: it's the cheapest, most alive thing on the map.

@@ -20,6 +20,10 @@
   --r-satellite: 215 14% 54%; --r-golden-gate: 12 58% 54%; --r-san-francisco: 217 62% 56%;
   --r-north-bay: 142 42% 42%; --r-east-bay: 262 46% 62%; --r-peninsula: 189 55% 42%;
   --r-south-bay: 32 62% 50%; --r-santa-cruz: 330 48% 56%;
+  --peak-status-unsampled: 215 15% 55%;
+  --peak-status-clear: 142 45% 42%;
+  --peak-status-fog: 210 20% 78%;
+  --peak-status-dark: 217 12% 38%;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -29,6 +33,10 @@
     --accent: 217 91% 66%; --ring: 217 91% 66%;
     --water: 214 46% 9%; --land: 217 27% 15%; --land-line: 217 18% 26%;
     --shadow: 0 4px 24px -4px rgba(0, 0, 0, .5);
+    --peak-status-unsampled: 215 15% 55%;
+    --peak-status-clear: 142 45% 42%;
+    --peak-status-fog: 210 25% 88%;
+    --peak-status-dark: 217 12% 38%;
   }
 }
 
@@ -66,6 +74,10 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
 .dot.region-san-francisco { background: hsl(var(--r-san-francisco)); } .dot.region-north-bay { background: hsl(var(--r-north-bay)); }
 .dot.region-east-bay { background: hsl(var(--r-east-bay)); } .dot.region-peninsula { background: hsl(var(--r-peninsula)); }
 .dot.region-south-bay { background: hsl(var(--r-south-bay)); } .dot.region-santa-cruz { background: hsl(var(--r-santa-cruz)); }
+.dot.dot-peak-clear { background: hsl(var(--peak-status-clear)); }
+.dot.dot-peak-fog { background: hsl(var(--peak-status-fog)); }
+.dot.dot-peak-dark { background: hsl(var(--peak-status-dark)); }
+.dot.dot-peak-unsampled { background: hsl(var(--peak-status-unsampled)); }
 
 /* ---- HUD shared ---- */
 .hud { z-index: 10; }
@@ -165,6 +177,8 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .legend-map { position: fixed; left: 12px; bottom: 12px; z-index: 12; display: flex; flex-wrap: wrap; gap: 4px 12px; max-width: 44vw; padding: 8px 12px; border-radius: var(--radius); background: hsl(var(--card) / .9); backdrop-filter: blur(10px); border: 1px solid hsl(var(--border)); box-shadow: var(--shadow); }
 .panel-list:not([hidden]) ~ .legend-map { left: 344px; }
 .legend-item { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; color: hsl(var(--muted-foreground)); }
+.peaks-legend { bottom: 52px; max-width: 176px; }
+.peaks-legend[hidden] { display: none; }
 @media (max-width: 900px) { .legend-map { display: none; } }
 
 /* ---- layer toggle group ---- */
