@@ -7,8 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "fetch:alertca": "python3 scripts/fetch-alertcalifornia.py",
-    "build:map": "python3 scripts/build-map.py"
+    "fetch:alertca": "python3 scripts/fetch-alertcalifornia.py"
   },
   "dependencies": {
     "astro": "^4.15.0",
