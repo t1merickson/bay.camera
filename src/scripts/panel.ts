@@ -7,6 +7,7 @@ import type maplibregl from 'maplibre-gl';
 import { camById, REGION_LABELS } from './data';
 import { setSelected, setRegionFilter } from './cams';
 import { resolveAlertCamUrl } from './alertca';
+import { colorFor, iconKeyFor, iconSvg } from './wxicons';
 
 const esc = (s: unknown) => String(s).replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]!));
 const EXT = '<svg class="ext" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"/></svg>';
@@ -28,10 +29,11 @@ interface WeatherCurrent {
   wind_gusts_10m?: number;
   wind_direction_10m?: number;
   weather_code?: number;
+  is_day?: 0 | 1;
 }
 interface WeatherForecast {
   current?: WeatherCurrent;
-  hourly?: { time?: string[]; temperature_2m?: number[] };
+  hourly?: { time?: string[]; temperature_2m?: number[]; weather_code?: number[]; is_day?: (0 | 1)[] };
   daily?: { sunrise?: string[]; sunset?: string[] };
 }
 
@@ -77,6 +79,7 @@ const WEATHER_CURRENT_FIELDS = [
   'wind_gusts_10m',
   'wind_direction_10m',
   'weather_code',
+  'is_day',
 ].join(',');
 
 const $ = (id: string) => document.getElementById(id)!;
@@ -106,7 +109,7 @@ function weatherUrl(spot: WeatherSpot) {
     `latitude=${encodeURIComponent(String(spot.lat))}`,
     `longitude=${encodeURIComponent(String(spot.lng))}`,
     `current=${WEATHER_CURRENT_FIELDS}`,
-    'hourly=temperature_2m',
+    'hourly=temperature_2m,weather_code,is_day',
     'forecast_hours=12',
     'daily=sunrise,sunset',
     'forecast_days=1',
@@ -168,22 +171,77 @@ function hourLabel(value?: string) {
   return `${t.hour % 12 || 12}${t.hour < 12 ? 'a' : 'p'}`;
 }
 
-function hourlyStrip(data: WeatherForecast) {
+function weatherCode(value: unknown) {
+  return num(value) ?? 3;
+}
+
+function isDay(value: unknown) {
+  return value === 0 ? false : true;
+}
+
+const pct = (value: number) => value.toFixed(2).replace(/\.?0+$/, '');
+
+function hourlyTrend(data: WeatherForecast) {
   const times = data.hourly?.time ?? [];
   const temps = data.hourly?.temperature_2m ?? [];
-  const html = times.slice(0, 12).map((time, i) =>
-    `<div class="wxd-hour"><div class="wxd-hour-time">${esc(hourLabel(time))}</div><div class="wxd-hour-temp">${esc(temp(temps[i]))}</div></div>`
+  const codes = data.hourly?.weather_code ?? [];
+  const days = data.hourly?.is_day ?? [];
+  const count = Math.min(12, Math.max(times.length, temps.length, codes.length, days.length));
+  const validTemps = temps.slice(0, 12).map(num).filter((value): value is number => value != null);
+  if (!count || !validTemps.length) return '<div class="wxd-hours-empty">Hourly forecast unavailable</div>';
+
+  const minTemp = Math.min(...validTemps);
+  const maxTemp = Math.max(...validTemps);
+  const domainMin = minTemp - 1;
+  const domainMax = maxTemp + 1;
+  const yFor = (value: number) => {
+    if (minTemp === maxTemp) return 50;
+    return 78 - ((value - domainMin) / (domainMax - domainMin)) * 56;
+  };
+  const xFor = (i: number) => count === 1 ? 50 : 4 + (i * 92) / (count - 1);
+  let lastTemp = validTemps[0];
+  const points = Array.from({ length: count }, (_, i) => {
+    const actualTemp = num(temps[i]);
+    if (actualTemp != null) lastTemp = actualTemp;
+    const code = weatherCode(codes[i]);
+    const day = isDay(days[i]);
+    return {
+      x: xFor(i),
+      y: yFor(actualTemp ?? lastTemp),
+      time: times[i],
+      tempText: temp(actualTemp),
+      code,
+      day,
+      color: colorFor(code, day),
+      icon: iconKeyFor(code, day),
+    };
+  });
+  const lines = points.slice(0, -1).map((point, i) => {
+    const next = points[i + 1];
+    return `<line x1="${pct(point.x)}" y1="${pct(point.y)}" x2="${pct(next.x)}" y2="${pct(next.y)}" stroke="${point.color}" stroke-width="2" stroke-linecap="round" opacity="0.7"/>`;
+  }).join('');
+  const markers = points.map((point, i) =>
+    `<span class="wxl-temp" style="left:${pct(point.x)}%;top:${pct(point.y)}%;">${esc(point.tempText)}</span>` +
+    `<span class="wxl-icon" style="left:${pct(point.x)}%;top:${pct(point.y)}%;color:${point.color};">${iconSvg(point.icon)}</span>` +
+    (i % 2 === 0 ? `<span class="wxl-hour" style="left:${pct(point.x)}%;">${esc(hourLabel(point.time))}</span>` : '')
   ).join('');
-  return html || '<div class="wxd-hours-empty">Hourly forecast unavailable</div>';
+  return `<div class="wxl"><svg class="wxl-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${lines}</svg>${markers}</div>`;
 }
 
 function renderWeather(data: WeatherForecast) {
   const current = data.current ?? {};
+  const code = weatherCode(current.weather_code);
+  const day = isDay(current.is_day);
+  const icon = iconKeyFor(code, day);
+  const color = colorFor(code, day);
   $('cam-view').innerHTML =
     '<div class="wxd-hero">' +
+    `<span class="wxd-hero-icon" style="color:${color};">${iconSvg(icon)}</span>` +
+    '<div>' +
     `<div class="wxd-temp">${esc(temp(current.temperature_2m))}</div>` +
     `<div class="wxd-condition">${esc(conditionLabel(current.weather_code))}</div>` +
     `<div class="wxd-feels">feels like ${esc(temp(current.apparent_temperature))}</div>` +
+    '</div>' +
     '</div>';
   $('cam-info').innerHTML =
     '<div class="wxd-grid">' +
@@ -197,7 +255,7 @@ function renderWeather(data: WeatherForecast) {
     '</div>' +
     '<div class="wxd-hours">' +
     '<div class="wxd-hours-title">Next 12 hours</div>' +
-    `<div class="wxd-hours-strip">${hourlyStrip(data)}</div>` +
+    hourlyTrend(data) +
     '</div>';
 }
 

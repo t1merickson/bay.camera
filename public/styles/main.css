@@ -157,7 +157,9 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .cam-donate { margin: 8px 0 0; font-size: 0.78rem; }
 .cam-donate a { color: hsl(32 80% 45%); }
 .wx-view { align-items: stretch; justify-content: stretch; padding: 18px; }
-.wxd-hero { width: 100%; display: flex; flex-direction: column; justify-content: center; gap: 3px; }
+.wxd-hero { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 10px; }
+.wxd-hero-icon { display: inline-flex; flex: none; width: 36px; height: 36px; }
+.wxd-hero-icon svg { width: 100%; height: 100%; }
 .wxd-temp { font-size: 2rem; font-weight: 650; line-height: 1; letter-spacing: -0.02em; }
 .wxd-condition { font-size: 0.92rem; font-weight: 600; color: hsl(var(--foreground)); }
 .wxd-feels, .wxd-loading, .wxd-error { font-size: 0.82rem; color: hsl(var(--muted-foreground)); }
@@ -166,12 +168,14 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .wxd-label { font-weight: 600; font-size: 0.66rem; text-transform: uppercase; letter-spacing: .04em; color: hsl(var(--muted-foreground)); }
 .wxd-value { font-size: 0.86rem; color: hsl(var(--foreground)); text-align: right; }
 .wxd-hours { margin-top: 14px; }
-.wxd-hours-title { margin-bottom: 7px; font-weight: 600; font-size: 0.66rem; text-transform: uppercase; letter-spacing: .04em; color: hsl(var(--muted-foreground)); }
-.wxd-hours-strip { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
-.wxd-hour { flex: 0 0 42px; padding: 6px 4px; border: 1px solid hsl(var(--border)); border-radius: 6px; background: hsl(var(--muted) / .45); text-align: center; }
-.wxd-hour-time { font-size: 0.66rem; color: hsl(var(--muted-foreground)); }
-.wxd-hour-temp { font-size: 0.84rem; font-weight: 650; color: hsl(var(--foreground)); }
+.wxd-hours-title { margin-bottom: 0; font-weight: 600; font-size: 0.66rem; text-transform: uppercase; letter-spacing: .04em; color: hsl(var(--muted-foreground)); }
 .wxd-hours-empty { font-size: 0.82rem; color: hsl(var(--muted-foreground)); }
+.wxl { position: relative; height: 116px; margin-top: 6px; }
+.wxl-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.wxl-icon { position: absolute; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; padding: 2px; border-radius: 999px; background: hsl(var(--card)); transform: translate(-50%, -50%); }
+.wxl-icon svg { width: 100%; height: 100%; }
+.wxl-temp { position: absolute; transform: translate(-50%, calc(-50% - 16px)); font-size: 10px; font-weight: 650; line-height: 1; color: hsl(var(--foreground)); white-space: nowrap; }
+.wxl-hour { position: absolute; bottom: 0; transform: translateX(-50%); font-size: 10px; line-height: 1; color: hsl(var(--muted-foreground)); white-space: nowrap; }
 
 /* ---- legend (floats over map) ---- */
 .legend-map { position: fixed; left: 12px; bottom: 12px; z-index: 12; display: flex; flex-wrap: wrap; gap: 4px 12px; max-width: 44vw; padding: 8px 12px; border-radius: var(--radius); background: hsl(var(--card) / .9); backdrop-filter: blur(10px); border: 1px solid hsl(var(--border)); box-shadow: var(--shadow); }
