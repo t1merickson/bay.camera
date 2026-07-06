@@ -135,7 +135,7 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .cam-view { position: relative; background: hsl(var(--muted)); aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center; flex: none; }
 .cam-view img, .cam-view iframe { width: 100%; height: 100%; object-fit: cover; display: block; border: 0; }
 .cam-view.is-offline::after { content: "offline"; position: absolute; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .05em; color: hsl(var(--muted-foreground)); }
-.cam-embed-play, .cam-open { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; font-size: 0.85rem; color: hsl(var(--foreground)); background: none; border: 0; cursor: pointer; }
+.cam-embed-play, .cam-open-link { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; font-size: 0.85rem; color: hsl(var(--foreground)); background: none; border: 0; cursor: pointer; }
 .cam-info { padding: 14px; overflow-y: auto; }
 .cam-name { margin: 0 0 3px; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: .04em; color: hsl(var(--muted-foreground)); display: flex; align-items: center; gap: 7px; }
 .cam-attr { margin: 0 0 8px; font-size: 0.85rem; color: hsl(var(--foreground)); }

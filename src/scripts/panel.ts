@@ -79,7 +79,7 @@ export async function openCam(id: string) {
     }
   } else {
     const a = document.createElement('a');
-    a.className = 'cam-open'; a.href = c.page; a.target = '_blank';
+    a.className = 'cam-open-link'; a.href = c.page; a.target = '_blank';
     a.innerHTML = 'Open camera ' + EXT;
     camView.appendChild(a);
   }
