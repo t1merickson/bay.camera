@@ -177,7 +177,7 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .legend-map { position: fixed; left: 12px; bottom: 12px; z-index: 12; display: flex; flex-wrap: wrap; gap: 4px 12px; max-width: 44vw; padding: 8px 12px; border-radius: var(--radius); background: hsl(var(--card) / .9); backdrop-filter: blur(10px); border: 1px solid hsl(var(--border)); box-shadow: var(--shadow); }
 .panel-list:not([hidden]) ~ .legend-map { left: 344px; }
 .legend-item { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; color: hsl(var(--muted-foreground)); }
-.peaks-legend { bottom: 52px; max-width: 176px; }
+.peaks-legend { bottom: 64px; max-width: none; }
 .peaks-legend[hidden] { display: none; }
 @media (max-width: 900px) { .legend-map { display: none; } }
 
