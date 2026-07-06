@@ -107,6 +107,33 @@ windy-style instrument:
   scratchpad pattern; ALERTCalifornia/GIBS URLs must be pre-verified by the
   orchestrator (Codex sandbox has no DNS).
 
+## microclimates.today source-dive findings (2026-07-06, read their inline JS)
+
+Their fog stack, fully decoded (their client is richly commented):
+- **Products (SSEC RealEarth, CORS `*`, no key):** `G18-ABI-CONUS-BAND02`
+  (day, 0.5 km visible), `G18-ABI-CONUS-night-microphysics` (night — purpose-
+  built low-stratus RGB, fog reads pale teal; verified live, unmistakable),
+  also `-BAND13` and `-snow-fog`. Latest timestamp:
+  `realearth.ssec.wisc.edu/api/latest?products=<id>` → `"20260706.091625"`;
+  tiles `realearth.ssec.wisc.edu/tiles/<id>_20260706_091625/{z}/{x}/{y}.png`
+  (underscore form, {z}/{x}/{y} order, ~maxzoom 7).
+- **Tone curve** on Band 2: shipped constants black 30 / white 185 / γ1.1
+  (SVG filter + screen-blend over Carto dark so clear air drops out).
+  MapLibre-native equivalent: `raster-color` luminance→alpha ramp.
+- **Day/night handoff at +7° solar elevation** (measured: Band-2 mean
+  luminance hits the black point near +6°; earlier handoff avoids black
+  frames). MIN_DAY_BRIGHTNESS 44 as archiver-reported backstop.
+- **Their backend tier** (Cloudflare Worker archiver, `/api/now`): satellite
+  frame history → fog state machine (clearing/building/socked-in/clear),
+  ETA text, brightness trend + momentum, bay-vs-ocean brightness gap ("is it
+  through the Gate"), week's-norm-at-this-hour baseline, plus a fogTop
+  estimate. ALL of this needs frame history = a small server + storage; maps
+  to our future Netlify function. The static-site steals are the products,
+  tone curve, and handoff above.
+- **Neighborhoods page:** NWS gridded forecast area-weighted onto DataSF
+  neighborhood polygons + "fog-escape spots". Good future feature; their
+  cyan-glow monospace aesthetic is explicitly NOT wanted here.
+
 ## Next moves (priority order)
 
 1. **Morning fog session.** Everything was built/calibrated at 11am–noon as

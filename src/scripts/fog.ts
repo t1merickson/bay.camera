@@ -1,46 +1,133 @@
 /**
  * The fog story, in two parts:
  *
- * 1. GOES-18 satellite imagery via NASA GIBS (free, no key, CORS ok) as a
- *    web-mercator raster layer sandwiched between the basemap and its labels.
- *    Daytime GeoColor is the canonical marine-layer view; after dark, Band 13
- *    Clean IR keeps low stratus readable. ~10-min cadence; `default` time =
- *    most recent granule. MapLibre overzooms the native GIBS matrix.
+ * 1. GOES-18 satellite imagery as a web-mercator raster layer sandwiched
+ *    between the basemap and its labels. Daytime NASA GIBS Band 2 is rendered
+ *    through a transparent fog ramp; after dark, SSEC RealEarth night
+ *    microphysics keeps low stratus readable. ~10-min cadence.
  *
  * 2. Fog-top altitude: sample the ALERTCalifornia peak cams across their
  *    elevation range, classify each frame in-cloud vs clear (fogtop.ts), and
  *    the elevation boundary between them is the marine-layer top.
  */
 import type maplibregl from 'maplibre-gl';
+import { addProtocol, type RequestParameters } from 'maplibre-gl';
 import { peaks, mToFt } from './data';
 import { getAlertCamUrls } from './alertca';
 import { analyzePeaks, estimateFogTop, type PeakInput, type PeakReading, type FogTopEstimate } from './fogtop';
 import { updatePeakStatuses } from './peaks';
 
-const ATTRIBUTION = 'GOES-18 · NASA GIBS';
 const GOES_SOURCE_ID = 'goes';
 const GOES_LAYER_ID = 'goes';
 const GOES_BEFORE_ID = 'labels';
-const NIGHT_ELEVATION_DEG = -3;
+// Measured on real frames: Band-2 luminance hits the tone-curve black point
+// near +6°, so hand off early rather than show black frames.
+const SAT_SWITCH_ELEV_DEG = 7;
+const CAM_NIGHT_ELEV_DEG = -3;
 const BAY_SOLAR_REF = { lat: 37.77, lon: -122.42 };
 const DAY_MS = 24 * 60 * 60 * 1000;
+const REALEARTH_NIGHT_PRODUCT = 'G18-ABI-CONUS-night-microphysics';
+const REALEARTH_LATEST_URL = `https://realearth.ssec.wisc.edu/api/latest?products=${REALEARTH_NIGHT_PRODUCT}`;
+const NASA_GIBS_ATTRIBUTION = 'GOES-18 · NASA GIBS';
+const SSEC_REALEARTH_ATTRIBUTION = 'GOES-18 · SSEC RealEarth';
+const FOGTONE_PROTOCOL = 'fogtone';
+const FOGTONE_PREFIX = `${FOGTONE_PROTOCOL}://`;
+// Tone curve constants calibrated on real GOES-18 fog frames.
+const FOG_TONE_BLACK = 30;
+const FOG_TONE_WHITE = 185;
+const FOG_TONE_GAMMA = 1.1;
+const FOG_TONE_MAX_ALPHA = 236; // About 0.925 * 255, keeping solid fog just under opaque.
 
-const GOES_TILES = {
+type SatMode = 'day' | 'night';
+type SatSourceKind = 'gibs-day' | 'realearth-night' | 'gibs-night-fallback';
+type SatTileSpec = {
+  mode: SatMode;
+  kind: SatSourceKind;
+  url: string;
+  maxzoom: number;
+  attribution: string;
+};
+
+const SAT_TILES = {
   day: {
-    url: 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/GOES-West_ABI_GeoColor/default/default/GoogleMapsCompatible_Level7/{z}/{y}/{x}.png',
+    url: 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/GOES-West_ABI_Band2_Red_Visible_1km/default/default/GoogleMapsCompatible_Level7/{z}/{y}/{x}.png',
     maxzoom: 7,
   },
-  night: {
+  nightFallback: {
     // In Band 13 IR, Bay fog/low stratus reads as brighter mid-gray than clear sky.
     url: 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/GOES-West_ABI_Band13_Clean_Infrared/default/default/GoogleMapsCompatible_Level6/{z}/{y}/{x}.png',
     maxzoom: 6,
   },
 } as const;
 
-type GoesMode = keyof typeof GOES_TILES;
+const RASTER_OPACITY = ['interpolate', ['linear'], ['zoom'], 8, 0.88, 10, 0.8, 12, 0.55] as const;
 
 const bucket = () => Math.floor(Date.now() / (10 * 60 * 1000)); // 10-min cache-buster
-const tileUrl = (mode: GoesMode) => `${GOES_TILES[mode].url}?cb=${bucket()}`;
+const cacheBusted = (url: string) => `${url}?cb=${bucket()}`;
+const fogtoneUrl = (url: string) => `${FOGTONE_PREFIX}${url}`;
+
+function buildFogToneAlphaLookup(): Uint8ClampedArray {
+  const lookup = new Uint8ClampedArray(256);
+  for (let lum = 0; lum < lookup.length; lum++) {
+    const linear = Math.min(Math.max((lum - FOG_TONE_BLACK) / (FOG_TONE_WHITE - FOG_TONE_BLACK), 0), 1);
+    lookup[lum] = Math.round(Math.pow(linear, 1 / FOG_TONE_GAMMA) * FOG_TONE_MAX_ALPHA);
+  }
+  return lookup;
+}
+
+const FOG_TONE_ALPHA_LOOKUP = buildFogToneAlphaLookup();
+
+function realUrlFromFogToneUrl(url: string): string {
+  return url.startsWith(FOGTONE_PREFIX) ? url.slice(FOGTONE_PREFIX.length) : url;
+}
+
+async function loadFogToneTile(params: RequestParameters, abortController: AbortController): Promise<{ data: ArrayBuffer }> {
+  const realUrl = realUrlFromFogToneUrl(params.url);
+  const response = await fetch(realUrl, { signal: abortController.signal });
+  if (!response.ok) throw new Error(`Fog tone tile fetch failed: ${response.status}`);
+
+  const originalBlob = await response.blob();
+  let bitmap: ImageBitmap | null = null;
+  try {
+    bitmap = await createImageBitmap(originalBlob);
+    const width = bitmap.width;
+    const height = bitmap.height;
+    const canvas = new OffscreenCanvas(width, height);
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) throw new Error('Fog tone canvas context unavailable');
+
+    ctx.drawImage(bitmap, 0, 0);
+    const image = ctx.getImageData(0, 0, width, height);
+    const pixels = image.data;
+    for (let i = 0; i < pixels.length; i += 4) {
+      const lum = Math.round(0.2126 * pixels[i] + 0.7152 * pixels[i + 1] + 0.0722 * pixels[i + 2]);
+      const alpha = FOG_TONE_ALPHA_LOOKUP[lum];
+      pixels[i] = 255;
+      pixels[i + 1] = 255;
+      pixels[i + 2] = 255;
+      pixels[i + 3] = Math.min(alpha, pixels[i + 3]);
+    }
+    ctx.putImageData(image, 0, 0);
+    const toneBlob = await canvas.convertToBlob({ type: 'image/png' });
+    return { data: await toneBlob.arrayBuffer() };
+  } catch {
+    return { data: await originalBlob.arrayBuffer() };
+  } finally {
+    bitmap?.close();
+  }
+}
+
+addProtocol(FOGTONE_PROTOCOL, loadFogToneTile);
+
+// URL debug override for visual verification: `?fog=day` or `?fog=night`
+// forces satellite imagery only; peak-camera analysis keeps its own dusk gate.
+function readSatModeOverride(): SatMode | null {
+  if (typeof window === 'undefined') return null;
+  const fog = new URLSearchParams(window.location.search).get('fog');
+  return fog === 'day' || fog === 'night' ? fog : null;
+}
+
+const SAT_MODE_OVERRIDE = readSatModeOverride();
 
 function dayOfYearUtc(date: Date): number {
   const day = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
@@ -71,57 +158,174 @@ export function solarElevationDeg(date = new Date()): number {
   return elevation * 180 / Math.PI;
 }
 
-export function goesModeForDate(date = new Date()): GoesMode {
-  return solarElevationDeg(date) < NIGHT_ELEVATION_DEG ? 'night' : 'day';
+export function satModeForDate(date = new Date()): SatMode {
+  if (SAT_MODE_OVERRIDE) return SAT_MODE_OVERRIDE;
+  return solarElevationDeg(date) < SAT_SWITCH_ELEV_DEG ? 'night' : 'day';
 }
 
-let activeGoesMode: GoesMode | null = null;
+export function camerasAreDark(date = new Date()): boolean {
+  return solarElevationDeg(date) < CAM_NIGHT_ELEV_DEG;
+}
 
-function addGoesSourceAndLayer(map: maplibregl.Map, mode: GoesMode, visibility: 'visible' | 'none') {
-  const spec = GOES_TILES[mode];
+let activeSatMode: SatMode | null = null;
+let activeSatKind: SatSourceKind | null = null;
+let activeSatUrl: string | null = null;
+let lastNightMicrophysicsTimestamp: string | null = null;
+let refreshSeq = 0;
+
+function dayTileSpec(): SatTileSpec {
+  return {
+    mode: 'day',
+    kind: 'gibs-day',
+    url: fogtoneUrl(cacheBusted(SAT_TILES.day.url)),
+    maxzoom: SAT_TILES.day.maxzoom,
+    attribution: NASA_GIBS_ATTRIBUTION,
+  };
+}
+
+function nightFallbackTileSpec(): SatTileSpec {
+  return {
+    mode: 'night',
+    kind: 'gibs-night-fallback',
+    url: cacheBusted(SAT_TILES.nightFallback.url),
+    maxzoom: SAT_TILES.nightFallback.maxzoom,
+    attribution: NASA_GIBS_ATTRIBUTION,
+  };
+}
+
+function realEarthNightTileSpec(timestamp: string): SatTileSpec {
+  const tileTimestamp = timestamp.replace('.', '_');
+  return {
+    mode: 'night',
+    kind: 'realearth-night',
+    url: `https://realearth.ssec.wisc.edu/tiles/${REALEARTH_NIGHT_PRODUCT}_${tileTimestamp}/{z}/{x}/{y}.png`,
+    maxzoom: 7,
+    attribution: SSEC_REALEARTH_ATTRIBUTION,
+  };
+}
+
+async function fetchLatestNightTimestamp(): Promise<string> {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 10000);
+  try {
+    const response = await fetch(REALEARTH_LATEST_URL, { signal: controller.signal });
+    if (!response.ok) throw new Error(`RealEarth latest failed: ${response.status}`);
+    const latest = await response.json() as Partial<Record<typeof REALEARTH_NIGHT_PRODUCT, unknown>>;
+    const timestamp = latest[REALEARTH_NIGHT_PRODUCT];
+    if (typeof timestamp !== 'string' || !/^\d{8}\.\d{6}$/.test(timestamp)) {
+      throw new Error('RealEarth latest returned an invalid timestamp');
+    }
+    return timestamp;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+async function nightTileSpec(): Promise<SatTileSpec> {
+  try {
+    const timestamp = await fetchLatestNightTimestamp();
+    if (timestamp === lastNightMicrophysicsTimestamp && lastNightMicrophysicsTimestamp) {
+      return realEarthNightTileSpec(lastNightMicrophysicsTimestamp);
+    }
+    lastNightMicrophysicsTimestamp = timestamp;
+    return realEarthNightTileSpec(timestamp);
+  } catch {
+    return nightFallbackTileSpec();
+  }
+}
+
+function currentGoesVisibility(map: maplibregl.Map): 'visible' | 'none' {
+  return map.getLayer(GOES_LAYER_ID) && map.getLayoutProperty(GOES_LAYER_ID, 'visibility') === 'visible' ? 'visible' : 'none';
+}
+
+function rasterPaint(): maplibregl.RasterLayerSpecification['paint'] {
+  return {
+    // Fade back as you overzoom past the sensor resolution so streets stay
+    // readable under the (increasingly blurry) cloud field.
+    'raster-opacity': RASTER_OPACITY as any,
+    'raster-fade-duration': 300,
+  };
+}
+
+function addLayerBeforeLabels(map: maplibregl.Map, layer: maplibregl.RasterLayerSpecification): boolean {
+  try {
+    if (map.getLayer(GOES_BEFORE_ID)) map.addLayer(layer, GOES_BEFORE_ID);
+    else map.addLayer(layer);
+  } catch {
+    return false;
+  }
+  return Boolean(map.getLayer(GOES_LAYER_ID));
+}
+
+function addGoesSourceAndLayer(map: maplibregl.Map, spec: SatTileSpec, visibility: 'visible' | 'none') {
   map.addSource(GOES_SOURCE_ID, { type: 'raster', tileSize: 256, maxzoom: spec.maxzoom,
-    attribution: ATTRIBUTION,
-    tiles: [tileUrl(mode)] });
+    attribution: spec.attribution,
+    tiles: [spec.url] });
   const layer: maplibregl.RasterLayerSpecification = {
     id: GOES_LAYER_ID, type: 'raster', source: GOES_SOURCE_ID,
     layout: { visibility },
-    // Fade back as you overzoom past the sensor resolution so streets stay
-    // readable under the (increasingly blurry) cloud field.
-    paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 8, 0.88, 10, 0.8, 12, 0.55] as any, 'raster-fade-duration': 300 },
+    paint: rasterPaint(),
   };
-  if (map.getLayer(GOES_BEFORE_ID)) map.addLayer(layer, GOES_BEFORE_ID);
-  else map.addLayer(layer);
-  activeGoesMode = mode;
+  const added = addLayerBeforeLabels(map, layer);
+  if (!added) throw new Error('Unable to add GOES raster layer');
+  activeSatMode = spec.mode;
+  activeSatKind = spec.kind;
+  activeSatUrl = spec.url;
 }
 
-function refreshGoesTiles(map: maplibregl.Map, visibility?: 'visible' | 'none') {
-  const mode = goesModeForDate();
-  const currentVisibility = visibility ?? (map.getLayer(GOES_LAYER_ID) && map.getLayoutProperty(GOES_LAYER_ID, 'visibility') === 'visible' ? 'visible' : 'none');
-  if (activeGoesMode !== mode || !map.getSource(GOES_SOURCE_ID) || !map.getLayer(GOES_LAYER_ID)) {
+function applyGoesTileSpec(map: maplibregl.Map, spec: SatTileSpec, visibility: 'visible' | 'none') {
+  const sourceMissing = !map.getSource(GOES_SOURCE_ID);
+  const layerMissing = !map.getLayer(GOES_LAYER_ID);
+  const recreate = sourceMissing || layerMissing || activeSatMode !== spec.mode || activeSatKind !== spec.kind;
+  if (recreate) {
     if (map.getLayer(GOES_LAYER_ID)) map.removeLayer(GOES_LAYER_ID);
     if (map.getSource(GOES_SOURCE_ID)) map.removeSource(GOES_SOURCE_ID);
-    addGoesSourceAndLayer(map, mode, currentVisibility);
+    addGoesSourceAndLayer(map, spec, visibility);
     return;
   }
-  (map.getSource(GOES_SOURCE_ID) as maplibregl.RasterTileSource).setTiles([tileUrl(mode)]);
-  if (visibility) map.setLayoutProperty(GOES_LAYER_ID, 'visibility', visibility);
+  if (activeSatUrl !== spec.url) {
+    (map.getSource(GOES_SOURCE_ID) as maplibregl.RasterTileSource).setTiles([spec.url]);
+    activeSatUrl = spec.url;
+  }
+  map.setLayoutProperty(GOES_LAYER_ID, 'visibility', visibility);
+}
+
+async function refreshGoesTiles(map: maplibregl.Map, visibility?: 'visible' | 'none') {
+  const seq = ++refreshSeq;
+  const mode = satModeForDate();
+  const desiredVisibility = visibility ?? currentGoesVisibility(map);
+  if (mode === 'day') {
+    applyGoesTileSpec(map, dayTileSpec(), desiredVisibility);
+    return;
+  }
+  if (activeSatMode !== 'night' || !map.getLayer(GOES_LAYER_ID) || !map.getSource(GOES_SOURCE_ID)) {
+    applyGoesTileSpec(map, nightFallbackTileSpec(), desiredVisibility);
+  } else if (visibility) {
+    map.setLayoutProperty(GOES_LAYER_ID, 'visibility', visibility);
+  }
+  const spec = await nightTileSpec();
+  if (seq !== refreshSeq || satModeForDate() !== 'night') return;
+  applyGoesTileSpec(map, spec, desiredVisibility);
 }
 
 export function addGoesLayer(map: maplibregl.Map) {
-  addGoesSourceAndLayer(map, goesModeForDate(), 'none');
+  const mode = satModeForDate();
+  addGoesSourceAndLayer(map, mode === 'day' ? dayTileSpec() : nightFallbackTileSpec(), 'none');
+  if (mode === 'night') void refreshGoesTiles(map).catch(() => undefined);
   // While visible, re-point tiles at the newest granule every 10 min.
   window.setInterval(() => {
     if (document.hidden || map.getLayoutProperty(GOES_LAYER_ID, 'visibility') !== 'visible') return;
-    refreshGoesTiles(map, 'visible');
+    void refreshGoesTiles(map, 'visible').catch(() => undefined);
   }, 10 * 60 * 1000);
 }
 
 export function setGoesVisible(map: maplibregl.Map, on: boolean) {
   if (!map.getLayer(GOES_LAYER_ID)) return;
   if (on) {
-    refreshGoesTiles(map, 'visible');
+    void refreshGoesTiles(map, 'visible').catch(() => undefined);
     return;
   }
+  refreshSeq++;
   map.setLayoutProperty(GOES_LAYER_ID, 'visibility', 'none');
 }
 
@@ -191,13 +395,13 @@ function renderNightCameraEstimate() {
   const main = $('fog-main'), sub = $('fog-sub'), chip = $('fog-chip');
   if (!main || !sub) return;
   const time = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-  main.textContent = 'Night — satellite IR shows fog; cameras need daylight';
+  main.textContent = 'Night — satellite layer shows fog; cameras need daylight';
   sub.textContent = `peak-camera estimate resumes at sunrise · ${time}`;
   if (chip) chip.hidden = true;
 }
 
 export function runFogAnalysis(map: maplibregl.Map, sampleSize: number, force = false): Promise<void> {
-  if (goesModeForDate() === 'night') {
+  if (camerasAreDark()) {
     renderNightCameraEstimate();
     return Promise.resolve();
   }
