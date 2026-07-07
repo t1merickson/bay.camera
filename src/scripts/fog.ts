@@ -33,7 +33,11 @@ const SSEC_REALEARTH_ATTRIBUTION = 'GOES-18 · SSEC RealEarth';
 const FOGTONE_PROTOCOL = 'fogtone';
 const FOGTONE_PREFIX = `${FOGTONE_PROTOCOL}://`;
 // Tone curve constants calibrated on real GOES-18 fog frames.
-const FOG_TONE_BLACK = 30;
+// Black point 70 (was 30, microclimates.today's tune for a black background):
+// on our map-first design the higher cut keeps bright daytime land reflectance
+// (~60-140) from graying out clear inland areas, while the marine layer
+// (~150-230) stays solid. Trade-off: the very thinnest wisps drop out.
+const FOG_TONE_BLACK = 70;
 const FOG_TONE_WHITE = 185;
 const FOG_TONE_GAMMA = 1.1;
 const FOG_TONE_MAX_ALPHA = 236; // About 0.925 * 255, keeping solid fog just under opaque.
@@ -405,7 +409,11 @@ export function runFogAnalysis(map: maplibregl.Map, sampleSize: number, force = 
     renderNightCameraEstimate();
     return Promise.resolve();
   }
-  if (running) return running;
+  if (running) {
+    // Don't swallow a bigger request (fog toggle's full pass) while the boot
+    // probe is in flight — chain it; the size guard below dedupes repeats.
+    return running.then(() => runFogAnalysis(map, sampleSize, force));
+  }
   // A bigger requested sample upgrades a still-fresh smaller run (the boot
   // probe is 12 cams; the Fog toggle wants the full pass).
   if (!force && sampleSize <= lastSampleSize && Date.now() - lastRun < 10 * 60 * 1000 && lastEstimate) return Promise.resolve();
