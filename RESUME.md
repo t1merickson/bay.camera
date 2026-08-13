@@ -143,14 +143,27 @@ Their fog stack, fully decoded (their client is richly commented):
 1b. **Predictive fog card (awaiting Tim's verdict):** coast–inland temp
    gradient + coastal dew-point spread (both already in fetched data) as
    honest "fog likely tonight" heuristics.
-2. **Deploy to Netlify** — config exists, untested end-to-end. Domain still
-   undecided (Tim gave bay.camera to gongruya). At deploy time, add CDN
-   caching to the proxies: the /api/alertca 200-rewrite should become an
-   edge/function response with `Netlify-CDN-Cache-Control: s-maxage=60`
-   (it pipes ~0.9MB gzipped per miss — this is the bandwidth line to watch);
-   weather stays browser→Open-Meteo direct (zero cost to us, ~1.6k concurrent
-   visitor-hours/day of free quota) until traffic justifies the same
-   s-maxage=600 edge-cache treatment.
+2. ~~**Deploy to Netlify**~~ — **DONE. Live at https://bay-camera.netlify.app/**
+   (12 Aug 2026). Auto-deploys on push to `master` at
+   github.com/t1merickson/bay.camera. The domain question is still open —
+   bay.camera belongs to gongruya, and Tim decided against buying a new one
+   for now. The product is still named bay.camera in all UI; only
+   `astro.config.mjs`'s `site` points at the Netlify subdomain.
+
+   **Caching gotcha, learned the hard way:** a `[[headers]]` block in
+   netlify.toml does NOT apply to a proxy rewrite. The live proxy reported
+   `fwd=miss` on every single request while static paths reported `stored`,
+   and the upstream sends no cache directive of its own — so every visitor
+   was pulling a fresh 6.65 MB from a public agency. Caching that path needs
+   code at the edge: `netlify/edge-functions/alertca.ts`, which also needs
+   `cache: 'manual'` in its config or Netlify skips the CDN cache entirely.
+   Verified live: `stored`, then `hit; ttl=56`. The netlify.toml redirect
+   stays as the fallback via `context.next()`.
+
+   Deno's fetch is NOT blocked by the upstream's firewall — that block only
+   targets browser TLS fingerprints — so the edge function can call it directly.
+   Weather stays browser→Open-Meteo direct (zero cost to us) until traffic
+   justifies the same treatment.
 3. **Design iteration with Tim's eyes** — dark-basemap contrast (Carto dark
    is very dark at z8), fog-card typography, temp-pill density at low zoom.
 4. **Night mode for fog card** — currently says "cameras too dark to read"
