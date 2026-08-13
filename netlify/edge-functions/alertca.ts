@@ -45,4 +45,7 @@ export default async (_request: Request, context: Context) => {
   });
 };
 
-export const config: Config = { path: '/api/alertca-edge' };
+// cache: 'manual' opts this response into the CDN cache. Without it Netlify
+// runs the function on every request and never stores the result, which makes
+// the whole point of this file moot.
+export const config: Config = { path: '/api/alertca-edge', cache: 'manual' };
