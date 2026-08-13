@@ -17,8 +17,9 @@
  * the normal pipeline so the netlify.toml redirect proxy still answers it.
  * Cameras keep working; we just lose the caching.
  *
- * Currently mounted on a test path. Once verified live it moves to
- * /api/alertca and the netlify.toml redirect becomes the fallback.
+ * Verified live before switching to the real path: the upstream's firewall
+ * accepts Deno's TLS fingerprint (the block only affects browsers), and the
+ * edge reports "hit" on a repeat request.
  */
 
 import type { Config, Context } from '@netlify/edge-functions';
@@ -48,4 +49,4 @@ export default async (_request: Request, context: Context) => {
 // cache: 'manual' opts this response into the CDN cache. Without it Netlify
 // runs the function on every request and never stores the result, which makes
 // the whole point of this file moot.
-export const config: Config = { path: '/api/alertca-edge', cache: 'manual' };
+export const config: Config = { path: '/api/alertca', cache: 'manual' };

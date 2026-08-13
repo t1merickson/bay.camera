@@ -17,16 +17,15 @@
   to = "https://ops.alertcalifornia.org/api/getCameraDataByLoc"
   status = 200
 
-# That upstream ignores every narrowing parameter and always returns its entire
-# camera database (~6.65 MB raw, ~0.9 MB gzipped). Caching it at Netlify's edge
-# means we hit a public agency's API once a minute total, however many people
-# have the map open. Browsers still revalidate each load so the frame list stays
-# fresh; alertca.ts keeps its own 60s cache on top of this.
-[[headers]]
-  for = "/api/alertca"
-  [headers.values]
-    Netlify-CDN-Cache-Control = "public, s-maxage=60, stale-while-revalidate=120"
-    Cache-Control = "public, max-age=0, must-revalidate"
+# Caching for that path lives in netlify/edge-functions/alertca.ts, not here.
+# A [[headers]] block does NOT apply to a proxied response — tried it against
+# the live site and the proxy path reported "fwd=miss" on every request while
+# static paths reported "stored". The upstream sends no cache directive of its
+# own, so without code running at the edge, every visitor triggered a fresh
+# 6.65 MB fetch from a public agency's API.
+#
+# The redirect above stays as the fallback: if the edge function's fetch fails
+# it calls context.next() and this answers instead, uncached but working.
 
 # Astro puts a content hash in these filenames, so changing a file changes its
 # name. Safe to cache forever.
