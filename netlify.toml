@@ -4,6 +4,10 @@
   command = "npm run build"
   publish = "dist"
 
+[build.environment]
+  # Match the local dev version so a build that passes here passes there.
+  NODE_VERSION = "22"
+
 # ops.alertcalifornia.org blocks browser TLS fingerprints (AWS WAF) while
 # allowing server-side fetches, so the client hits this same-origin path and
 # Netlify proxies it (status 200 = proxy, not redirect). Mirrors the Vite dev
@@ -12,3 +16,21 @@
   from = "/api/alertca"
   to = "https://ops.alertcalifornia.org/api/getCameraDataByLoc"
   status = 200
+
+# That upstream ignores every narrowing parameter and always returns its entire
+# camera database (~6.65 MB raw, ~0.9 MB gzipped). Caching it at Netlify's edge
+# means we hit a public agency's API once a minute total, however many people
+# have the map open. Browsers still revalidate each load so the frame list stays
+# fresh; alertca.ts keeps its own 60s cache on top of this.
+[[headers]]
+  for = "/api/alertca"
+  [headers.values]
+    Netlify-CDN-Cache-Control = "public, s-maxage=60, stale-while-revalidate=120"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Astro puts a content hash in these filenames, so changing a file changes its
+# name. Safe to cache forever.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

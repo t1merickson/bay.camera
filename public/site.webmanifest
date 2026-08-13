@@ -1,12 +1,14 @@
 {
-  "short_name": "",
-  "name": "",
+  "name": "bay.camera — Bay Area fog, light & weather cameras",
+  "short_name": "bay.camera",
+  "description": "A full-screen interactive map of live webcams, fog, and microclimates across the San Francisco Bay Area.",
   "icons": [{
     "src": "/icon.png",
     "type": "image/png",
-    "sizes": "192x192"
+    "sizes": "384x384"
   }],
-  "start_url": "/?utm_source=homescreen",
-  "background_color": "#fafafa",
-  "theme_color": "#fafafa"
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
 }

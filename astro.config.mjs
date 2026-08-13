@@ -17,7 +17,10 @@ const alertcaProxy = {
 };
 
 export default defineConfig({
-  site: 'https://bay.camera',
+  // Deploy target. bay.camera itself is not ours right now, so canonical URLs
+  // and the sitemap point at the Netlify subdomain. The product is still
+  // called bay.camera everywhere it's user-facing.
+  site: 'https://bay-camera.netlify.app',
   output: 'static',
   build: { format: 'file' },
   vite: {

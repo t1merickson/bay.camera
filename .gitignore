@@ -21,3 +21,6 @@ xcuserdata
 # svn & cvs
 .svn
 CVS
+
+# point-in-time session dump, not project docs
+COMPACTED.md

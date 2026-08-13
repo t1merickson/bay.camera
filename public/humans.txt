@@ -3,13 +3,19 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    t1merickson -- design & code
 
-# THANKS
+# DATA
 
-    <name>
+    NASA GIBS -- GOES-18 satellite imagery (GeoColor, Band 2, Band 13)
+    SSEC RealEarth, UW-Madison -- night microphysics fog product
+    NOAA / National Weather Service -- station observations
+    Open-Meteo -- microclimate forecasts and elevation
+    ALERTCalifornia, UC San Diego -- peak-mounted wildfire cameras
+    OpenStreetMap contributors, CARTO -- basemap
+    Solar Icons by 480 Design (CC BY 4.0) -- weather icons
 
 # TECHNOLOGY COLOPHON
 
-    CSS3, HTML5
-    Apache Server Configs, jQuery, Modernizr, Normalize.css
+    Astro, MapLibre GL JS, TypeScript
+    Hand-written CSS. No framework, no tracking, no API keys.
