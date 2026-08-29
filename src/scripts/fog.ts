@@ -12,6 +12,7 @@
  */
 import type maplibregl from 'maplibre-gl';
 import { addProtocol, type RequestParameters } from 'maplibre-gl';
+import { firstLabelLayerId } from './map';
 import { peaks, mToFt } from './data';
 import { getAlertCamUrls } from './alertca';
 import { analyzePeaks, estimateFogTop, type PeakInput, type PeakReading, type FogTopEstimate } from './fogtop';
@@ -19,7 +20,6 @@ import { updatePeakStatuses } from './peaks';
 
 const GOES_SOURCE_ID = 'goes';
 const GOES_LAYER_ID = 'goes';
-const GOES_BEFORE_ID = 'labels';
 // Measured on real frames: Band-2 luminance hits the tone-curve black point
 // near +6°, so hand off early rather than show black frames.
 const SAT_SWITCH_ELEV_DEG = 7;
@@ -253,7 +253,11 @@ function rasterPaint(): maplibregl.RasterLayerSpecification['paint'] {
 
 function addLayerBeforeLabels(map: maplibregl.Map, layer: maplibregl.RasterLayerSpecification): boolean {
   try {
-    if (map.getLayer(GOES_BEFORE_ID)) map.addLayer(layer, GOES_BEFORE_ID);
+    // Computed per style rather than a fixed id: the old raster basemap had a
+    // literal 'labels' layer, the vector styles name theirs differently and
+    // disagree with each other (see firstLabelLayerId in map.ts).
+    const beforeId = firstLabelLayerId(map);
+    if (beforeId && map.getLayer(beforeId)) map.addLayer(layer, beforeId);
     else map.addLayer(layer);
   } catch {
     return false;

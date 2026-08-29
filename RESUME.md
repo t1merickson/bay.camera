@@ -41,6 +41,32 @@ windy-style instrument:
 
 ## ⚠️ Gotchas that cost real time (do not rediscover)
 
+0. **CARTO killed the free raster basemap (28 Aug 2026).** Every tile from
+   `basemaps.cartocdn.com` now has "API KEY REQUIRED" stamped diagonally
+   across it, and signing up gets a 14-day trial, not a free tier. We moved to
+   **OpenFreeMap** (`tiles.openfreemap.org/styles/positron` and `/dark`) — no
+   key, no signup, same Positron/Dark-Matter look, OpenMapTiles data.
+   Consequences of that swap, all of which cost time:
+   - The basemap is now **vector, not raster**, so the old "label-less base +
+     labels-only overlay" sandwich is gone. GOES is inserted via `beforeId`
+     instead (`firstLabelLayerId` in map.ts).
+   - **Do not insert before the first symbol layer.** OpenFreeMap's dark style
+     puts its first symbol layer at index 8 and then draws every road,
+     building and boundary after it — inserting there puts roads on top of the
+     clouds. Insert after the last basemap *geometry* layer.
+   - **That scan must skip our own layers.** cam-point/peak-point/clusters are
+     circle layers appended above the basemap; a naive "last non-symbol layer"
+     walks past the labels, returns undefined, and GOES gets appended over the
+     whole map, burying every place name. Hit this for real. `APP_SOURCES` in
+     map.ts is the filter — add a new source to the app and update that set.
+   - Attribution comes free from their TileJSON; adding `customAttribution`
+     prints OpenStreetMap twice.
+   - Their glyph endpoint (`tiles.openfreemap.org/fonts/...`) was curl-checked
+     and returns real `application/x-protobuf`. Verify that again before ever
+     changing the URL — see gotcha 2.
+   - Known risk: OpenFreeMap is a free service with no SLA. Self-hosting is
+     documented if it ever goes away.
+
 1. **ALERTCalifornia's API blocks browser TLS fingerprints.** curl works;
    real Chrome fetch dies with a *spurious CORS error* (AWS WAF JA3 blocking,
    near-certainly). UA/headers/HTTP-version are all irrelevant — tested. The
