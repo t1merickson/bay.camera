@@ -1,22 +1,32 @@
 /* bay.camera — full-screen map app. shadcn-spirit tokens, hand-rolled, no Tailwind. */
 
 :root {
+  /* Chrome neutrals are TRUE neutral (0% sat) on purpose. These were shadcn's
+     slate ramp, which tints every panel blue — and this UI floats over a map
+     whose colors are the actual content. Neutral chrome keeps the only color
+     on screen meaningful. Rungs are alpha-black-over-white, resolved to solid
+     because panels are .92 opaque and the compositing difference is invisible. */
   --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
+  --foreground: 0 0% 7%;
   --card: 0 0% 100%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215 16% 47%;
-  --border: 214 32% 91%;
-  --primary: 222 47% 11%;
-  --primary-foreground: 210 40% 98%;
+  --muted: 0 0% 95%;            /* hover fill = black 5% */
+  --muted-foreground: 0 0% 40%; /* secondary ink, 5.7:1 on white */
+  --border: 0 0% 90%;           /* hairline = black 10% */
+  --border-strong: 0 0% 82%;
+  --primary: 0 0% 7%;
+  --primary-foreground: 0 0% 98%;
   --accent: 217 91% 55%;
   --ring: 217 91% 55%;
-  --radius: 0.5rem;
+  --radius: 8px;
+  --radius-sm: 6px;
+  --shadow: 0 4px 20px -4px rgb(0 0 0 / .16);
+  /* Basemap fills stay faintly cool — they read as land and water, not chrome. */
   --water: 205 45% 90%;
   --land: 210 24% 95%;
   --land-line: 214 20% 80%;
-  --shadow: 0 4px 20px -4px rgba(15, 23, 42, .18);
-  /* region hues, desaturated so a full map reads calm (mirror map.ts REGION_COLORS) */
+  /* SEMANTIC COLOR BELOW — do not neutralize. These encode which region a
+     camera is in and whether a peak is socked in. They are the product.
+     (region hues mirror map.ts REGION_COLORS) */
   --r-satellite: 215 14% 54%; --r-golden-gate: 12 58% 54%; --r-san-francisco: 217 62% 56%;
   --r-north-bay: 142 42% 42%; --r-east-bay: 262 46% 62%; --r-peninsula: 189 55% 42%;
   --r-south-bay: 32 62% 50%; --r-santa-cruz: 330 48% 56%;
@@ -27,12 +37,13 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: 222 47% 6%; --foreground: 210 40% 96%; --card: 222 44% 8%;
-    --muted: 217 33% 15%; --muted-foreground: 215 20% 62%; --border: 217 30% 18%;
-    --primary: 210 40% 98%; --primary-foreground: 222 47% 11%;
+    --background: 0 0% 5%; --foreground: 0 0% 96%; --card: 0 0% 9%;
+    --muted: 0 0% 16%; --muted-foreground: 0 0% 65%; --border: 0 0% 20%;
+    --border-strong: 0 0% 28%;
+    --primary: 0 0% 96%; --primary-foreground: 0 0% 7%;
     --accent: 217 91% 66%; --ring: 217 91% 66%;
+    --shadow: 0 4px 24px -4px rgb(0 0 0 / .55);
     --water: 214 46% 9%; --land: 217 27% 15%; --land-line: 217 18% 26%;
-    --shadow: 0 4px 24px -4px rgba(0, 0, 0, .5);
     --peak-status-unsampled: 215 15% 55%;
     --peak-status-clear: 142 45% 42%;
     --peak-status-fog: 210 25% 88%;
@@ -44,7 +55,7 @@
 html, body { height: 100%; margin: 0; overflow: hidden; }
 body {
   background: hsl(var(--background)); color: hsl(var(--foreground));
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased;
 }
 a { color: hsl(var(--accent)); text-decoration: none; }
@@ -105,7 +116,7 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
 .btn { font-size: 0.8rem; font-weight: 500; padding: 6px 12px; border-radius: var(--radius); border: 1px solid hsl(var(--border)); background: hsl(var(--card)); color: hsl(var(--foreground)); cursor: pointer; }
 .btn:hover { background: hsl(var(--muted)); }
 .btn[aria-expanded="true"] { background: hsl(var(--foreground)); color: hsl(var(--background)); border-color: transparent; }
-.icon-btn { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 7px; border: 1px solid hsl(var(--border)); background: hsl(var(--card)); color: hsl(var(--foreground)); cursor: pointer; font-size: 0.95rem; line-height: 1; }
+.icon-btn { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); border: 1px solid hsl(var(--border)); background: hsl(var(--card)); color: hsl(var(--foreground)); cursor: pointer; font-size: 0.95rem; line-height: 1; }
 .icon-btn:hover { background: hsl(var(--muted)); }
 
 /* live toggle */
@@ -137,7 +148,7 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
 /* camera list */
 .cam-list { overflow-y: auto; padding: 4px 8px 10px; }
 .cam-list-region { font-size: 0.64rem; text-transform: uppercase; letter-spacing: .06em; color: hsl(var(--muted-foreground)); font-weight: 600; padding: 12px 6px 4px; }
-.cam-list-item { width: 100%; display: flex; align-items: center; gap: 8px; padding: 7px 8px; border: 0; background: transparent; color: hsl(var(--foreground)); border-radius: 6px; cursor: pointer; text-align: left; font-size: 0.82rem; }
+.cam-list-item { width: 100%; display: flex; align-items: center; gap: 8px; padding: 7px 8px; border: 0; background: transparent; color: hsl(var(--foreground)); border-radius: var(--radius-sm); cursor: pointer; text-align: left; font-size: 0.82rem; }
 .cam-list-item:hover { background: hsl(var(--muted)); }
 .cli-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 body.hiding-offline .cam-list-item.offline { display: none; }
@@ -213,7 +224,7 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .wx-pill {
   display: none; align-items: center; gap: 4px; padding: 2px 7px;
   background: hsl(var(--card) / .92); border: 1px solid hsl(var(--border));
-  border-radius: 999px; box-shadow: 0 1px 4px rgba(15, 23, 42, .12);
+  border-radius: 999px; box-shadow: 0 1px 4px rgb(0 0 0 / .12);
   font-size: 12px; line-height: 1.4; cursor: pointer; position: relative;
 }
 .wx-pill.is-on { display: inline-flex; }
@@ -222,7 +233,7 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .wx-name {
   position: absolute; top: calc(100% + 3px); left: 50%; transform: translateX(-50%);
   white-space: nowrap; font-size: 10px; color: hsl(var(--muted-foreground));
-  background: hsl(var(--card) / .85); padding: 0 5px; border-radius: 4px; opacity: 0; transition: opacity .12s;
+  background: hsl(var(--card) / .85); padding: 0 5px; border-radius: var(--radius-sm); opacity: 0; transition: opacity .12s;
 }
 .wx-pill:hover .wx-name { opacity: 1; }
 .wx-pill:hover { z-index: 5; border-color: hsl(var(--accent) / .5); }
@@ -245,6 +256,63 @@ body.cam-open .fog-card { right: 384px; }
 .fog-sub { font-size: 0.72rem; color: hsl(var(--muted-foreground)); margin-top: 2px; }
 /* keep the fog card clear of maplibre zoom controls */
 body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 128px; }
+
+/* ---- press feedback ----
+   apple-design §1: feedback belongs on pointer-DOWN, not on release. This file
+   had no :active state anywhere, so every control felt dead until its effect
+   landed. 100ms is below the threshold where a press reads as a transition. */
+.btn, .icon-btn, .chip, .maplibregl-ctrl-group button {
+  transition: transform 100ms ease-out, background-color 100ms ease-out;
+}
+.btn:active, .icon-btn:active, .chip:active, .maplibregl-ctrl-group button:active {
+  transform: scale(.97);
+}
+.cam-list-item { transition: background-color 100ms ease-out; }
+.cam-list-item:active { background: hsl(var(--foreground) / .09); }
+/* .wx-pill IS the MapLibre marker element — MapLibre rewrites its transform
+   every frame to position it, so press feedback here must never use transform
+   or the pill jumps to the map origin. Filter is safe and compositor-friendly. */
+/* .maplibregl-marker is MapLibre's own class on this same element and its
+   `transition: opacity .2s` loads after ours, so matching both classes is
+   what wins the tie. Opacity is kept in the list so MapLibre's marker fade
+   still works. */
+.maplibregl-marker.wx-pill { transition: filter 100ms ease-out, border-color 100ms ease-out, opacity .2s; }
+.wx-pill:active { filter: brightness(.94); }
+
+/* ---- accessibility preferences ----
+   apple-design §14: reduced motion means a gentler equivalent, not no feedback,
+   so the press scale becomes a press fill rather than disappearing. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .btn:active, .icon-btn:active, .chip:active, .maplibregl-ctrl-group button:active {
+    transform: none; background: hsl(var(--foreground) / .09);
+  }
+}
+
+/* This UI is almost entirely glass floating over a map, so honoring this one
+   matters more here than in a normal app. */
+@media (prefers-reduced-transparency: reduce) {
+  .panel, .hud-top, .legend-map, .map-pop, .fog-card, .wx-pill, .wx-name {
+    background: hsl(var(--card));
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  .maplibregl-ctrl-attrib { background: hsl(var(--card)) !important; }
+}
+
+@media (prefers-contrast: more) {
+  :root { --border: 0 0% 68%; --muted-foreground: 0 0% 28%; }
+  .panel, .hud-top, .legend-map, .map-pop, .fog-card {
+    background: hsl(var(--card)); backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  .btn, .icon-btn, .chip, .layer-group { border-color: hsl(var(--border-strong)); }
+}
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+  :root { --border: 0 0% 44%; --muted-foreground: 0 0% 82%; }
+}
 
 /* ---- mobile: panels become bottom sheets ---- */
 @media (max-width: 640px) {
