@@ -338,6 +338,19 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .wxl-temp { position: absolute; transform: translate(-50%, calc(-50% - 16px)); font-size: 10px; font-weight: 650; line-height: 1; color: hsl(var(--foreground)); white-space: nowrap; }
 .wxl-hour { position: absolute; bottom: 0; transform: translateX(-50%); font-size: 10px; line-height: 1; color: hsl(var(--muted-foreground)); white-space: nowrap; }
 
+/* ---- conditions block inside the camera panel ----
+   The camera panel used to end at the source links and leave a tall dead area
+   below them. We already know where every camera is — it is the same
+   coordinate that places its dot on the map — so the space answers "what is
+   it like there right now" using the same renderer the weather pills use. */
+.cam-wx { margin-top: 18px; padding-top: 14px; box-shadow: inset 0 1px 0 0 rgb(128 128 128 / .18); }
+.cam-wx-head {
+  font-size: 0.66rem; text-transform: uppercase; letter-spacing: .05em;
+  color: hsl(var(--muted-foreground)); font-weight: 600; margin-bottom: 10px;
+}
+.cam-wx .wxd-hero { margin-bottom: 12px; }
+.cam-wx .wxd-grid { box-shadow: none; }
+
 /* ---- peak-status key ----
    The persistent region legend that used to live here is gone: the Cameras
    panel already lists every region with its colour swatch and doubles as the

@@ -125,6 +125,23 @@ async function fetchWeather(spot: WeatherSpot): Promise<WeatherForecast> {
   return await r.json() as WeatherForecast;
 }
 
+/**
+ * 10 minutes, keyed on coordinates rounded to ~100m. Clicking through a dozen
+ * cameras used to be a dozen forecast requests; now neighbouring cameras share
+ * one. The TTL matches the refresh cadence the map pills already use.
+ */
+const WX_TTL_MS = 10 * 60 * 1000;
+const wxCache = new Map<string, { at: number; data: WeatherForecast }>();
+
+async function fetchWeatherCached(spot: WeatherSpot): Promise<WeatherForecast> {
+  const key = `${spot.lat.toFixed(3)},${spot.lng.toFixed(3)}`;
+  const hit = wxCache.get(key);
+  if (hit && Date.now() - hit.at < WX_TTL_MS) return hit.data;
+  const data = await fetchWeather(spot);
+  wxCache.set(key, { at: Date.now(), data });
+  return data;
+}
+
 function conditionLabel(value: unknown) {
   const code = num(value);
   return code == null ? '—' : WEATHER_CODE_LABELS[code] ?? '—';
@@ -228,13 +245,13 @@ function hourlyTrend(data: WeatherForecast) {
   return `<div class="wxl"><svg class="wxl-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${lines}</svg>${markers}</div>`;
 }
 
-function renderWeather(data: WeatherForecast) {
+function weatherHeroHtml(data: WeatherForecast) {
   const current = data.current ?? {};
   const code = weatherCode(current.weather_code);
   const day = isDay(current.is_day);
   const icon = iconKeyFor(code, day);
   const color = colorFor(code, day);
-  $('cam-view').innerHTML =
+  return (
     '<div class="wxd-hero">' +
     `<span class="wxd-hero-icon" style="color:${color};">${iconSvg(icon)}</span>` +
     '<div>' +
@@ -242,8 +259,13 @@ function renderWeather(data: WeatherForecast) {
     `<div class="wxd-condition">${esc(conditionLabel(current.weather_code))}</div>` +
     `<div class="wxd-feels">feels like ${esc(temp(current.apparent_temperature))}</div>` +
     '</div>' +
-    '</div>';
-  $('cam-info').innerHTML =
+    '</div>'
+  );
+}
+
+function weatherDetailHtml(data: WeatherForecast) {
+  const current = data.current ?? {};
+  return (
     '<div class="wxd-grid">' +
     detailRow('Humidity', percent(current.relative_humidity_2m)) +
     detailRow('Dew point', tempF(current.dew_point_2m)) +
@@ -256,7 +278,39 @@ function renderWeather(data: WeatherForecast) {
     '<div class="wxd-hours">' +
     '<div class="wxd-hours-title">Next 12 hours</div>' +
     hourlyTrend(data) +
-    '</div>';
+    '</div>'
+  );
+}
+
+function renderWeather(data: WeatherForecast) {
+  $('cam-view').innerHTML = weatherHeroHtml(data);
+  $('cam-info').innerHTML = weatherDetailHtml(data);
+}
+
+/**
+ * Append the forecast for a camera's own coordinates under its metadata.
+ * The camera panel had a tall dead area below the source links, and we already
+ * know where every camera is, so the space may as well answer "what is it like
+ * there right now".
+ *
+ * `guard` is the activeId at call time: the fetch is slower than a click, so a
+ * late response for a camera the user has already left must not paint over the
+ * new one.
+ */
+async function appendLocalWeather(lat: number, lng: number, guard: string) {
+  const head = '<div class="cam-wx-head">Conditions here</div>';
+  const host = document.createElement('section');
+  host.className = 'cam-wx';
+  host.innerHTML = head + '<div class="wxd-loading">Loading conditions…</div>';
+  $('cam-info').appendChild(host);
+  try {
+    const data = await fetchWeatherCached({ name: '', lat, lng });
+    if (activeId !== guard) return;
+    host.innerHTML = head + weatherHeroHtml(data) + weatherDetailHtml(data);
+  } catch {
+    if (activeId !== guard) return;
+    host.innerHTML = head + '<div class="wxd-error">Conditions unavailable</div>';
+  }
 }
 
 export function setLive(on: boolean) {
@@ -327,6 +381,8 @@ export async function openCam(id: string) {
   if (c.page) html += `<p class="cam-source"><a href="${esc(c.page)}" target="_blank" rel="noopener">Source page ${EXT}</a></p>`;
   if (c.donation) html += `<p class="cam-donate"><a href="${esc(c.donation.url)}" target="_blank" rel="noopener">♥ ${esc(c.donation.text)}</a></p>`;
   $('cam-info').innerHTML = html;
+  // Region-level entries (bay-wide views, offshore buoys) carry no coordinates.
+  if (c.lat != null && c.lng != null) void appendLocalWeather(c.lat, c.lng, id);
   ($('panel-cam') as HTMLElement).hidden = false;
   document.body.classList.add('cam-open');
   document.querySelectorAll('.cam-list-item').forEach((el) => el.classList.toggle('active', (el as HTMLElement).dataset.id === id));
@@ -336,7 +392,7 @@ export async function openCam(id: string) {
 }
 
 /** Preview a peak cam (ALERTCalifornia layer) in the same right panel. */
-export async function openPeakCam(p: { camId: string; name: string; county: string; elevM: number }) {
+export async function openPeakCam(p: { camId: string; name: string; county: string; elevM: number; lat?: number; lng?: number }) {
   activeId = 'peak:' + p.camId;
   const id = activeId;
   stopPreviewTimer();
@@ -368,6 +424,7 @@ export async function openPeakCam(p: { camId: string; name: string; county: stri
     `<p class="cam-name">Peak camera · ${esc(p.county)} · ${ft} ft</p>` +
     `<p class="cam-attr">ALERTCalifornia — UC San Diego &amp; CAL FIRE</p>` +
     `<p class="cam-source"><a href="https://cameras.alertcalifornia.org/" target="_blank" rel="noopener">alertcalifornia.org ${EXT}</a></p>`;
+  if (p.lat != null && p.lng != null) void appendLocalWeather(p.lat, p.lng, id);
   ($('panel-cam') as HTMLElement).hidden = false;
   document.body.classList.add('cam-open');
   document.querySelectorAll('.cam-list-item.active').forEach((el) => el.classList.remove('active'));
