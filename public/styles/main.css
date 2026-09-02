@@ -185,7 +185,7 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
 /* One glass recipe, applied everywhere a surface floats over the map. Note
    there is no `border` anywhere below: the rim is inset shadow, so it never
    adds to the box and never paints a flat line across a curved corner. */
-.panel, .hud-top, .legend-map, .map-pop, .fog-card {
+.panel, .hud-top, .map-pop, .fog-card {
   position: relative;
   background: rgb(var(--glass-tint) / var(--glass-tint-a));
   backdrop-filter: var(--glass-backdrop);
@@ -204,9 +204,17 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
    eight region colours and four peak states, and spending blue and orange on
    every chrome edge competes with the data. */
 
+/* One wide pill. Height is driven by content rather than the old fixed 52px,
+   which makes this the same bar at every width — the compact treatment that
+   used to live behind a 640px breakpoint is now simply the bar.
+   --radius-full clamps to half the height, so the ends are true semicircles
+   at whatever height the content settles on. Content is vertically centred, so
+   it sits at the capsule's widest point and the 20px padding is for comfort
+   rather than to clear the curve. */
 .hud-top {
-  position: fixed; top: 12px; left: 12px; right: 12px; height: 52px; z-index: 20;
-  display: flex; align-items: center; gap: 16px; padding: 0 18px; border-radius: var(--radius-lg);
+  position: fixed; top: 12px; left: 12px; right: 12px; z-index: 20;
+  display: flex; align-items: center; gap: 16px;
+  padding: 8px 20px; border-radius: var(--radius-full);
 }
 .brand { display: flex; align-items: center; }
 .hud-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
@@ -260,7 +268,7 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
 .live-input:checked + .live-switch .live-thumb { transform: translateX(16px); }
 
 /* ---- panels ---- */
-.panel { position: fixed; top: 82px; bottom: 12px; width: 320px; border-radius: var(--radius-lg); display: flex; flex-direction: column; overflow: hidden; z-index: 15; }
+.panel { position: fixed; top: 69px; bottom: 12px; width: 320px; border-radius: var(--radius-lg); display: flex; flex-direction: column; overflow: hidden; z-index: 15; }
 .panel[hidden] { display: none; } /* .panel sets display:flex, which would otherwise beat the UA [hidden] rule */
 .live-input:focus-visible + .live-switch { outline: 2px solid hsl(var(--ring)); outline-offset: 2px; }
 .panel-list { left: 12px; }
@@ -330,13 +338,31 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .wxl-temp { position: absolute; transform: translate(-50%, calc(-50% - 16px)); font-size: 10px; font-weight: 650; line-height: 1; color: hsl(var(--foreground)); white-space: nowrap; }
 .wxl-hour { position: absolute; bottom: 0; transform: translateX(-50%); font-size: 10px; line-height: 1; color: hsl(var(--muted-foreground)); white-space: nowrap; }
 
-/* ---- legend (floats over map) ---- */
-.legend-map { position: fixed; left: 12px; bottom: 12px; z-index: 12; display: flex; flex-wrap: wrap; gap: 4px 12px; max-width: 44vw; padding: 10px 15px; border-radius: var(--radius-lg); }
-.panel-list:not([hidden]) ~ .legend-map { left: 344px; }
-.legend-item { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; color: hsl(var(--muted-foreground)); }
-.peaks-legend { bottom: 64px; max-width: none; }
+/* ---- peak-status key ----
+   The persistent region legend that used to live here is gone: the Cameras
+   panel already lists every region with its colour swatch and doubles as the
+   region filter, so a second copy bolted to the corner was explaining
+   something twice.
+
+   What remains is the peak-status key, and it is deliberately NOT a glass
+   tile. A key annotates the map, so it belongs to the map rather than to the
+   floating chrome layer — and Apple's rule is the same one: don't put Liquid
+   Glass in the content layer. With no surface behind it the labels need their
+   own legibility, which is a halo in the page background colour, the same
+   trick the basemap's own place names use. */
+.peaks-legend {
+  position: fixed; left: 14px; bottom: 14px; z-index: 12;
+  display: flex; flex-wrap: wrap; gap: 4px 14px;
+  background: none; box-shadow: none; padding: 0;
+}
 .peaks-legend[hidden] { display: none; }
-@media (max-width: 900px) { .legend-map { display: none; } }
+.panel-list:not([hidden]) ~ .peaks-legend { left: 346px; }
+.legend-item {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.72rem; font-weight: 500; color: hsl(var(--foreground) / .8);
+  text-shadow: 0 0 3px hsl(var(--background)), 0 0 7px hsl(var(--background));
+}
+@media (max-width: 900px) { .peaks-legend { display: none; } }
 
 /* ---- layer toggle group ---- */
 /* Fog / Temps / Peaks are three INDEPENDENT toggles, any combination of which
@@ -472,7 +498,7 @@ body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 128px;
 /* This UI is almost entirely glass floating over a map, so honoring this one
    matters more here than in a normal app. */
 @media (prefers-reduced-transparency: reduce) {
-  .panel, .hud-top, .legend-map, .map-pop, .fog-card, .wx-pill, .wx-name,
+  .panel, .hud-top, .map-pop, .fog-card, .wx-pill, .wx-name,
   .maplibregl-ctrl.maplibregl-ctrl-group {
     background: hsl(var(--card));
     backdrop-filter: none; -webkit-backdrop-filter: none;
@@ -487,7 +513,7 @@ body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 128px;
 
 @media (prefers-contrast: more) {
   :root { --border: 0 0% 68%; --muted-foreground: 0 0% 28%; }
-  .panel, .hud-top, .legend-map, .map-pop, .fog-card {
+  .panel, .hud-top, .map-pop, .fog-card {
     background: hsl(var(--card)); backdrop-filter: none; -webkit-backdrop-filter: none;
     box-shadow: inset 0 0 0 1px hsl(var(--border-strong)), var(--glass-lift);
   }
@@ -501,7 +527,7 @@ body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 128px;
 
 /* ---- mobile: panels become bottom sheets ---- */
 @media (max-width: 640px) {
-  .hud-top { height: auto; padding: 8px 12px; }
+  .hud-top { padding: 8px 14px; gap: 10px; }
   .brand h1 { font-size: 0.95rem; }
   .panel { top: auto; bottom: 8px; left: 8px; right: 8px; width: auto; max-height: 60vh; }
   .panel-cam { width: auto; }
