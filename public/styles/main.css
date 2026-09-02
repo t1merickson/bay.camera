@@ -39,8 +39,7 @@
     inset 0 1px 0 0 rgb(255 255 255 / .9),      /* specular top edge */
     inset 0 0 0 1px rgb(255 255 255 / .45),     /* rim all the way round */
     inset 0 -1px 1px 0 rgb(0 0 0 / .05);        /* thickness at the base */
-  /* Chromatic edge: cool on one vertical rim, warm on the other. Kept at .10
-     because the point is that you notice it only when looking for it. */
+  /* Chromatic edge: cool on one vertical rim, warm on the other. */
   --glass-fringe:
     inset 2px 0 3px -2px rgb(120 170 255 / .30),
     inset -2px 0 3px -2px rgb(255 176 120 / .26);
