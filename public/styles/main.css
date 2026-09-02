@@ -26,23 +26,37 @@
   --radius-full: 999px;
 
   /* ---- glass material ----
-     Edges are inset shadows, never a border. A border paints a flat line of
-     one colour on every side; real glass catches light on the top edge, holds
-     a faint rim all the way round, and goes slightly dark where it meets what
-     is under it. Three inset layers do that, and unlike a border they do not
-     take part in layout. */
-  --glass-blur: 24px;
-  --glass-sat: 180%;
+     Apple ships two Liquid Glass variants. The REGULAR variant "blurs and
+     adjusts the luminosity of background content to maintain legibility", and
+     the HIG says to use it "when background content might create legibility
+     issues, or when components have a significant amount of text, such as
+     alerts, sidebars, or popovers". Every surface in this app holds text over
+     a busy map, so every surface is regular. The CLEAR variant is for chrome
+     floating over photo or video; we have no such surface today. If the GOES
+     satellite layer ever becomes the visual subject, that is the case for
+     clear — and the HIG's remedy for it is a dark dimming layer at 35%.
+
+     Note what regular does NOT do: boost saturation. It adjusts luminosity.
+     An earlier pass here used saturate(180%), which pulled the map's colour
+     up into the chrome and competed with the region hues that colour is
+     reserved for.
+
+     Edges are inset shadows, never a border. A border paints one flat colour
+     on all four sides and cuts across a rounded corner; glass catches light
+     on its top edge and needs a faint dark rim to stay defined against a pale
+     basemap. Inset shadows also take no part in layout. */
+  --glass-blur: 20px;
+  --glass-sat: 115%;
+  --glass-lum: 1.04;   /* luminosity lift so dark map features don't muddy ink */
+  /* The whole filter chain lives in one token so the two places that apply
+     glass cannot drift apart, which they already did once. */
+  --glass-backdrop: blur(var(--glass-blur)) saturate(var(--glass-sat)) brightness(var(--glass-lum));
   --glass-tint: 255 255 255;
-  --glass-tint-a: .58;
+  --glass-tint-a: .48;
   --glass-rim:
-    inset 0 1px 0 0 rgb(255 255 255 / .9),      /* specular top edge */
-    inset 0 0 0 1px rgb(255 255 255 / .45),     /* rim all the way round */
-    inset 0 -1px 1px 0 rgb(0 0 0 / .05);        /* thickness at the base */
-  /* Chromatic edge: cool on one vertical rim, warm on the other. */
-  --glass-fringe:
-    inset 2px 0 3px -2px rgb(120 170 255 / .30),
-    inset -2px 0 3px -2px rgb(255 176 120 / .26);
+    inset 0 1px 0 0 rgb(255 255 255 / .70),     /* light catching the top edge */
+    inset 0 0 0 1px rgb(0 0 0 / .08),           /* neutral rim, survives a pale map */
+    inset 0 -1px 1px 0 rgb(0 0 0 / .07);        /* thickness at the base */
   --glass-lift:
     0 12px 32px -8px rgb(0 0 0 / .18),
     0 2px 8px -2px rgb(0 0 0 / .10);
@@ -76,14 +90,15 @@
        turned down: the tint inverts but the specular edge stays white and
        just loses most of its strength. */
     --glass-tint: 26 26 26;
-    --glass-tint-a: .55;
+    --glass-tint-a: .52;
+    /* Luminosity goes DOWN in dark mode: the job is the same (keep ink
+       legible) but the threat is reversed — bright satellite imagery blowing
+       out from behind the glass rather than dark terrain muddying it. */
+    --glass-lum: .84;
     --glass-rim:
-      inset 0 1px 0 0 rgb(255 255 255 / .22),
-      inset 0 0 0 1px rgb(255 255 255 / .09),
+      inset 0 1px 0 0 rgb(255 255 255 / .20),
+      inset 0 0 0 1px rgb(255 255 255 / .07),
       inset 0 -1px 1px 0 rgb(0 0 0 / .35);
-    --glass-fringe:
-      inset 2px 0 3px -2px rgb(120 170 255 / .22),
-      inset -2px 0 3px -2px rgb(255 176 120 / .18);
     --glass-lift:
       0 16px 40px -10px rgb(0 0 0 / .62),
       0 2px 10px -2px rgb(0 0 0 / .42);
@@ -115,28 +130,42 @@ h1 { margin: 0; font-size: 1rem; font-weight: 650; letter-spacing: -0.02em; }
 .map-stage { position: fixed; inset: 0; z-index: 0; background: hsl(var(--water)); }
 #map { width: 100%; height: 100%; }
 .maplibregl-canvas { outline: none; }
-/* MapLibre controls, themed to the design system */
-.maplibregl-ctrl-group {
+/* MapLibre controls, themed to the design system.
+   Every selector here matches BOTH classes on purpose. maplibre-gl.css is
+   imported from map.ts, so Astro injects it after this file's <link>, and a
+   single-class rule loses the tie. Measured before fixing: the zoom group was
+   rendering opaque #fff in dark mode and the attribution was black-on-dark —
+   the glass and the ink here were never actually applying. Same load-order
+   trap as .maplibregl-marker on the temp pills. */
+.maplibregl-ctrl.maplibregl-ctrl-group {
   background: rgb(var(--glass-tint) / var(--glass-tint-a));
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
   border: 0; box-shadow: var(--glass-rim), var(--glass-lift);
   border-radius: var(--radius); overflow: hidden;
 }
-.maplibregl-ctrl-group button { width: 32px; height: 32px; background: transparent; }
+.maplibregl-ctrl.maplibregl-ctrl-group button { width: 32px; height: 32px; background: transparent; color: hsl(var(--foreground)); }
 /* was a border-top divider; a soft inset keeps the capsule's curve intact */
-.maplibregl-ctrl-group button + button { box-shadow: inset 0 1px 0 0 rgb(128 128 128 / .2); }
-.maplibregl-ctrl-group button:hover { background: rgb(var(--glass-tint) / .5); }
+.maplibregl-ctrl.maplibregl-ctrl-group button + button { box-shadow: inset 0 1px 0 0 rgb(128 128 128 / .2); }
+.maplibregl-ctrl.maplibregl-ctrl-group button:hover { background: hsl(var(--foreground) / .1); }
 /* Attribution is legally required to be readable, so this surface gets a
    heavier tint than the rest of the glass and ink one rung up from --muted. */
-.maplibregl-ctrl-attrib {
+.maplibregl-ctrl.maplibregl-ctrl-attrib {
   background: rgb(var(--glass-tint) / .82) !important;
-  backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: var(--glass-backdrop); -webkit-backdrop-filter: var(--glass-backdrop);
   color: hsl(var(--foreground) / .72); border-radius: var(--radius-full); font-size: 11px;
   padding: 2px 9px;
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / .18);
 }
-.maplibregl-ctrl-attrib a { color: hsl(var(--foreground) / .82); }
+/* The visible text is in .maplibregl-ctrl-attrib-inner, not the container, and
+   MapLibre styles both — the background above already needed !important to
+   win, and colour needs the same. Measured before this: rgb(0,0,0) on a dark
+   glass pill, i.e. unreadable, which also means it was unreadable before the
+   glass pass and nobody had checked. */
+.maplibregl-ctrl.maplibregl-ctrl-attrib,
+.maplibregl-ctrl.maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-inner,
+.maplibregl-ctrl.maplibregl-ctrl-attrib a { color: hsl(var(--foreground) / .8) !important; }
+.maplibregl-ctrl.maplibregl-ctrl-attrib-button { background-color: transparent; }
 @media (prefers-color-scheme: dark) { .maplibregl-ctrl-icon { filter: invert(1) brightness(1.15); } }
 body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2s; }
 
@@ -159,38 +188,21 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
 .panel, .hud-top, .legend-map, .map-pop, .fog-card {
   position: relative;
   background: rgb(var(--glass-tint) / var(--glass-tint-a));
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
   border: 0;
-  box-shadow: var(--glass-rim), var(--glass-fringe), var(--glass-lift);
+  box-shadow: var(--glass-rim), var(--glass-lift);
 }
 
-/* Specular highlight. The article calls for one, and it is the difference
-   between "blurred rectangle" and "a slab with a light source". One soft
-   sheen falling off from the top-left corner — the same direction the rim
-   highlight and the drop shadow already imply, so the three agree on where
-   the light is. Absolutely positioned, so it never becomes a flex item in
-   .hud-top or .panel. */
-.panel::before, .hud-top::before, .legend-map::before,
-.map-pop::before, .fog-card::before {
-  content: ''; position: absolute; inset: 0; border-radius: inherit;
-  pointer-events: none; z-index: 0;
-  background: linear-gradient(147deg,
-    rgb(255 255 255 / .20) 0%,
-    rgb(255 255 255 / .06) 26%,
-    rgb(255 255 255 / 0) 52%);
-}
-/* Panel content must sit above the sheen. */
-.panel > *, .hud-top > *, .legend-map > *, .map-pop > *, .fog-card > * { position: relative; z-index: 1; }
-@media (prefers-color-scheme: dark) {
-  .panel::before, .hud-top::before, .legend-map::before,
-  .map-pop::before, .fog-card::before {
-    background: linear-gradient(147deg,
-      rgb(255 255 255 / .09) 0%,
-      rgb(255 255 255 / .03) 30%,
-      rgb(255 255 255 / 0) 56%);
-  }
-}
+/* There is no painted-on specular sheen here, and that is deliberate.
+   A fixed-percentage diagonal gradient describes a different light source on
+   every element it touches — the same 147deg wash spanned a 52px bar and a
+   full-height panel and implied two different slabs. Apple's specular comes
+   from the system computing it per shape; the honest hand-written equivalent
+   is the one bright top edge in --glass-rim, which is size-independent.
+   Same reasoning killed the chromatic fringe: this UI reserves hue for the
+   eight region colours and four peak states, and spending blue and orange on
+   every chrome edge competes with the data. */
 
 .hud-top {
   position: fixed; top: 12px; left: 12px; right: 12px; height: 52px; z-index: 20;
@@ -214,23 +226,30 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
 .btn {
   font-size: 0.8rem; font-weight: 550; padding: 7px 14px; border: 0; cursor: pointer;
   border-radius: var(--radius-full);
-  background: rgb(var(--glass-tint) / .5);
-  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / .55), inset 0 0 0 1px rgb(255 255 255 / .3);
+  /* Plain fill, not glass: this button sits inside .hud-top, which is already
+     glass. Translucency on translucency reads muddy and buys nothing. */
+  background: hsl(var(--foreground) / .06);
+  box-shadow: inset 0 0 0 1px hsl(var(--foreground) / .12);
   color: hsl(var(--foreground));
 }
-.btn:hover { background: rgb(var(--glass-tint) / .78); }
+.btn:hover { background: hsl(var(--foreground) / .11); }
 .btn[aria-expanded="true"] {
   background: hsl(var(--foreground) / .92); color: hsl(var(--background));
   box-shadow: inset 0 1px 0 0 rgb(255 255 255 / .18);
 }
 .icon-btn {
   width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center;
-  border-radius: var(--radius-full); border: 0; cursor: pointer; font-size: 0.95rem; line-height: 1;
-  background: rgb(var(--glass-tint) / .4);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / .26);
+  /* 8px, not a capsule: this button sits 14px below and 18px inside the
+     panel's 22px corner, and Apple's concentricity rule wants a nested corner
+     to share a centre with its container's — inner = outer - inset, so
+     22 - 14 = 8. A capsule here was reading as ~15px and fighting the corner
+     it sits in. */
+  border-radius: 8px; border: 0; cursor: pointer; font-size: 0.95rem; line-height: 1;
+  background: hsl(var(--foreground) / .06);
+  box-shadow: inset 0 0 0 1px hsl(var(--foreground) / .12);
   color: hsl(var(--foreground));
 }
-.icon-btn:hover { background: rgb(var(--glass-tint) / .7); }
+.icon-btn:hover { background: hsl(var(--foreground) / .11); }
 
 /* live toggle */
 .live-toggle { display: inline-flex; align-items: center; gap: 7px; font-size: 0.8rem; color: hsl(var(--muted-foreground)); cursor: pointer; user-select: none; }
@@ -256,10 +275,10 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
 .chip {
   display: inline-flex; align-items: center; gap: 6px; font-size: 0.74rem; cursor: pointer;
   border: 0; border-radius: var(--radius-full); padding: 5px 11px;
-  background: rgb(var(--glass-tint) / .34); color: hsl(var(--muted-foreground));
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / .22);
+  background: hsl(var(--foreground) / .05); color: hsl(var(--muted-foreground));
+  box-shadow: inset 0 0 0 1px hsl(var(--foreground) / .11);
 }
-.chip:hover { background: rgb(var(--glass-tint) / .62); color: hsl(var(--foreground)); }
+.chip:hover { background: hsl(var(--foreground) / .1); color: hsl(var(--foreground)); }
 .chip[aria-pressed="true"] {
   background: hsl(var(--foreground) / .92); color: hsl(var(--background));
   box-shadow: inset 0 1px 0 0 rgb(255 255 255 / .18);
@@ -271,7 +290,7 @@ body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2
 /* camera list */
 .cam-list { overflow-y: auto; padding: 4px 10px 12px; }
 .cam-list-region { font-size: 0.64rem; text-transform: uppercase; letter-spacing: .06em; color: hsl(var(--muted-foreground)); font-weight: 600; padding: 12px 6px 4px; }
-.cam-list-item { width: 100%; display: flex; align-items: center; gap: 8px; padding: 7px 8px; border: 0; background: transparent; color: hsl(var(--foreground)); border-radius: var(--radius-sm); cursor: pointer; text-align: left; font-size: 0.82rem; }
+.cam-list-item { width: 100%; display: flex; align-items: center; gap: 8px; padding: 7px 8px; border: 0; background: transparent; color: hsl(var(--foreground)); border-radius: 12px; cursor: pointer; text-align: left; font-size: 0.82rem; }
 .cam-list-item:hover { background: hsl(var(--muted)); }
 .cli-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 body.hiding-offline .cam-list-item.offline { display: none; }
@@ -306,7 +325,7 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .wxd-hours-empty { font-size: 0.82rem; color: hsl(var(--muted-foreground)); }
 .wxl { position: relative; height: 116px; margin-top: 6px; }
 .wxl-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.wxl-icon { position: absolute; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; padding: 2px; border-radius: var(--radius-full); background: rgb(var(--glass-tint) / .8); transform: translate(-50%, -50%); }
+.wxl-icon { position: absolute; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; padding: 2px; border-radius: var(--radius-full); background: rgb(var(--glass-tint) / .92); transform: translate(-50%, -50%); }
 .wxl-icon svg { width: 100%; height: 100%; }
 .wxl-temp { position: absolute; transform: translate(-50%, calc(-50% - 16px)); font-size: 10px; font-weight: 650; line-height: 1; color: hsl(var(--foreground)); white-space: nowrap; }
 .wxl-hour { position: absolute; bottom: 0; transform: translateX(-50%); font-size: 10px; line-height: 1; color: hsl(var(--muted-foreground)); white-space: nowrap; }
@@ -320,22 +339,38 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 @media (max-width: 900px) { .legend-map { display: none; } }
 
 /* ---- layer toggle group ---- */
-/* The group is one glass capsule; segments inside are separated by a sliver of
-   gap rather than a divider line, so nothing draws a hard edge across the
-   capsule's curve. */
+/* Fog / Temps / Peaks are three INDEPENDENT toggles, any combination of which
+   can be on. They used to sit inside one glass capsule separated by 2px gaps,
+   which is the visual grammar of a segmented control — and a segmented control
+   means pick exactly one. Three loose capsules say what the behaviour actually
+   is.
+   
+   The group also no longer carries its own glass. It lives inside .hud-top,
+   which is already glass, and stacking a translucent surface on a translucent
+   surface costs legibility for no gain. */
 .layer-group {
-  display: inline-flex; gap: 2px; padding: 2px; border: 0;
-  border-radius: var(--radius-full);
-  background: rgb(var(--glass-tint) / .4);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / .26);
+  display: inline-flex; gap: 6px; padding: 0; border: 0;
+  background: transparent; box-shadow: none;
 }
-.btn-layer { border: 0; border-radius: var(--radius-full); background: transparent; box-shadow: none; padding: 5px 13px; }
-.btn-layer:hover { background: rgb(var(--glass-tint) / .55); }
+.btn-layer {
+  border: 0; border-radius: var(--radius-full); padding: 5px 13px;
+  background: hsl(var(--foreground) / .06);
+  box-shadow: inset 0 0 0 1px hsl(var(--foreground) / .12);
+}
+.btn-layer:hover { background: hsl(var(--foreground) / .11); }
+/* Selected state is a prominent fill, the way Apple's selected toolbar toggles
+   read, and it is NEUTRAL rather than accent-tinted for two reasons. Accent
+   text on an accent-tinted fill measured 3.33:1 in light mode, under the 4.5
+   an 0.8rem label needs. And --accent is hue 217, which is the same hue as
+   --r-san-francisco: a persistent blue fill on the app's primary control was
+   wearing one of the map's own data colours. Neutral measures 14.5:1 and
+   leaves blue to mean "focus" and "interactive", which is all it should mean.
+   Weight stays at 550 through the state change so the labels never re-flow. */
 .btn-layer[aria-pressed="true"] {
-  background: hsl(var(--accent) / .18); color: hsl(var(--accent)); font-weight: 650;
-  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / .4), inset 0 0 0 1px hsl(var(--accent) / .28);
+  background: hsl(var(--foreground) / .9); color: hsl(var(--background));
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / .18);
 }
-.btn-layer[aria-pressed="true"]:hover { background: hsl(var(--accent) / .26); }
+.btn-layer[aria-pressed="true"]:hover { background: hsl(var(--foreground)); }
 
 /* ---- hover popover (floating thumbnail card) ---- */
 .map-pop {
@@ -356,11 +391,14 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 /* ---- microclimate temp pills ---- */
 .wx-pill {
   display: none; align-items: center; gap: 4px; padding: 3px 9px;
-  background: rgb(var(--glass-tint) / .62);
-  backdrop-filter: blur(12px) saturate(160%); -webkit-backdrop-filter: blur(12px) saturate(160%);
+  /* NOT glass, on purpose. The HIG is explicit: "Don't use Liquid Glass in
+     the content layer... use standard materials for elements in the content
+     layer." These 41 pills are readings drawn on the map — they are content,
+     not chrome, and they were each running a backdrop-filter. A standard
+     opaque material is both the correct material and 41 fewer blur passes. */
+  background: rgb(var(--glass-tint) / .88);
   border: 0; border-radius: var(--radius-full);
-  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / .5), inset 0 0 0 1px rgb(255 255 255 / .28),
-              var(--glass-lift-sm);
+  box-shadow: inset 0 0 0 1px hsl(var(--foreground) / .14), var(--glass-lift-sm);
   font-size: 12px; line-height: 1.4; cursor: pointer; position: relative;
 }
 .wx-pill.is-on { display: inline-flex; }
@@ -369,15 +407,13 @@ body.hiding-offline .cam-list-item.offline { display: none; }
 .wx-name {
   position: absolute; top: calc(100% + 3px); left: 50%; transform: translateX(-50%);
   white-space: nowrap; font-size: 10px; color: hsl(var(--muted-foreground));
-  background: rgb(var(--glass-tint) / .7); backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgb(var(--glass-tint) / .92);
   padding: 1px 7px; border-radius: var(--radius-full); opacity: 0; transition: opacity .12s;
 }
 .wx-pill:hover .wx-name { opacity: 1; }
 .wx-pill:hover {
-  z-index: 5; background: rgb(var(--glass-tint) / .82);
-  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / .6), inset 0 0 0 1px hsl(var(--accent) / .45),
-              var(--glass-lift-sm);
+  z-index: 5; background: rgb(var(--glass-tint) / .97);
+  box-shadow: inset 0 0 0 1px hsl(var(--accent) / .55), var(--glass-lift-sm);
 }
 
 /* ---- marine layer (fog-top) card ---- */
@@ -437,7 +473,7 @@ body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 128px;
    matters more here than in a normal app. */
 @media (prefers-reduced-transparency: reduce) {
   .panel, .hud-top, .legend-map, .map-pop, .fog-card, .wx-pill, .wx-name,
-  .maplibregl-ctrl-group {
+  .maplibregl-ctrl.maplibregl-ctrl-group {
     background: hsl(var(--card));
     backdrop-filter: none; -webkit-backdrop-filter: none;
     /* Solid surfaces need a real edge back, since the glass rim was doing
@@ -445,10 +481,8 @@ body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 128px;
        nothing left to refract, so both go. */
     box-shadow: inset 0 0 0 1px hsl(var(--border)), var(--glass-lift);
   }
-  .panel::before, .hud-top::before, .legend-map::before,
-  .map-pop::before, .fog-card::before { display: none; }
-  .btn, .icon-btn, .chip, .layer-group { background: hsl(var(--card)); box-shadow: inset 0 0 0 1px hsl(var(--border)); }
-  .maplibregl-ctrl-attrib { background: hsl(var(--card)) !important; }
+  .btn, .icon-btn, .chip { background: hsl(var(--card)); box-shadow: inset 0 0 0 1px hsl(var(--border)); }
+  .maplibregl-ctrl.maplibregl-ctrl-attrib { background: hsl(var(--card)) !important; }
 }
 
 @media (prefers-contrast: more) {
@@ -457,9 +491,7 @@ body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 128px;
     background: hsl(var(--card)); backdrop-filter: none; -webkit-backdrop-filter: none;
     box-shadow: inset 0 0 0 1px hsl(var(--border-strong)), var(--glass-lift);
   }
-  .panel::before, .hud-top::before, .legend-map::before,
-  .map-pop::before, .fog-card::before { display: none; }
-  .btn, .icon-btn, .chip, .layer-group, .wx-pill {
+  .btn, .icon-btn, .chip, .wx-pill {
     background: hsl(var(--card)); box-shadow: inset 0 0 0 1px hsl(var(--border-strong));
   }
 }
