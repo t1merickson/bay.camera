@@ -137,17 +137,54 @@ h1 { margin: 0; font-size: 1rem; font-weight: 650; letter-spacing: -0.02em; }
    rendering opaque #fff in dark mode and the attribution was black-on-dark —
    the glass and the ink here were never actually applying. Same load-order
    trap as .maplibregl-marker on the temp pills. */
-.maplibregl-ctrl.maplibregl-ctrl-group {
+.maplibregl-ctrl.maplibregl-ctrl-group,
+.maplibregl-ctrl.maplibregl-ctrl-group:not(:empty) {
   background: rgb(var(--glass-tint) / var(--glass-tint-a));
   backdrop-filter: var(--glass-backdrop);
   -webkit-backdrop-filter: var(--glass-backdrop);
-  border: 0; box-shadow: var(--glass-rim), var(--glass-lift);
-  border-radius: var(--radius); overflow: hidden;
+  border: 0;
+  /* :not(:empty) has to be on OUR selector too. MapLibre sets its flat 2px
+     ring through `.maplibregl-ctrl-group:not(:empty)`, which ties with a plain
+     two-class selector — and a tie goes to whoever loads last, which is always
+     MapLibre. Measured before this: box-shadow was rgba(0,0,0,.1) 0 0 0 2px,
+     so the zoom stack was the one piece of chrome that never became glass. */
+  box-shadow: var(--glass-rim), var(--glass-lift);
+  /* Capsule, matching the top bar: two 32px buttons make a 64px stack and
+     --radius-full clamps to 32px, so the ends are true semicircles. */
+  border-radius: var(--radius-full); overflow: hidden;
 }
 .maplibregl-ctrl.maplibregl-ctrl-group button { width: 32px; height: 32px; background: transparent; color: hsl(var(--foreground)); }
-/* was a border-top divider; a soft inset keeps the capsule's curve intact */
-.maplibregl-ctrl.maplibregl-ctrl-group button + button { box-shadow: inset 0 1px 0 0 rgb(128 128 128 / .2); }
+/* MapLibre draws `border-top: 1px solid #ddd` between stacked buttons and we
+   only ever overrode box-shadow, so that bright line was still there on dark
+   glass. On a capsule it would also cut across the widest part of the curve.
+   Apple Maps stacks its zoom glyphs with no divider at all. */
+.maplibregl-ctrl.maplibregl-ctrl-group button + button { border-top: 0; box-shadow: none; }
 .maplibregl-ctrl.maplibregl-ctrl-group button:hover { background: hsl(var(--foreground) / .1); }
+.maplibregl-ctrl.maplibregl-ctrl-group button:active { background: hsl(var(--foreground) / .16); }
+
+/* The + and - were MapLibre's #333 background-image run through
+   `invert(1) brightness(1.15)` in dark mode, which lands near #eaeaea —
+   brighter than any ink in this app. Masking our own glyphs makes the colour
+   a token on the same ink ladder as the text, and needs no per-scheme filter. */
+/* MapLibre's real selector is
+   `.maplibregl-ctrl button.maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon`,
+   which carries an element token as well as three classes. Anything shorter
+   ties or loses, and its #333 glyph then paints on top of ours through the
+   mask. Matching class-for-class with `button.` included is what wins. */
+.maplibregl-ctrl.maplibregl-ctrl-group button.maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon,
+.maplibregl-ctrl.maplibregl-ctrl-group button.maplibregl-ctrl-zoom-out .maplibregl-ctrl-icon {
+  background-image: none;
+  background-color: hsl(var(--foreground) / .75);
+  mask-repeat: no-repeat; mask-position: center; mask-size: 15px 15px;
+  -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: 15px 15px;
+}
+.maplibregl-ctrl.maplibregl-ctrl-group button:hover .maplibregl-ctrl-icon { background-color: hsl(var(--foreground) / .95); }
+.maplibregl-ctrl.maplibregl-ctrl-group button.maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon {
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='2.4'%20stroke-linecap='round'%3E%3Cpath%20d='M12%205.5v13M5.5%2012h13'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='2.4'%20stroke-linecap='round'%3E%3Cpath%20d='M12%205.5v13M5.5%2012h13'/%3E%3C/svg%3E");
+}
+.maplibregl-ctrl.maplibregl-ctrl-group button.maplibregl-ctrl-zoom-out .maplibregl-ctrl-icon {
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='2.4'%20stroke-linecap='round'%3E%3Cpath%20d='M5.5%2012h13'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='2.4'%20stroke-linecap='round'%3E%3Cpath%20d='M5.5%2012h13'/%3E%3C/svg%3E");
+}
 /* Attribution is legally required to be readable, so this surface gets a
    heavier tint than the rest of the glass and ink one rung up from --muted. */
 .maplibregl-ctrl.maplibregl-ctrl-attrib {
@@ -166,7 +203,6 @@ h1 { margin: 0; font-size: 1rem; font-weight: 650; letter-spacing: -0.02em; }
 .maplibregl-ctrl.maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-inner,
 .maplibregl-ctrl.maplibregl-ctrl-attrib a { color: hsl(var(--foreground) / .8) !important; }
 .maplibregl-ctrl.maplibregl-ctrl-attrib-button { background-color: transparent; }
-@media (prefers-color-scheme: dark) { .maplibregl-ctrl-icon { filter: invert(1) brightness(1.15); } }
 body.cam-open .maplibregl-ctrl-bottom-right { right: 372px; transition: right .2s; }
 
 /* region dot utility */
