@@ -548,7 +548,11 @@ body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 128px;
    matters more here than in a normal app. */
 @media (prefers-reduced-transparency: reduce) {
   .panel, .hud-top, .map-pop, .fog-card, .wx-pill, .wx-name,
-  .maplibregl-ctrl.maplibregl-ctrl-group {
+  /* :not(:empty) has to be repeated here. The base rule needs it to outrank
+     MapLibre's own ring, and that made the base rule (0,3,0) — which then
+     outranked this fallback at (0,2,0), so the zoom control stayed glass with
+     reduced transparency on. Verified: backdrop-filter was still blur(20px). */
+  .maplibregl-ctrl.maplibregl-ctrl-group:not(:empty) {
     background: hsl(var(--card));
     backdrop-filter: none; -webkit-backdrop-filter: none;
     /* Solid surfaces need a real edge back, since the glass rim was doing
@@ -562,7 +566,8 @@ body:has(.fog-card:not([hidden])) .maplibregl-ctrl-bottom-right { bottom: 128px;
 
 @media (prefers-contrast: more) {
   :root { --border: 0 0% 68%; --muted-foreground: 0 0% 28%; }
-  .panel, .hud-top, .map-pop, .fog-card {
+  .panel, .hud-top, .map-pop, .fog-card,
+  .maplibregl-ctrl.maplibregl-ctrl-group:not(:empty) {
     background: hsl(var(--card)); backdrop-filter: none; -webkit-backdrop-filter: none;
     box-shadow: inset 0 0 0 1px hsl(var(--border-strong)), var(--glass-lift);
   }
