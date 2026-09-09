@@ -1,7 +1,8 @@
 # style guide
 
 Conventions for the current codebase (Astro + MapLibre, data-driven). For the
-big picture see [README.md](README.md); for session state see [RESUME.md](RESUME.md).
+big picture see [README.md](README.md); for architecture and gotchas see
+[RESUME.md](RESUME.md); for live task state see `.checkpoints/`.
 
 ## what this is
 

@@ -44,8 +44,25 @@ or says push.
   Estimate and its confidence in Live wires.
 - **Tule fog** — still the strongest expansion available and still unanswered.
   See Live wires; I would raise it again.
-- **COMPACTED.md** — gitignored, inert, still on disk. Offer to fold its error
-  ledger into RESUME.md and delete it was never answered.
+- **Backlog inherited from RESUME.md's old "Next moves"**, which moved here on
+  9 Sep when that file was carved down to durable knowledge. None started:
+  - **Morning fog session.** The classifier was built and calibrated at
+    11am–noon as the deck burned off, i.e. patchy. Nobody has loaded it at 8am
+    on a genuinely foggy morning and checked the band against KHAF/KSFO and
+    their own eyes, or watched the night→day IR handoff at dawn. Thresholds are
+    at the top of `fogtop.ts`. This is the single cheapest way to find out
+    whether the differentiator actually works.
+  - **Fog card after dark** currently says cameras are too dark to read. It
+    could fall back to GOES IR or NWS observations instead of going quiet.
+  - **"Hide offline" for curated cameras** — dropped in the v4 rewrite, never
+    restored. 9 of 52 cameras are marked dead.
+  - **`camId` should be explicit** in `data/cameras.json` for ALERTCalifornia
+    entries, instead of being regexed out of the URL.
+  - **Temp-pill density at low zoom** was on the design list and never settled;
+    the tier system was the partial answer.
+- **Humidity is fetched but secondary** — it appears in pill hover text and the
+  weather detail panel, never as a map layer. Whether it deserves promotion to
+  a first-class overlay or onto the pill face was raised and never answered.
 - **Domain** — "forget buying a domain" stands; he was separately still
   considering asking gongruya for bay.camera back. Nothing to do.
 
@@ -241,7 +258,10 @@ or says push.
   About 85% sure it never did anything. Removal candidate, harmless either way.
 - **`og:image` is the 384px square app icon**, not a 1200x630 share card. Punted
   deliberately as a design decision rather than a deploy one.
-- **Doc sprawl, partly addressed:** README, STYLE, RESUME, COMPACTED (ignored),
-  and now this. Moving task state out of the root removed one authority conflict
-  — RESUME.md and CHECKPOINT.md used to both answer "what's next." RESUME.md
-  still carries a "Next moves" section that overlaps this file's Plates.
+- **Doc sprawl, now resolved.** Was README, STYLE, RESUME, COMPACTED (ignored)
+  and CHECKPOINT, with RESUME and CHECKPOINT both answering "what's next."
+  As of 9 Sep: COMPACTED is deleted, its unique error-ledger entries merged into
+  RESUME's gotchas; RESUME is durable knowledge only with no task state; this
+  file is the sole authority on what's next. Rollback copy of COMPACTED at
+  /tmp/COMPACTED.md.rollback-2026-09-09 — it was untracked, so git cannot
+  restore it. Delete that copy once the merge has been reviewed.

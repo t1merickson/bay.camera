@@ -5,8 +5,9 @@ San Francisco Bay Area — built for watching **fog, marine layer, and light**
 (originally for photographers, useful to anyone). A revival of Tim's ~2019
 static webcam directory.
 
-> Picking this up? Read [RESUME.md](RESUME.md) first — it has current state,
-> open threads, and gotchas.
+> Picking this up? Read [RESUME.md](RESUME.md) first — architecture, how the
+> fog pipeline works, and the gotchas that cost real time. For what is in
+> flight right now, read the newest file in `.checkpoints/`.
 
 ## Run it
 
@@ -83,17 +84,15 @@ src/pages/index.astro     the entire app (HTML + inline MapLibre script)
 public/styles/main.css     design system + layout
 src/lib/cameras.ts         loads cameras.json; exports cameras/pinned/REGIONS
 data/cameras.json          SOURCE OF TRUTH (all cameras)
-data/alertcalifornia-bay.json   183 peak cams (generated, unwired)
+data/alertcalifornia-bay.json   183 peak cams (generated, elevation-enriched)
 scripts/fetch-alertcalifornia.py  regenerate the peak-cam layer
 docs/vendors.md            camera-vendor taxonomy + resiliency flags
 docs/data-model.md         cameras.json schema + vetting + status lifecycle
 STYLE.md                   conventions + commit style + design notes
-RESUME.md                  session handoff: state, open threads, gotchas
+RESUME.md                  architecture, fog pipeline, hard-won gotchas
+.checkpoints/              live task state: in flight, blocked, discarded
 ```
 
-Vestigial (delete-safe, from the pre-MapLibre SVG-map era): `src/lib/project.ts`,
-`src/lib/basemap.json`, `scripts/build-map.py`, `scripts/ca-counties.geojson`,
-and the legacy root `index.html`.
 
 ## Verifying UI changes
 
