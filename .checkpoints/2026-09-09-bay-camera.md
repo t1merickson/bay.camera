@@ -111,7 +111,9 @@ or says push.
   every user-facing surface; only `astro.config.mjs`'s `site` points at the
   Netlify subdomain. The host is temporary, the name is not.
 - **Rewrote 15 commits' author email rather than pushing them** — they carried
-  `hey@timerickson.com` onto a public repo. Files verified byte-identical after.
+  Tim's private address instead of the noreply one, onto a public repo. Files
+  verified byte-identical after. (Deliberately not quoting the address here:
+  this file is committed to a public repository.)
 - **Edge function owns `/api/alertca`, netlify.toml redirect stays as fallback**
   via `context.next()`. Deployed to a throwaway path first in case the upstream
   firewall rejected Deno's TLS fingerprint; it does not, that block only targets
@@ -216,10 +218,10 @@ or says push.
   Tested against the live site: cold-loading `#wx/livermore` and `#wx/downtown-sf`
   both work — panel opens, hero temp renders, chart draws. **There is no
   deep-link race.** Whatever blanked that screenshot was local or capture-side.
-- **Unexplained and could recur:** why did 15 commits get authored as
-  `hey@timerickson.com` when the global config is the noreply address and there
-  was no local override? Symptom fixed, cause never found. If it recurs, suspect
-  an environment variable or a config changed mid-session.
+- **Unexplained and could recur:** why did 15 commits get authored with Tim's
+  private address when the global config is the noreply one and there was no
+  local override? Symptom fixed, cause never found. If it recurs, suspect an
+  environment variable or a config changed mid-session.
 - **The best idea in this project is still unanswered: tule fog.** Central Valley
   winter radiation fog runs Nov–Feb, the opposite season to the marine layer's
   May–Sep. As built, this site goes quiet every October. Tule fog would give it a
