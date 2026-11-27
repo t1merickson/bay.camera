@@ -9,9 +9,14 @@
  * src/lib/alertca-feed.mjs for the shape and netlify/functions/alertca.mts for
  * the server side.
  *
- * Image URLs rotate. Each camera's `img` filename embeds the capture time, e.g.
- *   "Berkeley_Downtown_1783230175_2957.jpg"
- * and the file lives at
+ * Image URLs rotate. Each camera's `img` filename embeds the capture time, in
+ * one of two shapes:
+ *   "Berkeley_Downtown_1783230175_2957.jpg"        UC San Diego, UNR, ALERTWest
+ *   "Chino_Hills_Fixed_West_1795793671_8418_s.jpg" Caltrans, HPWREN, FAA
+ * The trailing `_s` moves the timestamp one slot left, so it's found by
+ * pattern, not by position. Reading it by position (second-to-last chunk) got
+ * 1970/01/01 for 3,058 of 4,385 cameras.
+ * The file lives at
  *   https://img.cdn.prod.alertwest.com/data/img/<camId>/<YYYY>/<MM>/<DD>/<img>
  * with the date taken from that timestamp in UTC. A given filename 404s within
  * a minute or two as newer frames arrive, so URLs are always resolved fresh
@@ -68,12 +73,14 @@ interface Feed {
 let memoryCache: { receivedAt: number; cams: Map<string, AlertCam> } | null = null;
 let inFlight: Promise<Map<string, AlertCam>> | null = null;
 
+// <timestamp>_<sequence>, optional suffix like _s, then the extension.
+const FRAME_TIME = /_(\d{9,11})_\d+(?:_[a-z]+)?\.[a-z]+$/i;
+
 /** Current CDN URL for one frame, or null if the filename carries no timestamp. */
 function buildUrl(camId: string, img: string): string | null {
-  const parts = img.split('_');
-  if (parts.length < 2) return null;
-  const ts = Number(parts[parts.length - 2]);
-  if (!Number.isFinite(ts) || ts <= 0) return null;
+  const m = FRAME_TIME.exec(img);
+  if (!m) return null;
+  const ts = Number(m[1]);
   const d = new Date(ts * 1000);
   const yyyy = String(d.getUTCFullYear()).padStart(4, '0');
   const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
