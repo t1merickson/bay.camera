@@ -142,16 +142,22 @@ preprocessor, no CSS-in-JS, no `<style>` blocks in the Astro file. System fonts.
    Netlify edge function plus 200-rewrite fallback in production. The image CDN
    (`img.cdn.prod.alertwest.com`) has no such block and full CORS, so canvas
    pixel reads work with `crossOrigin='anonymous'`. Deno's fetch is **not**
-   blocked — the block only targets browsers — so the edge function can call
-   the upstream directly.
+   blocked — the block only targets browsers — so server code can call the
+   upstream directly. Node's fetch works too.
 
-4. **Netlify `[[headers]]` do not apply to a proxy rewrite.** Learned on live
-   evidence: the proxy path reported `fwd=miss` on every request while static
-   paths reported `stored`, and the upstream sends no cache directive, so every
-   visitor pulled a fresh 6.65 MB from a public agency. Caching that path needs
-   code at the edge (`netlify/edge-functions/alertca.ts`), which **also** needs
-   `cache: 'manual'` in its config or Netlify skips the CDN cache entirely.
-   Verified: `stored`, then `hit; ttl=56`.
+4. **Caching `/api/alertca` on Netlify took three tries.** First, a
+   `[[headers]]` block on a proxy rewrite: it doesn't apply. The proxy path
+   reported `fwd=miss` on every request, and the upstream sends no cache
+   directive, so every visitor pulled a fresh copy from a public agency.
+   Second, an Edge Function with `cache: 'manual'`. That worked, but Edge
+   Functions cap CPU at **50 ms per request**, and trimming the feed to
+   California takes 16-22 ms on a fast laptop, which is too close. Now it's a
+   regular Function (`netlify/functions/alertca.mts`, 60 s limit) whose
+   response carries `Netlify-CDN-Cache-Control: public, durable, max-age=60`.
+   Functions are never cached without that header.
+   **Measure cache age from when the browser received the feed, not from the
+   feed's `fetchedAt`.** The CDN can hand out a copy up to three minutes old,
+   so the server's fetch time makes every copy look stale.
 
 5. **Glyph endpoints that 200 an HTML page kill every vector layer.**
    `fonts.openmaptiles.org` does exactly this — MapLibre parses the HTML as PBF
@@ -236,11 +242,9 @@ preprocessor, no CSS-in-JS, no `<style>` blocks in the Astro file. System fonts.
   URL resolver, 60s TTL cache + sessionStorage mirror), `wxicons.ts` (vendored
   Solar Icons + WMO code mapping).
 - `public/styles/main.css` — the entire design system.
-- `scripts/fetch-alertcalifornia.py` — regenerates the peak-cam layer.
-- `scripts/enrich-elevations.py` — adds `elev_m` afterward.
 - `netlify.toml` — build config, `/api/alertca` rewrite fallback, asset caching.
-- `netlify/edge-functions/alertca.ts` — the cached proxy that actually serves
-  `/api/alertca`.
+- `netlify/functions/alertca.mts` — serves `/api/alertca`: fetches the feed,
+  trims it to California with `src/lib/alertca-feed.mjs`, caches it 60 s.
 
 ## microclimates.today source-dive (2026-07-06, read from their inline JS)
 

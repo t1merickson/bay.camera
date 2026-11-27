@@ -4,7 +4,6 @@
  * single source of truth; nothing here is hand-maintained.
  */
 import camerasJson from '../../data/cameras.json';
-import peaksJson from '../../data/alertcalifornia-bay.json';
 
 export interface CamData {
   id: string; name: string; region: string; type: string;
@@ -15,8 +14,9 @@ export interface CamData {
   alertcaId: string | null;
 }
 
+/** A high camera that looks at the horizon. Loaded live: see getPeaks() in peaks.ts. */
 export interface PeakCamData {
-  camId: string; name: string; county: string;
+  camId: string; name: string; county: string; provider: string;
   lat: number; lng: number; elevM: number;
 }
 
@@ -55,13 +55,6 @@ export const camGeojson = {
     properties: { id: c.id, region: c.region, name: c.name },
   })),
 };
-
-export const peaks: PeakCamData[] = (peaksJson.cameras as any[]).map((p) => ({
-  camId: String(p.camId), name: p.name, county: p.county,
-  lat: p.coords.lat, lng: p.coords.lon, elevM: p.elev_m ?? 0,
-}));
-
-export const peakById: Record<string, PeakCamData> = Object.fromEntries(peaks.map((p) => [p.camId, p]));
 
 export const REGION_LABELS: Record<string, string> = {
   'satellite': 'Satellite & cloud layer', 'golden-gate': 'Golden Gate', 'san-francisco': 'San Francisco',

@@ -1,14 +1,42 @@
 /**
- * ALERTCalifornia peak-camera layer: 183 mountain-top wildfire cams as small
- * diamond-ish dots, colored by fog status once the fog-top analysis has run
- * (slate = unknown, pale = in fog, green = clear, dim = dark/night).
+ * Peak-camera layer: every high, horizon-facing camera in California, colored
+ * by fog status once the fog-top analysis has run (slate = unknown, pale = in
+ * fog, green = clear, dim = dark/night).
+ *
+ * Positions come from the live camera feed, not a bundled file. The old
+ * data/alertcalifornia-bay.json went stale silently whenever ALERTCalifornia
+ * added or moved a camera, and nothing refreshed it.
  */
 import type maplibregl from 'maplibre-gl';
-import { peaks, mToFt, type PeakCamData } from './data';
+import { mToFt, type PeakCamData } from './data';
 import { dark } from './map';
 import { showPopover, hidePopover } from './popover';
-import { resolveAlertCamUrl } from './alertca';
+import { getAlertCams, resolveAlertCamUrl } from './alertca';
 import type { PeakReading } from './fogtop';
+
+// Fire cameras that pan (UC San Diego, UNR, ALERTWest) plus HPWREN's fixed
+// mountaintop cameras. Caltrans and FAA cameras sit low, beside roads and
+// runways, so they aren't peaks.
+const PEAK_PROVIDERS = new Set(['UCSD', 'UNR', 'ALERTWest', 'HPWREN']);
+
+let peaksPromise: Promise<PeakCamData[]> | null = null;
+
+/** Every peak camera with a known elevation. One feed read per page load. */
+export function getPeaks(): Promise<PeakCamData[]> {
+  peaksPromise ??= getAlertCams()
+    .then((cams) => [...cams.values()]
+      .filter((c) => PEAK_PROVIDERS.has(c.provider) && c.elevM !== null)
+      .map((c) => ({
+        camId: c.camId, name: c.name, county: c.county ?? '', provider: c.provider,
+        lat: c.lat, lng: c.lng, elevM: c.elevM!,
+      })))
+    .catch((err) => { peaksPromise = null; throw err; });
+  return peaksPromise;
+}
+
+let peaks: PeakCamData[] = [];
+let byId: Record<string, PeakCamData> = {};
+let lastReadings: Map<string, PeakReading> | undefined;
 
 const STATUS_COLORS: Record<string, string> = {
   unknown: 'hsl(215,15%,55%)',
@@ -35,7 +63,14 @@ export function addPeakLayer(map: maplibregl.Map, onOpen: (p: PeakCamData) => vo
   for (const [k, v] of Object.entries(STATUS_COLORS)) colorMatch.push(k, v);
   colorMatch.push(STATUS_COLORS.unknown);
 
+  // Starts empty and fills when the feed arrives; the layer is off by default,
+  // so nobody sees it empty.
   map.addSource('peaks', { type: 'geojson', data: geojson() as any });
+  getPeaks().then((list) => {
+    peaks = list;
+    byId = Object.fromEntries(list.map((p) => [p.camId, p]));
+    (map.getSource('peaks') as maplibregl.GeoJSONSource | undefined)?.setData(geojson(lastReadings) as any);
+  }).catch((err) => console.warn('peak cameras unavailable:', err));
   map.addLayer({ id: 'peak-point', type: 'circle', source: 'peaks',
     layout: { visibility: 'none' },
     paint: {
@@ -47,7 +82,6 @@ export function addPeakLayer(map: maplibregl.Map, onOpen: (p: PeakCamData) => vo
     },
   });
 
-  const byId = Object.fromEntries(peaks.map((p) => [p.camId, p]));
   let hoverId: string | null = null;
   map.on('mousemove', 'peak-point', (e) => {
     map.getCanvas().style.cursor = 'pointer';
@@ -59,7 +93,7 @@ export function addPeakLayer(map: maplibregl.Map, onOpen: (p: PeakCamData) => vo
     if (!p) return;
     showPopover(map, (f.geometry as any).coordinates, {
       title: p.name,
-      sub: `${mToFt(p.elevM).toLocaleString()} ft · ALERTCalifornia`,
+      sub: `${mToFt(p.elevM).toLocaleString()} ft · ${p.provider === 'HPWREN' ? 'HPWREN' : 'ALERTCalifornia'}`,
       image: () => resolveAlertCamUrl(p.camId),
     });
   });
@@ -80,6 +114,7 @@ export function setPeaksVisible(map: maplibregl.Map, on: boolean) {
 }
 
 export function updatePeakStatuses(map: maplibregl.Map, readings: Map<string, PeakReading>) {
+  lastReadings = readings;
   const src = map.getSource('peaks') as maplibregl.GeoJSONSource | undefined;
   if (src) src.setData(geojson(readings) as any);
 }

@@ -13,10 +13,10 @@
 import type maplibregl from 'maplibre-gl';
 import { addProtocol, type RequestParameters } from 'maplibre-gl';
 import { firstLabelLayerId } from './map';
-import { peaks, mToFt } from './data';
+import { mToFt, type PeakCamData } from './data';
 import { getAlertCamUrls } from './alertca';
 import { analyzePeaks, estimateFogTop, type PeakInput, type PeakReading, type FogTopEstimate } from './fogtop';
-import { updatePeakStatuses } from './peaks';
+import { getPeaks, updatePeakStatuses } from './peaks';
 
 const GOES_SOURCE_ID = 'goes';
 const GOES_LAYER_ID = 'goes';
@@ -339,9 +339,22 @@ export function setGoesVisible(map: maplibregl.Map, on: boolean) {
 
 // ---- fog-top analysis ----
 
+/**
+ * The population the fog-top classifier was calibrated on: UC San Diego's Axis
+ * fire cameras inside this box, the same box and provider the old bundled
+ * peak file used. Holding it fixed keeps readings comparable now that peak
+ * positions come from the live feed. Making the estimate regional for the
+ * rest of California is a separate change; this box is the Bay's only.
+ */
+const FOG_SAMPLE_BOX = { south: 36.85, north: 38.55, west: -123.6, east: -121.2 };
+const inFogSampleBox = (p: PeakCamData) =>
+  p.provider === 'UCSD' &&
+  p.lat >= FOG_SAMPLE_BOX.south && p.lat <= FOG_SAMPLE_BOX.north &&
+  p.lng >= FOG_SAMPLE_BOX.west && p.lng <= FOG_SAMPLE_BOX.east;
+
 /** Evenly sample n cams across the elevation ladder (keeps extremes). */
-function stratifiedSample(n: number): typeof peaks {
-  const sorted = [...peaks].sort((a, b) => a.elevM - b.elevM);
+function stratifiedSample(pool: PeakCamData[], n: number): PeakCamData[] {
+  const sorted = [...pool].sort((a, b) => a.elevM - b.elevM);
   if (sorted.length <= n) return sorted;
   const out = [];
   for (let i = 0; i < n; i++) out.push(sorted[Math.round((i * (sorted.length - 1)) / (n - 1))]);
@@ -423,8 +436,10 @@ export function runFogAnalysis(map: maplibregl.Map, sampleSize: number, force = 
   if (!force && sampleSize <= lastSampleSize && Date.now() - lastRun < 10 * 60 * 1000 && lastEstimate) return Promise.resolve();
   running = (async () => {
     const main = $('fog-main'), sub = $('fog-sub');
-    const sample = stratifiedSample(sampleSize);
-    if (main && !lastEstimate) { main.textContent = 'Reading peak cameras…'; if (sub) sub.textContent = `${sample.length} peaks across 0–${mToFt(1280).toLocaleString()} ft`; }
+    const pool = (await getPeaks()).filter(inFogSampleBox);
+    const sample = stratifiedSample(pool, sampleSize);
+    const topM = pool.reduce((m, p) => Math.max(m, p.elevM), 0);
+    if (main && !lastEstimate) { main.textContent = 'Reading peak cameras…'; if (sub) sub.textContent = `${sample.length} peaks across 0–${mToFt(topM).toLocaleString()} ft`; }
     const urls = await getAlertCamUrls();
     const inputs: PeakInput[] = [];
     for (const p of sample) {
