@@ -5,10 +5,12 @@ Its decisions and discards still hold. Its open items are carried below.
 
 ## Now
 
-Recon done, plan written, nine Haiku camera hunters running in the background.
-Each one writes `data/candidates/<slug>.json` (gitignored until verified). Next:
-build the statewide data layer, which needs no answers from Tim, while the
-hunters run and Tim decides the questions in Plates.
+Phase 1 is done and verified locally, committed, **not pushed**. The live site
+still runs the old edge function. Production needs a push to deploy the new
+Netlify Function, and only then can its CDN caching be checked live. Pushing is
+a public action, so it waits for Tim. The hunt is finished (116 candidates).
+Next: phase 2, which needs Tim's Caltrans answer and the mocks for site panels
+and favorites.
 
 ## What the recon found (27 Nov)
 
@@ -18,7 +20,9 @@ hunters run and Tim decides the questions in Plates.
   `data.locs` (10,335 sites with `el` = elevation in meters) and `data.cams`
   (cameras, joined on `lid`). Each table carries a `key` map from short field
   names to long ones.
-- **California has 4,688 cameras, and 3,746 are online:**
+- **California has 4,688 cameras in the feed, but only 4,385 can be shown.**
+  302 have no image filename (289 Caltrans) and 2 sit on sites marked private.
+  The trim drops both. Raw breakdown:
 
   | provider | total | offline | has PTZ + azimuth |
   |---|---|---|---|
@@ -52,16 +56,26 @@ hunters run and Tim decides the questions in Plates.
 Numbered so Tim can track it. Status is in brackets.
 
 **Phase 1 — statewide data (no decisions needed)**
-1. [next] Slim the feed at the edge. The edge function returns CA-only cameras
-   with only the fields we use, cached 60 s. Expect roughly 0.5 MB instead of
-   7 MB, and the client parses 4.7k rows instead of 14k.
-2. [ ] Drop the bundled 183-peak file. Peaks come from the live feed, so
-   positions can't go stale (this closes an old open item).
-3. [ ] Lock stable camera IDs before lists ship: `a<camId>` for feed cameras,
-   existing slugs for curated ones. Every shared list URL depends on this.
+1. [done] Slim the feed at the edge. The edge function returns CA-only cameras
+   with only the fields we use, cached 60 s. Measured: 126 KB compressed,
+   down from 794 KB. It runs as a regular Netlify Function, because edge
+   functions cap CPU at 50 ms and the trim takes 16-22 ms on a fast laptop.
+2. [done] Drop the bundled 183-peak file. Peaks come from the live feed, so
+   positions can't go stale (this closes an old open item). 1,639 peaks
+   statewide. The fog estimate still samples the calibrated population: UCSD
+   cameras in the old box, lat 36.85-38.55, lon -123.6 to -121.2.
+3. [done] Stable camera IDs, in `src/lib/camera-id.ts`: `a<camId>` for feed
+   cameras, slugs for curated ones, and `b`/`p` reserved for buoys and
+   PhenoCam.
 
 **Phase 2 — the map at state scale**
 4. [ ] California bounds; map view (center, zoom, layers) lives in the URL.
+4b. [ ] **Pins become sites, not cameras.** 1,039 of 4,385 cameras (24%)
+   share exact coordinates with another camera at the same site, so only the
+   top one can be clicked. Example: Mt Bullion 1 and 2. Sites hold 2 cameras
+   (583 sites), 4 (31), and 10 (32, mostly FAA and HPWREN arrays). Clicking a
+   site should list all its cameras with headings. View cones are the same
+   feature drawn on the map. Mock this alongside favorites.
 5. [ ] Cluster every camera type. Filter by type. Hide offline cameras by
    default (942 are offline).
 6. [ ] Replace the 8 Bay regions with about 10 California regions, built from
@@ -85,6 +99,39 @@ Numbered so Tim can track it. Status is in brackets.
     `?l=<name>&c=<ids>`. Opening one shows it read-only, with a Save button.
 
 **Phase 5 — camera hunt merge**
+
+Hunt results: 116 candidates, 57 verified live stills, and 85 with guessed
+coordinates. Science was the only hunter with real coordinates, because it
+used structured feeds. Hand-hunting is thin because the big networks are
+already in the ALERTCalifornia feed. **The value is in the structured sources
+the hunters found.** Script these and take real coordinates from them:
+- NOAA BuoyCAM station list with coordinates: ndbc.noaa.gov/buoycams.php
+  (8 CA buoys verified)
+- PhenoCam site table: phenocam.nau.edu/webcam/network/table/ (about 92 CA
+  sites, CC BY with attribution required). Latest still at
+  /data/latest/SITE.jpg
+- USGS CoastCam S3: cmgp-coastcam.s3-us-west-2.amazonaws.com/cameras/<site>/latest/c1_snap.jpg
+  (public domain). The Dream Inn cams can fill the null image URLs on the
+  existing Santa Cruz Main Beach and Cowell's rows.
+- State Parks: 12 HLS streams at video.parks.ca.gov/<Name>/<Name>.stream/playlist.m3u8
+- NPS stable stills at nps.gov/webcams-<park>/<file>.jpg
+- Fixed-URL observatory stills: Lick (mthamilton.ucolick.org) and Palomar
+  (algol.palomar.caltech.edu)
+- Great Basin APCD: 26 Owens Valley air-quality cams. Coordinates may be on
+  their ArcGIS map.
+- Caltrans district feeds: 698 cameras the ALERT feed lacks, with stable URLs.
+
+Open questions for the merge, to put to Tim:
+- **Policy:** 22 candidates are private businesses and 7 are "commercial-free".
+  STYLE.md's principle is public-domain only. Hold that line, or allow free
+  public business cams?
+- **Video:** 19 candidates are HLS streams. Chrome needs a player library
+  (hls.js) for those; Safari plays them natively. That's a new dependency.
+- **Mixed content:** a few stills are plain http (e.g. Crescent City harbor),
+  and an https page blocks those.
+- **Terms:** KTVU says "may not be published... or redistributed", so it stays
+  link-only. The Yosemite Conservancy cams require a usage agreement.
+
 15. [ ] When hunters report: validate schema, re-check liveness, dedupe against
     curated and feed cameras by distance and name, then merge into
     `data/cameras.json` with provenance. Also ingest the 698 Caltrans cameras
