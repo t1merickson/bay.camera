@@ -7,6 +7,9 @@ import type maplibregl from 'maplibre-gl';
 import { camById, REGION_LABELS } from './data';
 import { setSelected, setRegionFilter } from './cams';
 import { resolveAlertCamUrl } from './alertca';
+import { feedCamId, feedCamIdFrom } from '../lib/camera-id';
+import { getPeaks } from './peaks';
+import type { PeakCamData } from './data';
 import { colorFor, iconKeyFor, iconSvg } from './wxicons';
 
 const esc = (s: unknown) => String(s).replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]!));
@@ -392,7 +395,15 @@ export async function openCam(id: string) {
 }
 
 /** Preview a peak cam (ALERTCalifornia layer) in the same right panel. */
-export async function openPeakCam(p: { camId: string; name: string; county: string; elevM: number; lat?: number; lng?: number }) {
+/** Who runs each provider's cameras, as credited in the panel. */
+const PROVIDER_CREDIT: Record<string, { who: string; label: string; url: string }> = {
+  UCSD: { who: 'ALERTCalifornia, UC San Diego &amp; CAL FIRE', label: 'alertcalifornia.org', url: 'https://cameras.alertcalifornia.org/' },
+  HPWREN: { who: 'HPWREN, UC San Diego', label: 'hpwren.ucsd.edu', url: 'https://hpwren.ucsd.edu/cameras/' },
+  UNR: { who: 'Nevada Seismological Laboratory, University of Nevada, Reno', label: 'seismo.unr.edu', url: 'http://www.seismo.unr.edu/' },
+  ALERTWest: { who: 'ALERTWest', label: 'alertwest.org', url: 'https://www.alertwest.org/' },
+};
+
+export async function openPeakCam(p: PeakCamData) {
   activeId = 'peak:' + p.camId;
   const id = activeId;
   stopPreviewTimer();
@@ -404,7 +415,7 @@ export async function openPeakCam(p: { camId: string; name: string; county: stri
   if (activeId !== id) return;
   if (url) {
     const a = document.createElement('a');
-    a.href = 'https://cameras.alertcalifornia.org/'; a.target = '_blank';
+    a.href = (PROVIDER_CREDIT[p.provider] ?? PROVIDER_CREDIT.UCSD).url; a.target = '_blank';
     const img = document.createElement('img');
     img.alt = p.name; img.src = url;
     img.onerror = () => camView.classList.add('is-offline');
@@ -420,15 +431,19 @@ export async function openPeakCam(p: { camId: string; name: string; county: stri
     camView.classList.add('is-offline');
   }
   const ft = Math.round(p.elevM * 3.28084).toLocaleString();
+  // HPWREN, UNR and ALERTWest cameras share this layer, so the credit has to
+  // follow the provider. Every peak used to say "ALERTCalifornia".
+  const credit = PROVIDER_CREDIT[p.provider] ?? PROVIDER_CREDIT.UCSD;
   $('cam-info').innerHTML =
     `<p class="cam-name">Peak camera · ${esc(p.county)} · ${ft} ft</p>` +
-    `<p class="cam-attr">ALERTCalifornia — UC San Diego &amp; CAL FIRE</p>` +
-    `<p class="cam-source"><a href="https://cameras.alertcalifornia.org/" target="_blank" rel="noopener">alertcalifornia.org ${EXT}</a></p>`;
+    `<p class="cam-attr">${credit.who}</p>` +
+    `<p class="cam-source"><a href="${credit.url}" target="_blank" rel="noopener">${credit.label} ${EXT}</a></p>`;
   if (p.lat != null && p.lng != null) void appendLocalWeather(p.lat, p.lng, id);
   ($('panel-cam') as HTMLElement).hidden = false;
   document.body.classList.add('cam-open');
   document.querySelectorAll('.cam-list-item.active').forEach((el) => el.classList.remove('active'));
   setSelected(map, null);
+  try { history.replaceState(null, '', '#cam/' + feedCamId(p.camId)); } catch {}
 }
 
 export async function openWeather(spot: WeatherSpot) {
@@ -517,7 +532,14 @@ export function initPanels(m: maplibregl.Map) {
   const m2 = location.hash.match(/^#cam\/(.+)$/);
   if (m2) {
     const id = decodeURIComponent(m2[1]);
+    const feedId = feedCamIdFrom(id);
     if (camById[id]) openCam(id);
+    // Feed cameras open once the feed arrives. Only peaks have a panel so far;
+    // a link to a Caltrans or FAA camera is ignored until those get one.
+    else if (feedId) getPeaks().then((list) => {
+      const p = list.find((x) => x.camId === feedId);
+      if (p) openPeakCam(p);
+    }).catch(() => {});
   } else {
     const wx = location.hash.match(/^#wx\/(.+)$/);
     if (wx) {
