@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Site B</title>
+<link rel="stylesheet" href="http://localhost:4321/styles/main.css">
+<style>
+body{background:url(bg-map.png) center/cover no-repeat;margin:0;height:100vh}
+.tag{position:fixed;left:16px;bottom:16px;z-index:50;font:600 13px/1.3 system-ui;background:#111;color:#fff;padding:8px 12px;border-radius:999px}
+.tag span{font-weight:400;opacity:.75;margin-left:6px}
+.sub{font-size:.74rem;color:hsl(var(--muted-foreground));font-weight:400;margin-top:1px}
+.shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:rgb(128 128 128/.15)}
+.cap{display:flex;justify-content:space-between;font-size:.74rem;color:hsl(var(--muted-foreground));margin:6px 2px 14px}
+.cap b{color:hsl(var(--foreground));font-weight:600}
+.scroll{overflow-y:auto;padding:14px 16px}
+.dial{display:flex;align-items:center;gap:14px}.thumbs{display:flex;flex-direction:column;gap:8px;flex:1}
+ .t{display:flex;align-items:center;gap:8px;font-size:.74rem;font-weight:600;padding:4px;border-radius:10px}
+ .t img{width:64px;height:40px;object-fit:cover;border-radius:7px}.t.on{background:hsl(var(--foreground)/.08)}
+</style></head><body class="app">
+<header class="hud hud-top">
+  <div class="brand"><h1>cali.camera</h1></div>
+  <div class="conditions"><span class="cond"><b>Coast</b><span class="cond-t">52°</span><span class="cond-d">Clear</span></span>
+  <span class="cond"><b>Inland</b><span class="cond-t">48°</span><span class="cond-d">Clear</span></span></div>
+  <div class="hud-actions">
+    <div class="layer-group"><button class="btn btn-layer" aria-pressed="false">Fog</button><button class="btn btn-layer" aria-pressed="true">Temps</button><button class="btn btn-layer" aria-pressed="true">Peaks</button></div>
+    <button class="btn">Cameras</button>
+    <label class="live-toggle"><span class="live-switch"><span class="live-thumb"></span></span><span class="live-label">Live</span></label>
+  </div></header>
+<aside class="panel panel-cam" style="width:380px"><div class="panel-head"><div><strong>Mt Elizabeth</strong><div class="sub">ALERTCalifornia · 2 cameras · 4,934 ft</div></div><button class="icon-btn">✕</button></div>
+ <div class="scroll"><img class="shot" src="https://img.cdn.prod.alertwest.com/data/img/2159/2026/11/27/Mt_Elizabeth_1_1795793803_4240.jpg"><div class="cap"><b>Facing NE · 64°</b><span>65° wide</span></div>
+ <div class="dial"><svg viewBox="-12 -12 184 184" width="168" height="168"><circle cx="80" cy="80" r="66" fill="none" stroke="hsl(var(--foreground)/.15)"/><path d="M80,80 L41.3,133.4 A66,66 0 0 1 15.3,67.1 Z" fill="hsl(var(--foreground)/.14)" stroke="hsl(var(--foreground)/.35)" stroke-width="1"/><path d="M80,80 L114.6,23.8 A66,66 0 0 1 145.5,88.0 Z" fill="hsl(var(--foreground)/.85)" stroke="hsl(var(--foreground)/.35)" stroke-width="1"/><circle cx="80" cy="80" r="3" fill="hsl(var(--foreground))"/><text x="80" y="8" text-anchor="middle" font-size="10" fill="hsl(var(--muted-foreground))" font-weight="600">N</text><text x="156" y="84" text-anchor="middle" font-size="10" fill="hsl(var(--muted-foreground))" font-weight="600">E</text><text x="80" y="160" text-anchor="middle" font-size="10" fill="hsl(var(--muted-foreground))" font-weight="600">S</text><text x="4" y="84" text-anchor="middle" font-size="10" fill="hsl(var(--muted-foreground))" font-weight="600">W</text></svg><div class="thumbs"><div class="t on"><img src="https://img.cdn.prod.alertwest.com/data/img/2159/2026/11/27/Mt_Elizabeth_1_1795793803_4240.jpg"><span>NE 64°</span></div><div class="t "><img src="https://img.cdn.prod.alertwest.com/data/img/2160/2026/11/27/Mt_Elizabeth_2_1795793804_9056.jpg"><span>W 249°</span></div></div></div></div></aside>
+<div class="tag">Site B · Compass<span>pick a direction; the same cones draw on the map</span></div>
+</body></html>

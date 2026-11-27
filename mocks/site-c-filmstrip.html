@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Site C</title>
+<link rel="stylesheet" href="http://localhost:4321/styles/main.css">
+<style>
+body{background:url(bg-map.png) center/cover no-repeat;margin:0;height:100vh}
+.tag{position:fixed;left:16px;bottom:16px;z-index:50;font:600 13px/1.3 system-ui;background:#111;color:#fff;padding:8px 12px;border-radius:999px}
+.tag span{font-weight:400;opacity:.75;margin-left:6px}
+.sub{font-size:.74rem;color:hsl(var(--muted-foreground));font-weight:400;margin-top:1px}
+.shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:rgb(128 128 128/.15)}
+.cap{display:flex;justify-content:space-between;font-size:.74rem;color:hsl(var(--muted-foreground));margin:6px 2px 14px}
+.cap b{color:hsl(var(--foreground));font-weight:600}
+.scroll{overflow-y:auto;padding:14px 16px}
+.stage{position:relative}.nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:999px;border:0;
+ background:rgb(0 0 0/.45);color:#fff;font-size:20px;line-height:1}.nav.l{left:10px}.nav.r{right:10px}
+ .count{position:absolute;right:10px;bottom:10px;background:rgb(0 0 0/.5);color:#fff;font-size:.72rem;padding:2px 8px;border-radius:999px}
+ .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.strip img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px;opacity:.6}
+ .strip img.on{opacity:1;outline:2px solid hsl(var(--foreground));outline-offset:1px}
+</style></head><body class="app">
+<header class="hud hud-top">
+  <div class="brand"><h1>cali.camera</h1></div>
+  <div class="conditions"><span class="cond"><b>Coast</b><span class="cond-t">52°</span><span class="cond-d">Clear</span></span>
+  <span class="cond"><b>Inland</b><span class="cond-t">48°</span><span class="cond-d">Clear</span></span></div>
+  <div class="hud-actions">
+    <div class="layer-group"><button class="btn btn-layer" aria-pressed="false">Fog</button><button class="btn btn-layer" aria-pressed="true">Temps</button><button class="btn btn-layer" aria-pressed="true">Peaks</button></div>
+    <button class="btn">Cameras</button>
+    <label class="live-toggle"><span class="live-switch"><span class="live-thumb"></span></span><span class="live-label">Live</span></label>
+  </div></header>
+<aside class="panel panel-cam" style="width:520px"><div class="panel-head"><div><strong>Middletown airport</strong><div class="sub">FAA weather cameras</div></div><button class="icon-btn">✕</button></div>
+ <div class="scroll"><div class="stage"><img class="shot" src="https://img.cdn.prod.alertwest.com/data/img/17126/2026/11/27/Middletown_1_1795793723_1602_s.jpg"><button class="nav l">‹</button><button class="nav r">›</button><span class="count">1 of 4</span></div>
+ <div class="strip"><img class="on" src="https://img.cdn.prod.alertwest.com/data/img/17126/2026/11/27/Middletown_1_1795793723_1602_s.jpg"><img class="" src="https://img.cdn.prod.alertwest.com/data/img/17127/2026/11/27/Middletown_2_1795793723_9631_s.jpg"><img class="" src="https://img.cdn.prod.alertwest.com/data/img/17128/2026/11/27/Middletown_3_1795793723_8693_s.jpg"><img class="" src="https://img.cdn.prod.alertwest.com/data/img/17129/2026/11/27/Middletown_4_1795793723_9206_s.jpg"></div></div></aside>
+<div class="tag">Site C · Filmstrip<span>one big view; step through the others like turning your head</span></div>
+</body></html>

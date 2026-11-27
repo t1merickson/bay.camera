@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Lists C</title>
+<link rel="stylesheet" href="http://localhost:4321/styles/main.css">
+<style>
+body{background:url(bg-map.png) center/cover no-repeat;margin:0;height:100vh}
+.tag{position:fixed;left:16px;bottom:16px;z-index:50;font:600 13px/1.3 system-ui;background:#111;color:#fff;padding:8px 12px;border-radius:999px}
+.tag span{font-weight:400;opacity:.75;margin-left:6px}
+.sub{font-size:.74rem;color:hsl(var(--muted-foreground));font-weight:400;margin-top:1px}
+.shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:rgb(128 128 128/.15)}
+.cap{display:flex;justify-content:space-between;font-size:.74rem;color:hsl(var(--muted-foreground));margin:6px 2px 14px}
+.cap b{color:hsl(var(--foreground));font-weight:600}
+.scroll{overflow-y:auto;padding:14px 16px}
+.lp{background:hsl(var(--foreground)/.9)!important;color:hsl(var(--background))!important}
+ .dd{position:fixed;top:66px;right:330px;width:280px;height:auto;bottom:auto;padding:8px;z-index:30}
+ .ddh{font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600;padding:6px 10px}
+ .dd button{display:flex;justify-content:space-between;width:100%;border:0;background:transparent;padding:8px 10px;border-radius:10px;font:500 .84rem system-ui;color:hsl(var(--foreground))}
+ .dd button.on{background:hsl(var(--foreground)/.08)}.dd button span{color:hsl(var(--muted-foreground))}.dd .muted{color:hsl(var(--muted-foreground))}
+ .dd hr{border:0;height:1px;background:hsl(var(--foreground)/.1);margin:6px 4px}
+ .toast{position:fixed;top:66px;left:50%;transform:translateX(-50%);z-index:40;background:#111;color:#fff;font-size:.78rem;padding:8px 14px;border-radius:999px}
+ .toast code{font-size:.72rem;opacity:.8}
+ .strip{position:fixed;left:12px;right:12px;bottom:12px;top:auto;width:auto;height:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:10px;z-index:20}
+ .strip figure{margin:0}.strip img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;display:block}
+ .tag{bottom:auto;top:74px;left:16px}.strip figcaption{font-size:.72rem;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style></head><body class="app">
+<header class="hud hud-top">
+  <div class="brand"><h1>cali.camera</h1></div>
+  <div class="conditions"><span class="cond"><b>Coast</b><span class="cond-t">52°</span><span class="cond-d">Clear</span></span>
+  <span class="cond"><b>Inland</b><span class="cond-t">48°</span><span class="cond-d">Clear</span></span></div>
+  <div class="hud-actions"><button class="btn lp" aria-expanded="true">★ Morning fog check ▾</button>
+    <div class="layer-group"><button class="btn btn-layer" aria-pressed="false">Fog</button><button class="btn btn-layer" aria-pressed="true">Temps</button><button class="btn btn-layer" aria-pressed="true">Peaks</button></div>
+    <button class="btn">Cameras</button>
+    <label class="live-toggle"><span class="live-switch"><span class="live-thumb"></span></span><span class="live-label">Live</span></label>
+  </div></header>
+<div class="dd panel"><div class="ddh">My lists</div><button class="on">★ Morning fog check <span>5</span></button><button>★ Sunset spots <span>3</span></button><hr><button class="muted">+ New list from cameras in view</button></div>
+ <div class="toast">Link copied · <code>cali.camera/?l=Morning+fog+check&amp;c=a2428,a2193,a2156,a1988,a6573</code></div>
+ <section class="strip panel"><figure><img src="https://img.cdn.prod.alertwest.com/data/img/2428/2026/11/27/Sutro_Tower_1_1795793792_4164.jpg"><figcaption>Sutro Tower 1</figcaption></figure><figure><img src="https://img.cdn.prod.alertwest.com/data/img/2193/2026/11/27/Mt_Tamalpais_West_1795793806_7927.jpg"><figcaption>Mt Tamalpais West</figcaption></figure><figure><img src="https://img.cdn.prod.alertwest.com/data/img/2156/2026/11/27/Mt_Diablo_1795793798_3513.jpg"><figcaption>Mt Diablo</figcaption></figure><figure><img src="https://img.cdn.prod.alertwest.com/data/img/1988/2026/11/27/Golden_Gate_1795793798_7137.jpg"><figcaption>Golden Gate</figcaption></figure><figure><img src="https://img.cdn.prod.alertwest.com/data/img/6573/2026/11/27/TVD32_-_I-80_Bay_Bridge_SAS_Tower_East_1795793740_9700_s.jpg"><figcaption>TVD32 - I-80 Bay Bridge SAS Tower East</figcaption></figure></section>
+<div class="tag">Lists C · List in the top bar<span>pick a list; the map shows only its cameras; strip along the bottom</span></div>
+</body></html>

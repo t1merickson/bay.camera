@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Site A</title>
+<link rel="stylesheet" href="http://localhost:4321/styles/main.css">
+<style>
+body{background:url(bg-map.png) center/cover no-repeat;margin:0;height:100vh}
+.tag{position:fixed;left:16px;bottom:16px;z-index:50;font:600 13px/1.3 system-ui;background:#111;color:#fff;padding:8px 12px;border-radius:999px}
+.tag span{font-weight:400;opacity:.75;margin-left:6px}
+.sub{font-size:.74rem;color:hsl(var(--muted-foreground));font-weight:400;margin-top:1px}
+.shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:rgb(128 128 128/.15)}
+.cap{display:flex;justify-content:space-between;font-size:.74rem;color:hsl(var(--muted-foreground));margin:6px 2px 14px}
+.cap b{color:hsl(var(--foreground));font-weight:600}
+.scroll{overflow-y:auto;padding:14px 16px}
+
+</style></head><body class="app">
+<header class="hud hud-top">
+  <div class="brand"><h1>cali.camera</h1></div>
+  <div class="conditions"><span class="cond"><b>Coast</b><span class="cond-t">52°</span><span class="cond-d">Clear</span></span>
+  <span class="cond"><b>Inland</b><span class="cond-t">48°</span><span class="cond-d">Clear</span></span></div>
+  <div class="hud-actions">
+    <div class="layer-group"><button class="btn btn-layer" aria-pressed="false">Fog</button><button class="btn btn-layer" aria-pressed="true">Temps</button><button class="btn btn-layer" aria-pressed="true">Peaks</button></div>
+    <button class="btn">Cameras</button>
+    <label class="live-toggle"><span class="live-switch"><span class="live-thumb"></span></span><span class="live-label">Live</span></label>
+  </div></header>
+<aside class="panel panel-cam" style="width:380px"><div class="panel-head"><div><strong>Middletown airport</strong><div class="sub">FAA weather cameras · 4 views</div></div><button class="icon-btn">✕</button></div>
+ <div class="scroll"><img class="shot" src="https://img.cdn.prod.alertwest.com/data/img/17126/2026/11/27/Middletown_1_1795793723_1602_s.jpg"><div class="cap"><b>Middletown 1</b><span>direction not reported</span></div><img class="shot" src="https://img.cdn.prod.alertwest.com/data/img/17127/2026/11/27/Middletown_2_1795793723_9631_s.jpg"><div class="cap"><b>Middletown 2</b><span>direction not reported</span></div><img class="shot" src="https://img.cdn.prod.alertwest.com/data/img/17128/2026/11/27/Middletown_3_1795793723_8693_s.jpg"><div class="cap"><b>Middletown 3</b><span>direction not reported</span></div><img class="shot" src="https://img.cdn.prod.alertwest.com/data/img/17129/2026/11/27/Middletown_4_1795793723_9206_s.jpg"><div class="cap"><b>Middletown 4</b><span>direction not reported</span></div></div></aside>
+<div class="tag">Site A · Stack<span>every camera at the site, top to bottom</span></div>
+</body></html>

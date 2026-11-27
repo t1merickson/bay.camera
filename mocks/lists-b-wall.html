@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Lists B</title>
+<link rel="stylesheet" href="http://localhost:4321/styles/main.css">
+<style>
+body{background:url(bg-map.png) center/cover no-repeat;margin:0;height:100vh}
+.tag{position:fixed;left:16px;bottom:16px;z-index:50;font:600 13px/1.3 system-ui;background:#111;color:#fff;padding:8px 12px;border-radius:999px}
+.tag span{font-weight:400;opacity:.75;margin-left:6px}
+.sub{font-size:.74rem;color:hsl(var(--muted-foreground));font-weight:400;margin-top:1px}
+.shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:rgb(128 128 128/.15)}
+.cap{display:flex;justify-content:space-between;font-size:.74rem;color:hsl(var(--muted-foreground));margin:6px 2px 14px}
+.cap b{color:hsl(var(--foreground));font-weight:600}
+.scroll{overflow-y:auto;padding:14px 16px}
+.scrim{position:fixed;inset:0;background:rgb(0 0 0/.35);z-index:25}
+ .wall{position:fixed;top:69px;left:12px;right:12px;bottom:12px;z-index:30;width:auto}
+ .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px;overflow:auto}
+ figure{margin:0}figure img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;display:block}
+ figcaption{display:flex;justify-content:space-between;font-size:.76rem;margin:6px 2px}figcaption span{color:hsl(var(--muted-foreground))}
+</style></head><body class="app">
+<header class="hud hud-top">
+  <div class="brand"><h1>cali.camera</h1></div>
+  <div class="conditions"><span class="cond"><b>Coast</b><span class="cond-t">52°</span><span class="cond-d">Clear</span></span>
+  <span class="cond"><b>Inland</b><span class="cond-t">48°</span><span class="cond-d">Clear</span></span></div>
+  <div class="hud-actions">
+    <div class="layer-group"><button class="btn btn-layer" aria-pressed="false">Fog</button><button class="btn btn-layer" aria-pressed="true">Temps</button><button class="btn btn-layer" aria-pressed="true">Peaks</button></div>
+    <button class="btn">Cameras</button>
+    <label class="live-toggle"><span class="live-switch"><span class="live-thumb"></span></span><span class="live-label">Live</span></label>
+  </div></header>
+<div class="scrim"></div><section class="wall panel"><div class="panel-head"><div><strong>Morning fog check</strong><div class="sub">5 cameras · updates every minute</div></div>
+ <div style="display:flex;gap:8px"><button class="btn">Share link</button><button class="icon-btn">✕</button></div></div><div class="grid"><figure><img src="https://img.cdn.prod.alertwest.com/data/img/2428/2026/11/27/Sutro_Tower_1_1795793792_4164.jpg"><figcaption><b>Sutro Tower 1</b><span>live · 1 min ago</span></figcaption></figure><figure><img src="https://img.cdn.prod.alertwest.com/data/img/2193/2026/11/27/Mt_Tamalpais_West_1795793806_7927.jpg"><figcaption><b>Mt Tamalpais West</b><span>live · 1 min ago</span></figcaption></figure><figure><img src="https://img.cdn.prod.alertwest.com/data/img/2156/2026/11/27/Mt_Diablo_1795793798_3513.jpg"><figcaption><b>Mt Diablo</b><span>live · 1 min ago</span></figcaption></figure><figure><img src="https://img.cdn.prod.alertwest.com/data/img/1988/2026/11/27/Golden_Gate_1795793798_7137.jpg"><figcaption><b>Golden Gate</b><span>live · 1 min ago</span></figcaption></figure><figure><img src="https://img.cdn.prod.alertwest.com/data/img/6573/2026/11/27/TVD32_-_I-80_Bay_Bridge_SAS_Tower_East_1795793740_9700_s.jpg"><figcaption><b>TVD32 - I-80 Bay Bridge SAS Tower East</b><span>live · 1 min ago</span></figcaption></figure></div></section>
+<div class="tag">Lists B · Wall<span>a list opens as a live grid over the map</span></div>
+</body></html>

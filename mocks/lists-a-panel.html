@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Lists A</title>
+<link rel="stylesheet" href="http://localhost:4321/styles/main.css">
+<style>
+body{background:url(bg-map.png) center/cover no-repeat;margin:0;height:100vh}
+.tag{position:fixed;left:16px;bottom:16px;z-index:50;font:600 13px/1.3 system-ui;background:#111;color:#fff;padding:8px 12px;border-radius:999px}
+.tag span{font-weight:400;opacity:.75;margin-left:6px}
+.sub{font-size:.74rem;color:hsl(var(--muted-foreground));font-weight:400;margin-top:1px}
+.shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:rgb(128 128 128/.15)}
+.cap{display:flex;justify-content:space-between;font-size:.74rem;color:hsl(var(--muted-foreground));margin:6px 2px 14px}
+.cap b{color:hsl(var(--foreground));font-weight:600}
+.scroll{overflow-y:auto;padding:14px 16px}
+.tabs{display:flex;gap:4px;padding:12px 16px 0}.tabs button{border:0;background:transparent;padding:6px 12px;border-radius:999px;font:500 .8rem system-ui;color:hsl(var(--muted-foreground))}
+ .tabs button.on{background:hsl(var(--foreground)/.9);color:hsl(var(--background))}
+ .list{padding:10px;border-radius:14px;margin-bottom:8px}.list.on{background:hsl(var(--foreground)/.06)}
+ .lh{display:flex;align-items:baseline;gap:8px}.lh b{font-size:.86rem}.lh span{font-size:.74rem;color:hsl(var(--muted-foreground));flex:1}
+ .share{border:0;background:hsl(var(--foreground)/.07);border-radius:999px;padding:3px 10px;font:500 .72rem system-ui}
+ .mini{display:flex;gap:4px;margin-top:8px}.mini img{width:48px;height:32px;object-fit:cover;border-radius:6px}
+ .newlist{border:0;background:transparent;font:500 .8rem system-ui;color:hsl(var(--muted-foreground));padding:6px 10px}
+ .star{color:hsl(38 85% 50%);font-size:1rem}
+</style></head><body class="app">
+<header class="hud hud-top">
+  <div class="brand"><h1>cali.camera</h1></div>
+  <div class="conditions"><span class="cond"><b>Coast</b><span class="cond-t">52°</span><span class="cond-d">Clear</span></span>
+  <span class="cond"><b>Inland</b><span class="cond-t">48°</span><span class="cond-d">Clear</span></span></div>
+  <div class="hud-actions">
+    <div class="layer-group"><button class="btn btn-layer" aria-pressed="false">Fog</button><button class="btn btn-layer" aria-pressed="true">Temps</button><button class="btn btn-layer" aria-pressed="true">Peaks</button></div>
+    <button class="btn">Cameras</button>
+    <label class="live-toggle"><span class="live-switch"><span class="live-thumb"></span></span><span class="live-label">Live</span></label>
+  </div></header>
+<aside class="panel panel-list"><div class="panel-head"><strong>Cameras</strong><button class="icon-btn">✕</button></div>
+ <div class="tabs"><button>All</button><button class="on">My lists</button></div>
+ <div class="scroll">
+  <div class="list on"><div class="lh"><b>Morning fog check</b><span>5 cameras</span><button class="share">Share</button></div><div class="mini"><img src="https://img.cdn.prod.alertwest.com/data/img/2428/2026/11/27/Sutro_Tower_1_1795793792_4164.jpg"><img src="https://img.cdn.prod.alertwest.com/data/img/2193/2026/11/27/Mt_Tamalpais_West_1795793806_7927.jpg"><img src="https://img.cdn.prod.alertwest.com/data/img/2156/2026/11/27/Mt_Diablo_1795793798_3513.jpg"><img src="https://img.cdn.prod.alertwest.com/data/img/1988/2026/11/27/Golden_Gate_1795793798_7137.jpg"><img src="https://img.cdn.prod.alertwest.com/data/img/6573/2026/11/27/TVD32_-_I-80_Bay_Bridge_SAS_Tower_East_1795793740_9700_s.jpg"></div></div>
+  <div class="list"><div class="lh"><b>Sunset spots</b><span>3 cameras</span><button class="share">Share</button></div><div class="mini"><img src="https://img.cdn.prod.alertwest.com/data/img/2428/2026/11/27/Sutro_Tower_1_1795793792_4164.jpg"><img src="https://img.cdn.prod.alertwest.com/data/img/2193/2026/11/27/Mt_Tamalpais_West_1795793806_7927.jpg"><img src="https://img.cdn.prod.alertwest.com/data/img/2156/2026/11/27/Mt_Diablo_1795793798_3513.jpg"></div></div>
+  <button class="newlist">+ New list</button></div></aside>
+ <aside class="panel panel-cam"><div class="panel-head"><strong>Sutro Tower 1</strong><div style="display:flex;gap:6px"><button class="icon-btn star">★</button><button class="icon-btn">✕</button></div></div>
+ <div class="scroll"><img class="shot" src="https://img.cdn.prod.alertwest.com/data/img/2428/2026/11/27/Sutro_Tower_1_1795793792_4164.jpg"><div class="cap"><b>Saved to Morning fog check</b><span>change</span></div></div></aside>
+<div class="tag">Lists A · Star + My lists<span>save from any camera; lists live in the Cameras panel</span></div>
+</body></html>

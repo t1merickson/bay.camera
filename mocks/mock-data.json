@@ -1,0 +1,107 @@
+{
+ "elizabeth": [
+  {
+   "id": "a2159",
+   "name": "Mt Elizabeth 1",
+   "pr": "UCSD",
+   "az": 64.28,
+   "fov": 65.33,
+   "el": 1504,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/2159/2026/11/27/Mt_Elizabeth_1_1795793803_4240.jpg"
+  },
+  {
+   "id": "a2160",
+   "name": "Mt Elizabeth 2",
+   "pr": "UCSD",
+   "az": 248.6,
+   "fov": 65.33,
+   "el": 1504,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/2160/2026/11/27/Mt_Elizabeth_2_1795793804_9056.jpg"
+  }
+ ],
+ "middletown": [
+  {
+   "id": "a17126",
+   "name": "Middletown 1",
+   "pr": "FAA",
+   "az": null,
+   "fov": 45,
+   "el": 1730,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/17126/2026/11/27/Middletown_1_1795793723_1602_s.jpg"
+  },
+  {
+   "id": "a17127",
+   "name": "Middletown 2",
+   "pr": "FAA",
+   "az": null,
+   "fov": 45,
+   "el": 1730,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/17127/2026/11/27/Middletown_2_1795793723_9631_s.jpg"
+  },
+  {
+   "id": "a17128",
+   "name": "Middletown 3",
+   "pr": "FAA",
+   "az": null,
+   "fov": 45,
+   "el": 1730,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/17128/2026/11/27/Middletown_3_1795793723_8693_s.jpg"
+  },
+  {
+   "id": "a17129",
+   "name": "Middletown 4",
+   "pr": "FAA",
+   "az": null,
+   "fov": 45,
+   "el": 1730,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/17129/2026/11/27/Middletown_4_1795793723_9206_s.jpg"
+  }
+ ],
+ "list": [
+  {
+   "id": "a2428",
+   "name": "Sutro Tower 1",
+   "pr": "UCSD",
+   "az": 162.75,
+   "fov": 65.33,
+   "el": 254,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/2428/2026/11/27/Sutro_Tower_1_1795793792_4164.jpg"
+  },
+  {
+   "id": "a2193",
+   "name": "Mt Tamalpais West",
+   "pr": "UCSD",
+   "az": 333.7,
+   "fov": 65.33,
+   "el": 750,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/2193/2026/11/27/Mt_Tamalpais_West_1795793806_7927.jpg"
+  },
+  {
+   "id": "a2156",
+   "name": "Mt Diablo",
+   "pr": "UCSD",
+   "az": 208.56,
+   "fov": 62.8,
+   "el": 1162,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/2156/2026/11/27/Mt_Diablo_1795793798_3513.jpg"
+  },
+  {
+   "id": "a1988",
+   "name": "Golden Gate",
+   "pr": "UCSD",
+   "az": 44.4,
+   "fov": 51.47,
+   "el": 597,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/1988/2026/11/27/Golden_Gate_1795793798_7137.jpg"
+  },
+  {
+   "id": "a6573",
+   "name": "TVD32 - I-80 Bay Bridge SAS Tower East",
+   "pr": "CALTRANS",
+   "az": null,
+   "fov": 45,
+   "el": 0,
+   "url": "https://img.cdn.prod.alertwest.com/data/img/6573/2026/11/27/TVD32_-_I-80_Bay_Bridge_SAS_Tower_East_1795793740_9700_s.jpg"
+  }
+ ]
+}
