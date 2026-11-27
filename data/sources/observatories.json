@@ -1,0 +1,80 @@
+{
+  "source": "observatories",
+  "letter": "o",
+  "generated": "2026-11-27T15:56:38Z",
+  "provider": "Lick Observatory (UC Observatories) and Palomar Observatory (Caltech)",
+  "license": "Images are the observatories' own. Lick's APFCam page says images are copyright University of California Observatories / Lick Observatory, unauthorized use forbidden.",
+  "attribution": "Lick Observatory / University of California Observatories; Palomar Observatory / Caltech",
+  "home": "https://mthamilton.ucolick.org/hamcam/",
+  "cameras": [
+    {
+      "id": "o.lick-hamcam2",
+      "site": "o.lick",
+      "name": "Lick Observatory, Hamcam 2",
+      "lat": 37.3414,
+      "lng": -121.6429,
+      "coords_from": "geocoded landmark",
+      "kind": "image",
+      "image_url": "https://mthamilton.ucolick.org/hamcam/Cam2.ts.JPG",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://mthamilton.ucolick.org/hamcam/hamcam2.html",
+      "refresh_s": 180,
+      "faces": "Faces east-northeast, toward the summit domes (Shane 3-m, Crocker, APF)",
+      "azimuth": 67.5,
+      "hours": null,
+      "check": {
+        "at": "2026-11-27T15:56:35Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 203584
+      }
+    },
+    {
+      "id": "o.lick-allsky",
+      "site": "o.lick",
+      "name": "Lick Observatory, all-sky camera",
+      "lat": 37.3414,
+      "lng": -121.6429,
+      "coords_from": "geocoded landmark",
+      "kind": "image",
+      "image_url": "https://mthamilton.ucolick.org/skycam2/current.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://mthamilton.ucolick.org/skycam2/",
+      "refresh_s": 120,
+      "faces": "Straight up (all-sky fisheye)",
+      "azimuth": null,
+      "hours": "Built for night sky; daytime frames can be washed out",
+      "check": {
+        "at": "2026-11-27T15:56:36Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 79917
+      }
+    },
+    {
+      "id": "o.palomar-allsky",
+      "site": "o.palomar",
+      "name": "Palomar Observatory, all-sky camera",
+      "lat": 33.3564,
+      "lng": -116.865,
+      "coords_from": "geocoded landmark",
+      "kind": "image",
+      "image_url": "https://algol.palomar.caltech.edu/instruments/allsky/AllSkyCurrentImage.JPG",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.astro.caltech.edu/palomar/media/livecams.html",
+      "refresh_s": 300,
+      "faces": "Straight up (all-sky); Hale dome sits at top right, to the north-northwest",
+      "azimuth": null,
+      "hours": "Built for night sky; daytime frames can be washed out",
+      "check": {
+        "at": "2026-11-27T15:56:38Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 55834
+      }
+    }
+  ]
+}

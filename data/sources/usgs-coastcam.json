@@ -1,0 +1,103 @@
+{
+  "source": "usgs-coastcam",
+  "letter": "u",
+  "generated": "2026-11-27T15:44:48Z",
+  "provider": "USGS Pacific Coastal and Marine Science Center",
+  "license": "Public domain (US federal government work)",
+  "attribution": "USGS",
+  "home": "https://www.usgs.gov/programs/cmhrp/science/usgs-coastcams",
+  "cameras": [
+    {
+      "id": "u.dreaminn.c1",
+      "site": "u.dreaminn",
+      "name": "Santa Cruz Main Beach",
+      "lat": 36.9566,
+      "lng": -122.0251,
+      "coords_from": "geocoded landmark",
+      "kind": "image",
+      "image_url": "https://cmgp-coastcam.s3-us-west-2.amazonaws.com/cameras/dreaminn/latest/c1_snap.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.usgs.gov/centers/pcmsc/science/using-video-imagery-study-coastal-change-santa-cruz-beaches",
+      "refresh_s": 1800,
+      "faces": "east, over Main Beach and the Boardwalk",
+      "azimuth": 90,
+      "hours": "daylight, about every 30 minutes",
+      "check": {
+        "at": "2026-11-27T15:44:44Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 392270
+      }
+    },
+    {
+      "id": "u.dreaminn.c2",
+      "site": "u.dreaminn",
+      "name": "Santa Cruz Cowells Beach",
+      "lat": 36.9566,
+      "lng": -122.0251,
+      "coords_from": "geocoded landmark",
+      "kind": "image",
+      "image_url": "https://cmgp-coastcam.s3-us-west-2.amazonaws.com/cameras/dreaminn/latest/c2_snap.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.usgs.gov/centers/pcmsc/science/using-video-imagery-study-coastal-change-santa-cruz-beaches",
+      "refresh_s": 1800,
+      "faces": "south, over Cowells Beach",
+      "azimuth": 180,
+      "hours": "daylight, about every 30 minutes",
+      "check": {
+        "at": "2026-11-27T15:44:45Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 454882
+      }
+    },
+    {
+      "id": "u.sunset.c1",
+      "site": "u.sunset",
+      "name": "Sunset State Beach, camera 1",
+      "lat": 36.8918,
+      "lng": -121.833,
+      "coords_from": "geocoded landmark",
+      "kind": "image",
+      "image_url": "https://cmgp-coastcam.s3-us-west-2.amazonaws.com/cameras/sunset/latest/c1_snap.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.usgs.gov/centers/pcmsc/science/using-video-imagery-study-coastal-change-sunset-state-beach",
+      "refresh_s": 1800,
+      "faces": "northwest",
+      "azimuth": 315,
+      "hours": "daylight, about every 30 minutes",
+      "check": {
+        "at": "2026-11-27T15:44:46Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 562617
+      }
+    },
+    {
+      "id": "u.sunset.c2",
+      "site": "u.sunset",
+      "name": "Sunset State Beach, camera 2",
+      "lat": 36.8918,
+      "lng": -121.833,
+      "coords_from": "geocoded landmark",
+      "kind": "image",
+      "image_url": "https://cmgp-coastcam.s3-us-west-2.amazonaws.com/cameras/sunset/latest/c2_snap.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.usgs.gov/centers/pcmsc/science/using-video-imagery-study-coastal-change-sunset-state-beach",
+      "refresh_s": 1800,
+      "faces": "north",
+      "azimuth": 0,
+      "hours": "daylight, about every 30 minutes",
+      "check": {
+        "at": "2026-11-27T15:44:48Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 606796
+      }
+    }
+  ]
+}

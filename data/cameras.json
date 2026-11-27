@@ -358,7 +358,7 @@
       "type": "institutional",
       "embed": {
         "kind": "image",
-        "src": "http://mthamilton.ucolick.org/hamcam/Cam1.ts.JPG",
+        "src": "https://mthamilton.ucolick.org/hamcam/Cam1.ts.JPG",
         "page": "http://mthamilton.ucolick.org/hamcam/hamcam1.html"
       },
       "attribution": "Lick Observatory",
@@ -755,8 +755,8 @@
       },
       "type": "ipcamlive",
       "embed": {
-        "kind": "image",
-        "src": "http://s133.ipcamlive.com/streams/850b9zuje16fv3skh/snapshot.jpg",
+        "kind": "link",
+        "src": null,
         "page": "https://www.hmbyc.org/livevideo"
       },
       "attribution": "Half Moon Bay Yacht Club",
@@ -772,7 +772,7 @@
         "mixed-content",
         "unstable-host"
       ],
-      "notes": "New vendor: ipcamlive.com (self-serve IP-camera hosting platform, alias 63ea74c6a29d6, streamid 850b9zuje16fv3skh, server s133). Player page embeds via g1.ipcamlive.com/player/player.php?alias=63ea74c6a29d6 with domain-lock enabled (only plays inside hmbyc.org's iframe -> hotlink-protection risk for the player, but the direct snapshot.jpg endpoint returned 200 with a fresh JPEG and no referer needed at check time). Verified live 2026-07-04 night IR shot: harbor water, dock, lights, benches. http asset -> mixed-content. Different angle/operator than our existing Sam's Chowder House axis cam (across the harbor). Server subdomain (s133) and streamid can rotate if the camera reconnects -- treat as fragile, re-derive alias/streamid from the player page's inline JS if the src goes stale."
+      "notes": "New vendor: ipcamlive.com (self-serve IP-camera hosting platform, alias 63ea74c6a29d6, streamid 850b9zuje16fv3skh, server s133). Player page embeds via g1.ipcamlive.com/player/player.php?alias=63ea74c6a29d6 with domain-lock enabled (only plays inside hmbyc.org's iframe -> hotlink-protection risk for the player, but the direct snapshot.jpg endpoint returned 200 with a fresh JPEG and no referer needed at check time). Verified live 2026-07-04 night IR shot: harbor water, dock, lights, benches. http asset -> mixed-content. Different angle/operator than our existing Sam's Chowder House axis cam (across the harbor). Server subdomain (s133) and streamid can rotate if the camera reconnects -- treat as fragile, re-derive alias/streamid from the player page's inline JS if the src goes stale. Link only (27 Nov 2026): the operator domain-locks this ipcamlive stream to hmbyc.org, and the old snapshot URL returns 404."
     },
     {
       "id": "santa-cruz-cowells-beach-usgs",

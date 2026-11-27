@@ -1,0 +1,172 @@
+{
+  "source": "nps",
+  "letter": "n",
+  "generated": "2026-11-27T15:53:25Z",
+  "provider": "U.S. National Park Service",
+  "license": "Public domain (US federal government work)",
+  "attribution": "National Park Service",
+  "home": "https://www.nps.gov/subjects/air/webcams.htm",
+  "cameras": [
+    {
+      "id": "n.lavo-kyvc-webcam1",
+      "site": "n.lavo-kyvc-webcam1",
+      "name": "Lassen: Kohm Yah-mah-nee Visitor Center Webcam",
+      "lat": 40.43778,
+      "lng": -121.53384,
+      "coords_from": "NPS linked data: Kohm Yah-mah-nee Visitor Center; viewer page says the view is from that visitor center",
+      "kind": "image",
+      "image_url": "https://www.nps.gov/webcams-lavo/kyvc_webcam1.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.nps.gov/media/webcam/view.htm?id=9DFC6A5A-04A9-4982-806C-26C2B9FEC6D4",
+      "refresh_s": 60,
+      "faces": "This is the view *looking north from the Kohm Yah-mah-nee Visitor Center at Lassen Volcanic National Park.",
+      "azimuth": null,
+      "hours": null,
+      "check": {
+        "at": "2026-11-27T15:52:36Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 298823
+      }
+    },
+    {
+      "id": "n.pore-air",
+      "site": "n.pore-air",
+      "name": "Point Reyes: Lighthouse, beach looking NNE",
+      "lat": 37.9965,
+      "lng": -123.02048,
+      "coords_from": "NPS linked data: Point Reyes Lighthouse Visitor Center; the park webcam page says the view is from that visitor center",
+      "kind": "image",
+      "image_url": "https://www.nps.gov/featurecontent/ard/webcams/images/porelarge.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.nps.gov/AirWebCams/PORE",
+      "refresh_s": 900,
+      "faces": "View of Point Reyes Beach looking north-northeast from the Point Reyes Lighthouse Visitor Center.",
+      "azimuth": null,
+      "hours": null,
+      "check": {
+        "at": "2026-11-27T15:53:22Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 882541
+      }
+    },
+    {
+      "id": "n.redw-elk-prairie",
+      "site": "n.redw-elk-prairie",
+      "name": "Redwood: Elk Prairie at Prairie Creek Redwoods State Park",
+      "lat": 41.35982,
+      "lng": -124.02943,
+      "coords_from": "NPS linked data: Elk Prairie Campground, the nearest NPS place to the Elk Prairie view; approximate",
+      "kind": "image",
+      "image_url": "https://www.nps.gov/webcams-redw/Elk_Prairie.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.nps.gov/media/webcam/view.htm?id=7553A227-AAEA-6A87-2496155B0FB5BE97",
+      "refresh_s": 60,
+      "faces": "This view of Elk Prairie is oriented to the southeast, across a section of grassland to a portion of the Newton B.",
+      "azimuth": null,
+      "hours": null,
+      "check": {
+        "at": "2026-11-27T15:52:49Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 205662
+      }
+    },
+    {
+      "id": "n.redw-jed-smith",
+      "site": "n.redw-jed-smith",
+      "name": "Redwood: Jedediah Smith Redwoods State Park",
+      "lat": 41.79573,
+      "lng": -124.08645,
+      "coords_from": "NPS linked data: Jedediah Smith Campground; viewer page says the view is from the campground and day use area",
+      "kind": "image",
+      "image_url": "https://www.nps.gov/webcams-redw/Jed_Smith.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.nps.gov/media/webcam/view.htm?id=BB7B050A-BE3B-E7FE-BFED58CB2E874B0F",
+      "refresh_s": 60,
+      "faces": "This view from the Jedediah Smith Redwoods State Park campground and day use area is situated to the northwest, toward a mixed evergreen forest.",
+      "azimuth": null,
+      "hours": null,
+      "check": {
+        "at": "2026-11-27T15:52:52Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 789380
+      }
+    },
+    {
+      "id": "n.redw-kvc-pacific-ocean",
+      "site": "n.redw-kvc-pacific-ocean",
+      "name": "Redwood: Thomas H. Kuchel Visitor Center",
+      "lat": 41.28681,
+      "lng": -124.09093,
+      "coords_from": "NPS linked data: Thomas H. Kuchel Visitor Center; viewer page says the view is from that visitor center",
+      "kind": "image",
+      "image_url": "https://www.nps.gov/webcams-redw/KVC_Pacific_Ocean.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.nps.gov/media/webcam/view.htm?id=BD37BB78-0E56-34CE-3270526D6CCC87CA",
+      "refresh_s": 60,
+      "faces": "This view from the Thomas H.",
+      "azimuth": null,
+      "hours": null,
+      "check": {
+        "at": "2026-11-27T15:52:46Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 198574
+      }
+    },
+    {
+      "id": "n.seki-air",
+      "site": "n.seki-air",
+      "name": "Sequoia: Giant Forest, west view",
+      "lat": 36.56469,
+      "lng": -118.77268,
+      "coords_from": "NPS linked data: Giant Forest Museum, the nearest NPS place to the Giant Forest edge named on the park webcam page; approximate",
+      "kind": "image",
+      "image_url": "https://www.nps.gov/featurecontent/ard/webcams/images/sekilarge.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.nps.gov/AirWebCams/SEKI",
+      "refresh_s": 900,
+      "faces": "Looks west from the edge of the Giant Forest.",
+      "azimuth": null,
+      "hours": "summer only per the NPS air webcam page",
+      "check": {
+        "at": "2026-11-27T15:53:25Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 1308006
+      }
+    },
+    {
+      "id": "n.whis-vc-cam",
+      "site": "n.whis-vc-cam",
+      "name": "Whiskeytown: Whiskeytown Visitor Center",
+      "lat": 40.61503,
+      "lng": -122.52017,
+      "coords_from": "NPS linked data: Whiskeytown Visitor Center; viewer page says the camera is on its roof",
+      "kind": "image",
+      "image_url": "https://www.nps.gov/webcams-whis/VC-Cam.jpg",
+      "video_url": null,
+      "embed_url": null,
+      "page_url": "https://www.nps.gov/media/webcam/view.htm?id=81B4659E-1DD8-B71B-0B6B520E1760F1A2",
+      "refresh_s": 60,
+      "faces": "This camera is located on the roof of the park visitor center and looks west over Whiskeytown Lake.",
+      "azimuth": null,
+      "hours": null,
+      "check": {
+        "at": "2026-11-27T15:53:01Z",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 230423
+      }
+    }
+  ]
+}
