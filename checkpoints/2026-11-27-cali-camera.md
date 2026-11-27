@@ -5,12 +5,21 @@ Its decisions and discards still hold. Its open items are carried below.
 
 ## Now
 
-Phase 1 is done and verified locally, committed, **not pushed**. The live site
-still runs the old edge function. Production needs a push to deploy the new
-Netlify Function, and only then can its CDN caching be checked live. Pushing is
-a public action, so it waits for Tim. The hunt is finished (116 candidates).
-Next: phase 2, which needs Tim's Caltrans answer and the mocks for site panels
-and favorites.
+Phase 1 is shipped and verified in production (Durable cache hit, 179 KB on
+the wire). Phase 5 ingestion is done: **1,080 cameras from 9 sources**, in
+`data/sources/`, every one checked live, all committed. None of it is on the map
+yet. Waiting on Tim:
+- **Push** the image-URL fix. Since the last push, all 313 HPWREN peaks show
+  broken images on the live site. Fixed locally (commit "fix image URLs for
+  Caltrans, HPWREN and FAA cameras"). His "go" covered only the earlier push.
+- **Pick** one site-panel mock (A stack / B compass / C filmstrip) and one
+  list mock (A star + My lists / B wall / C list in the top bar). PNGs are in
+  `mocks/`. Phase 2's map work and the display of all new sources are blocked
+  on this pick.
+
+Tim's answers on 27 Nov ("Go, all"), as I read them, each stated back to him:
+push yes; Caltrans **on by default**; free business cams **allowed**; video
+**yes**, add an HLS player.
 
 ## What the recon found (27 Nov)
 
@@ -182,3 +191,34 @@ Open questions for the merge, to put to Tim:
 - Caltrans chain-control and road-condition feeds on mountain passes.
 - Web app install for a list ("add to home screen").
 - West-wide later: same feed, same code, different bounds.
+
+## Phase 5 results (27 Nov)
+
+| source | cams | notes |
+|---|---|---|
+| caltrans-gap | 954 | IDs from the image folder; 811 have a heading |
+| phenocam | 50 | CC BY; per-site `credit` on 35 |
+| gbuapcd | 21 | coordinates, heading and FOV from the district's ArcGIS |
+| hunt | 20 | re-placed from real sources; KTVU is link-only (its terms) |
+| state-parks | 13 | HLS video; placed from OpenStreetMap |
+| ndbc-buoycam | 8 | daylight only |
+| nps | 7 | coordinates from NPS linked data |
+| usgs-coastcam | 4 | coordinates approximate; USGS doesn't publish them |
+| observatories | 3 | Palomar Hale cam dropped this run (0-byte image) |
+
+Live wires from this pass:
+- Same-pole Caltrans cameras with no TV code (e.g. ED50 WB 1 vs WB 2) are
+  still merged by the 75 m rule. A few road cams are lost; count unknown.
+- Caltrans publishes the last 12 frames per camera
+  (`referenceImage1..12UpdatesAgoURL`), a ready-made time-lapse. That's an idea,
+  and nobody has asked for it.
+- Caltrans' district feeds give a direction for the 2,600 Caltrans cameras that
+  are also in the ALERT feed (which has no headings). Matching them would give
+  those cameras rough view cones.
+- The fixed-camera FOV numbers in the ALERT feed (HPWREN 90, FAA and Caltrans
+  45) look like defaults, not measurements. Some PTZ cams report FOV 0: treat
+  that as unknown.
+- PTZ FOV narrows with zoom, but less than the zoom number suggests (median
+  50° at zoom 10+). Use the feed's FOV directly; don't derive it from zoom.
+- Re-running sources: scripts are idempotent and polite. Caltrans is the
+  slow one (about 1,000 GETs).
