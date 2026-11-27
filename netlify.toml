@@ -1,4 +1,4 @@
-# Netlify deploy config. Static build + one proxy rewrite.
+# Netlify deploy config. Static build plus one function.
 
 [build]
   command = "npm run build"
@@ -8,24 +8,20 @@
   # Match the local dev version so a build that passes here passes there.
   NODE_VERSION = "22"
 
-# ops.alertcalifornia.org blocks browser TLS fingerprints (AWS WAF) while
-# allowing server-side fetches, so the client hits this same-origin path and
-# Netlify proxies it (status 200 = proxy, not redirect). Mirrors the Vite dev
-# proxy in astro.config.mjs.
-[[redirects]]
-  from = "/api/alertca"
-  to = "https://ops.alertcalifornia.org/api/getCameraDataByLoc"
-  status = 200
-
-# Caching for that path lives in netlify/edge-functions/alertca.ts, not here.
-# A [[headers]] block does NOT apply to a proxied response — tried it against
-# the live site and the proxy path reported "fwd=miss" on every request while
-# static paths reported "stored". The upstream sends no cache directive of its
-# own, so without code running at the edge, every visitor triggered a fresh
-# 6.65 MB fetch from a public agency's API.
+# /api/alertca is served by netlify/functions/alertca.mts, which fetches the
+# ALERTCalifornia feed server-side, trims it to California, and caches it at
+# the CDN for 60 s. It used to be a plain proxy rewrite here plus an edge
+# function for caching. Both are gone:
 #
-# The redirect above stays as the fallback: if the edge function's fetch fails
-# it calls context.next() and this answers instead, uncached but working.
+# - A [[headers]] block does NOT apply to a proxied response. Tried it against
+#   the live site: the proxy path reported "fwd=miss" on every request.
+# - Edge Functions cap CPU at 50 ms per request, and trimming 7 MB of JSON
+#   takes 16-22 ms even on a fast laptop. Too close to the limit.
+#
+# There is deliberately no redirect for /api/alertca any more. Netlify's docs
+# don't say whether a function's own `path` beats a netlify.toml redirect for
+# the same URL, so the function owns the path alone and the question never
+# comes up.
 
 # Astro puts a content hash in these filenames, so changing a file changes its
 # name. Safe to cache forever.
