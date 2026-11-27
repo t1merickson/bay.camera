@@ -22,3 +22,6 @@ xcuserdata
 .svn
 CVS
 
+
+# raw camera-hunt output, unverified until merged into data/cameras.json
+data/candidates/*.json

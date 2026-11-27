@@ -6,7 +6,7 @@ first, then [README.md](README.md) for commands and data model, and
 
 **This file holds durable knowledge only.** Live task state — what is in flight,
 what is blocked on a decision, what was tried and rejected — lives in
-`.checkpoints/`. If you want to know what to do next, read the newest checkpoint
+`checkpoints/`. If you want to know what to do next, read the newest checkpoint
 there. If you want to know how the thing works or why it is shaped this way,
 read on.
 

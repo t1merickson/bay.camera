@@ -7,7 +7,7 @@ static webcam directory.
 
 > Picking this up? Read [RESUME.md](RESUME.md) first — architecture, how the
 > fog pipeline works, and the gotchas that cost real time. For what is in
-> flight right now, read the newest file in `.checkpoints/`.
+> flight right now, read the newest file in `checkpoints/`.
 
 ## Run it
 
@@ -90,7 +90,7 @@ docs/vendors.md            camera-vendor taxonomy + resiliency flags
 docs/data-model.md         cameras.json schema + vetting + status lifecycle
 STYLE.md                   conventions + commit style + design notes
 RESUME.md                  architecture, fog pipeline, hard-won gotchas
-.checkpoints/              live task state: in flight, blocked, discarded
+checkpoints/              live task state: in flight, blocked, discarded
 ```
 
 
